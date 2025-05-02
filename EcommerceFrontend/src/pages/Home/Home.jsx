@@ -5,7 +5,7 @@ import watter_bottle from "../../assets/water-bottle.png"
 import toys from "../../assets/toys.png"
 import brand from "../../assets/brand.png"
 import blanket from "../../assets/blanket.png"
-import Abc from '../../components/abc'
+import Abc from '../../components/Abc'
 
 const Home = () => {
   return (
