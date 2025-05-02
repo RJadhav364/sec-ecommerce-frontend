@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 let slides = [
-    "https://serviceapi.spicezgold.com/download/1741660777364_NewProject(12).jpg",
+  "https://serviceapi.spicezgold.com/download/1741660907985_NewProject.jpg",
+  "https://serviceapi.spicezgold.com/download/1741660862304_NewProject(8).jpg",
     "https://serviceapi.spicezgold.com/download/1741660907985_NewProject.jpg",
     "https://serviceapi.spicezgold.com/download/1741660862304_NewProject(8).jpg",
-    "https://serviceapi.spicezgold.com/download/1741660777364_NewProject(12).jpg",
   ];
 const Navbar = () => {
     let [current, setCurrent] = useState(0);
@@ -37,6 +37,7 @@ const Navbar = () => {
         </div>
       {/* Navbar */}
     </div>
+    {/* slider code start */}
       <div className="overflow-hidden relative mx-auto w-[70%]">
       <div
         className={`flex transition ease-out duration-40`}
@@ -78,6 +79,8 @@ const Navbar = () => {
         })}
       </div>
         </div>
+    {/* slider code end */}
+
         </>
   )
 }
