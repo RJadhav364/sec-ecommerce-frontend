@@ -38,7 +38,8 @@ const Navbar = () => {
       {/* Navbar */}
     </div>
     {/* slider code start */}
-      <div className="overflow-hidden relative mx-auto w-[70%]">
+    <div className='bg-[#F5F0F0]'>
+      <div className="overflow-hidden relative mx-auto w-[70%] mt-[30px]">
       <div
         className={`flex transition ease-out duration-40`}
         style={{
@@ -79,6 +80,7 @@ const Navbar = () => {
         })}
       </div>
         </div>
+    </div>
     {/* slider code end */}
 
         </>

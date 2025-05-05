@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import kitchen from "../../assets/kitchen.png"
 import bycycle from "../../assets/bycycle.png"
 import watter_bottle from "../../assets/water-bottle.png"
@@ -8,13 +8,15 @@ import blanket from "../../assets/blanket.png"
 import Abc from '../../components/Abc'
 
 const Home = () => {
+  
   return (
     <>
-      <div className='py-5'>
+      <div className='py-5 bg-[#F5F0F0] dark:bg-slate-900'>
         <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px]">
           <div className="">
             <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true" >
               <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
+                
                 <img src="https://serviceapi.spicezgold.com/download/1741660988059_ele.png" className='w-[44%]' />
                   <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Electronics</h3>
               </div>
