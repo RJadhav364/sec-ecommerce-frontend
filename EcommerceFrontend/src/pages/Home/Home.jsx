@@ -6,11 +6,13 @@ import toys from "../../assets/toys.png"
 import brand from "../../assets/brand.png"
 import blanket from "../../assets/blanket.png"
 import Abc from '../../components/Abc'
+import HomeSlider from '../../components/HomeSlider.jsx'
 
 const Home = () => {
   
   return (
     <>
+    <HomeSlider />
       <div className='py-5 bg-[#F5F0F0] dark:bg-slate-900'>
         <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px]">
           <div className="">
