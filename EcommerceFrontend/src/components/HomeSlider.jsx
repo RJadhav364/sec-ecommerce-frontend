@@ -19,7 +19,7 @@ const HomeSlider = () => {
         else setCurrent(current + 1);
     };
   return (
-      <div className='bg-[#F5F0F0] pt-[30px] dark:bg-slate-900'>
+      <div className='bg-[#F5F0F0] pt-[30px] dark:bg-darkbg-highlight'>
         {/* slider code start */}
       <div className="overflow-hidden relative mx-auto w-[70%]">
       <div

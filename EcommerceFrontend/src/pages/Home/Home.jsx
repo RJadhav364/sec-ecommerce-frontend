@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
     <HomeSlider />
-      <div className='py-5 bg-[#F5F0F0] dark:bg-slate-900'>
+      <div className='py-5 bg-[#F5F0F0] dark:bg-darkbg-highlight'>
         <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px]">
           <div className="">
             <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true" >
@@ -83,30 +83,32 @@ const Home = () => {
         </div>
       </div>
       {/* popular products start */}
-      <div className='mx-auto w-[70%]'>
-        <div className="flex">
-          <div className='w-[40%]'>
-            <p className='text-[20px] font-[600]'>
-              Popular Products
-            </p>
-            <p className='text-[14px] font-[400]'>
-              Do not miss the current offers until the end of March.
-            </p>
-          </div>
-          {/* Tabs start */}
-          <div className='w-[60%]' >
-            <div className='flex gap-[20px]'>
-              <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer'>Electronics</button>
-              <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer'>Kitchen</button>
-              <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer'>Bicycles</button>
-              <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer'>Bottle</button>
-              <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer'>Toys</button>
-              <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer'>Clothes</button>
-              <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer'>Blankets</button>
-              <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer'>Footwear</button>
+      <div className='dark:bg-darkbg-highlight'>
+        <div className='mx-auto w-[70%] pt-[10px] pb-[33px]'>
+          <div className="flex">
+            <div className='w-[40%]'>
+              <p className='text-[20px] font-[600] dark:text-text-color'>
+                Popular Products
+              </p>
+              <p className='text-[14px] font-[400] dark:text-text-color'>
+                Do not miss the current offers until the end of March.
+              </p>
             </div>
+            {/* Tabs start */}
+            <div className='w-[60%]' >
+              <div className='flex gap-[20px]'>
+                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Electronics</button>
+                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Kitchen</button>
+                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Bicycles</button>
+                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Bottle</button>
+                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Toys</button>
+                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Clothes</button>
+                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Blankets</button>
+                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Footwear</button>
+              </div>
+            </div>
+            {/* Tabs end */}
           </div>
-          {/* Tabs end */}
         </div>
       </div>
       {/* according to tab products start */}

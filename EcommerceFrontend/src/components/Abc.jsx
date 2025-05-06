@@ -66,7 +66,7 @@ const Abc = () => {
   };
 
   return (
-    <div className="pt-5 relative overflow-hidden w-full" ref={containerRef}>
+    <div className="pb-5 relative overflow-hidden w-full dark:bg-darkbg-highlight" ref={containerRef}>
       <button
         onClick={() => handleSliderButton("prev")}
         className="p-[10px] rounded-full bg-white cursor-pointer absolute left-[13.8%] top-[54%] transform -translate-y-1/2 z-10 shadow-md"
@@ -88,7 +88,7 @@ const Abc = () => {
           {details.map(({ img, percent }, idx) => (
             <div
               key={idx}
-              className="shadow-lg rounded-md overflow-hidden border border-[#efe1e1] w-[290px] flex-shrink-0"
+              className="shadow-lg rounded-md overflow-hidden border border-[#efe1e1] dark:border-[#959090] w-[290px] flex-shrink-0"
             >
               <div class="group imgWrapper w-[100%]  overflow-hidden  rounded-md rounded-bl-none rounded-br-none relative">
                 <a href="/product/67dbe07b6e949cc6cd65781d" data-discover="true">
@@ -122,11 +122,11 @@ const Abc = () => {
                 </div>
               <div className="info p-3 py-5 relative pb-[50px] h-[190px]">
                 <h6 className="text-[13px] !font-[400]">
-                    <span className="link transition-all">CLAFOUTIS</span>
+                    <span className="link transition-all dark:text-text-color">CLAFOUTIS</span>
                 </h6>
                 <h3 className="text-[12px] lg:text-[13px] title mt-1 font-[500] mb-1 text-[#000]">
                     <a
-                    className="link transition-all"
+                    className="link transition-all dark:text-text-color"
                     href="/product/67dbe07b6e949cc6cd65781d"
                     data-discover="true"
                     >
@@ -146,6 +146,7 @@ const Abc = () => {
                         aria-hidden="true"
                         viewBox="0 0 24 24"
                         data-testid="StarIcon"
+                         fill="#FCCE64"
                         >
                         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                         </svg>
@@ -154,11 +155,12 @@ const Abc = () => {
                     <span>
                     <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
                         <svg
-                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]h"
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
                         focusable="false"
                         aria-hidden="true"
                         viewBox="0 0 24 24"
                         data-testid="StarIcon"
+                        fill="#FCCE64"
                         >
                         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                         </svg>
@@ -167,11 +169,12 @@ const Abc = () => {
                     <span>
                     <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
                         <svg
-                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]h"
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
                         focusable="false"
                         aria-hidden="true"
                         viewBox="0 0 24 24"
                         data-testid="StarIcon"
+                         fill="#FCCE64"
                         >
                         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                         </svg>
@@ -180,11 +183,12 @@ const Abc = () => {
                     <span>
                     <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
                         <svg
-                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]h"
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
                         focusable="false"
                         aria-hidden="true"
                         viewBox="0 0 24 24"
                         data-testid="StarIcon"
+                         fill="#FCCE64"
                         >
                         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                         </svg>
@@ -193,11 +197,12 @@ const Abc = () => {
                     <span>
                     <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
                         <svg
-                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]h"
+                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
                         focusable="false"
                         aria-hidden="true"
                         viewBox="0 0 24 24"
                         data-testid="StarIcon"
+                         fill="#FCCE64"
                         >
                         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
                         </svg>
@@ -208,13 +213,13 @@ const Abc = () => {
                     <span className="oldPrice line-through text-gray-500 text-[12px] lg:text-[14px] font-[500]">
                     ₹1,650.00
                     </span>
-                    <span className="price text-primary text-[12px] lg:text-[14px]  font-[600]">
+                    <span className="price text-primary text-[12px] lg:text-[14px]  font-[600] dark:text-text-color">
                     ₹1,450.00
                     </span>
                 </div>
                 <div className="!absolute bottom-[15px] left-0 pl-3 pr-3 w-full">
                     <button
-                    className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex w-full btn-sm gap-2 css-uiq2rh"
+                    className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex w-full btn-sm gap-2 css-uiq2rh dark:text-text-color border border-[#ff5252] hover:text-white hover:shadow-[inset_300px_0_0_0_#ff5252] justify-center items-center py-[5px] transition duration-[.4s] ease-in-out cursor-pointer rounded-[5px]"
                     tabindex="0"
                     type="button"
                     >
