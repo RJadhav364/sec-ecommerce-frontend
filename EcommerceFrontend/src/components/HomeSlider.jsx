@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const HomeSlider = () => {
     let slides = [
@@ -18,12 +18,17 @@ const HomeSlider = () => {
         if (current === slides.length - 1) setCurrent(0);
         else setCurrent(current + 1);
     };
+    useEffect(()=>{
+      setTimeout(()=>{
+        nextSlide();
+      },3000)
+    })
   return (
       <div className='bg-[#F5F0F0] pt-[30px] dark:bg-darkbg-highlight'>
         {/* slider code start */}
       <div className="overflow-hidden relative mx-auto w-[70%]">
       <div
-        className={`flex transition ease-out duration-40`}
+        className={`flex transition ease-out duration-[.5s]`}
         style={{
           transform: `translateX(-${current * 100}%)`,
         }}

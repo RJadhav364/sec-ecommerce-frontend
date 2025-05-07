@@ -1,14 +1,134 @@
 import React from "react";
 import WebsiteLogo from "../../components/WebsiteLogo";
-// import FullsizeImage from "../../components/FullsizeImage";
-// import footerLogoImg from "../../assets/footerLogoImg.png";
+import express_delivery_dark from "../../assets/express-delivery-dark.png"
+import express_delivery_light from "../../assets/express-delivery-light.png"
+import credit_card_dark from "../../assets/credit-card-dark.png"
+import credit_card_light from "../../assets/credit-card-light.png"
+import easy_return_dark from "../../assets/easy-return-dark.png"
+import easy_return_light from "../../assets/easy-return-light.png"
+import support_dark from "../../assets/support-dark.png"
+import support_light from "../../assets/support-light.png"
 const date = new Date();
 // console.log(date.getFullYear());
 const fullYear = date.getFullYear();
+const companyServices = [
+    {
+        icon_light: express_delivery_light,
+        icon_dark: express_delivery_dark,
+        box_title: "Free Shipping",
+        box_content: "On orders over $100",
+    },
+    {
+        icon_light: credit_card_light,
+        icon_dark: credit_card_dark,
+        box_title: "Secure Payment",
+        box_content: "100% protected payments",
+    },
+    {
+        icon_light: easy_return_light,
+        icon_dark: easy_return_dark,
+        box_title: "Easy Return",
+        box_content: "30-day return policy",
+    },
+    {
+        icon_light: support_light,
+        icon_dark: support_dark,
+        box_title: "24/7 Support",
+        box_content: "Dedicated customer service",
+    },
+]
 const Footer = () => {
   return (
     <footer className="bg-[#f7f7f7] dark:bg-darkbg-default pt-[30px]">
         <div className="mx-auto w-[70%]">
+        <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 py-[40px_58px] border-b border-b-[#e3e2e2] border-b-[2px]">
+            {
+                companyServices && companyServices.length > 0 && companyServices.map(({icon_light,icon_dark,box_title,box_content}) => (
+                    <div className="flex items-center justify-center text-center sm:text-left">
+                <img src={icon_dark} alt="" className="w-[70px] dark:hidden inline-block" />
+                <img src={icon_light} alt="" className="w-[70px] hidden dark:inline-block" />
+                <div className="ml-4">
+                <p className="text-base font-medium text-gray-900 dark:text-white">{box_title}</p>
+                <p className="mt-1 text-sm text-gray-500 dark:text-[#cdcdcd]">{box_content}</p>
+                </div>
+            </div>
+                ))
+            }
+            {/* <div className="flex items-center justify-center text-center sm:text-left">
+                <img src={express_delivery_dark} alt="" className="dark:hidden inline-block" />
+                <img src={express_delivery_light} alt="" className="hidden dark:inline-block" />
+                <div className="ml-4">
+                <p className="text-base font-medium text-gray-900 dark:text-white">Free Shipping</p>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-200">On orders over $100</p>
+                </div>
+            </div>
+            <div className="flex items-center justify-center text-center sm:text-left">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="lucide lucide-lock flex-shrink-0 h-10 w-10 text-gray-600"
+                aria-hidden="true"
+                >
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <div className="ml-4">
+                <p className="text-base font-medium text-gray-900">Secure Payment</p>
+                <p className="mt-1 text-sm text-gray-500">100% protected payments</p>
+                </div>
+            </div>
+            <div className="flex items-center justify-center text-center sm:text-left">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="lucide lucide-rotate-ccw flex-shrink-0 h-10 w-10 text-gray-600"
+                aria-hidden="true"
+                >
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+                </svg>
+                <div className="ml-4">
+                <p className="text-base font-medium text-gray-900">Easy Returns</p>
+                <p className="mt-1 text-sm text-gray-500">30-day return policy</p>
+                </div>
+            </div>
+            <div className="flex items-center justify-center text-center sm:text-left">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="lucide lucide-clock flex-shrink-0 h-10 w-10 text-gray-600"
+                aria-hidden="true"
+                >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <div className="ml-4">
+                <p className="text-base font-medium text-gray-900">24/7 Support</p>
+                <p className="mt-1 text-sm text-gray-500">Dedicated customer service</p>
+                </div>
+            </div> */}
+            </div>
             <div className="py-8">
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <div className="before:contents-[''] before:inline-block before:w-[2px] before:h-full before:bg-[#e3e2e2] before:absolute relative before:right-0 before:rounded-[10px]">
@@ -46,8 +166,8 @@ const Footer = () => {
                     <ul className="mt-6 space-y-4 text-sm">
                         <li>
                         <a
-                            href="#"
-                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color"
+                            // href="#"
+                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color cursor-pointer"
                         >
                             {" "}
                             ProLiner{" "}
@@ -56,8 +176,8 @@ const Footer = () => {
 
                         <li>
                         <a
-                            href="#"
-                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color"
+                            // href="#"
+                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color cursor-pointer"
                         >
                             {" "}
                             Aloe Vera Gel{" "}
@@ -66,8 +186,8 @@ const Footer = () => {
 
                         <li>
                         <a
-                            href="#"
-                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color"
+                            // href="#"
+                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color cursor-pointer"
                         >
                             {" "}
                             Male Complete Solution{" "}
@@ -76,8 +196,8 @@ const Footer = () => {
 
                         <li>
                         <a
-                            href="#"
-                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color"
+                            // href="#"
+                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color cursor-pointer"
                         >
                             {" "}
                             Healthforce{" "}
@@ -86,8 +206,8 @@ const Footer = () => {
 
                         <li>
                         <a
-                            href="#"
-                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color"
+                            // href="#"
+                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color cursor-pointer"
                         >
                             {" "}
                             ProCare{" "}
@@ -102,8 +222,8 @@ const Footer = () => {
                     <ul className="mt-6 space-y-4 text-sm">
                         <li>
                         <a
-                            href="#"
-                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color"
+                            // href="#"
+                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color cursor-pointer"
                         >
                             {" "}
                             Pricing{" "}
@@ -112,8 +232,8 @@ const Footer = () => {
 
                         <li>
                         <a
-                            href="#"
-                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color"
+                            // href="#"
+                            className="text-black transition hover:opacity-75 text-[14px] dark:text-text-color cursor-pointer"
                         >
                             {" "}
                             About Karuna Wellness Hub{" "}
@@ -127,10 +247,10 @@ const Footer = () => {
                     <ul className="mt-6 space-y-4 text-sm">
                         <li>
                         <a
-                            href="#"
+                            // href="#"
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:opacity-75 flex"
+                            className="text-gray-700 transition hover:opacity-75 flex cursor-pointer"
                         >
                             <svg
                             className="h-7 w-7"
@@ -153,10 +273,10 @@ const Footer = () => {
 
                         <li>
                         <a
-                            href="#"
+                            // href="#"
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:opacity-75 flex"
+                            className="text-gray-700 transition hover:opacity-75 flex cursor-pointer"
                         >
                             <div className="h-7 w-7 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex justify-center items-center">
                             <svg
@@ -186,10 +306,10 @@ const Footer = () => {
 
                         <li>
                         <a
-                            href="#"
+                            // href="#"
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:opacity-75 flex"
+                            className="text-gray-700 transition hover:opacity-75 flex cursor-pointer"
                         >
                             {/* <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M23.525 7.067c-.21-.79-.821-1.4-1.578-1.609C20.863 5 12 5 12 5s-8.863 0-9.947.458c-.757.209-1.368.819-1.578 1.609C.118 8.15 0 11.975 0 12s.118 3.85.475 4.933c.21.79.821 1.4 1.578 1.609 1.083.458 9.947.458 9.947.458s8.863 0 9.947-.458c.757-.209 1.368-.819 1.578-1.609C23.882 15.85 24 12.025 24 12s-.118-3.85-.475-4.933zm-15.8 6.8V9.133l5.867 2.867-5.867 2.867z" />
@@ -213,10 +333,10 @@ const Footer = () => {
 
                         <li>
                         <a
-                            href="#"
+                            // href="#"
                             rel="noreferrer"
                             target="_blank"
-                            className="text-gray-700 transition hover:opacity-75 flex"
+                            className="text-gray-700 transition hover:opacity-75 flex cursor-pointer"
                         >
                             <div className="h-7 w-7 bg-green-700 rounded-full flex justify-center items-center">
                             <svg

@@ -1,21 +1,117 @@
 import React, { useState } from 'react'
-
+import {Link} from "react-router-dom"
 const Navbar = () => {
+  const navbarDetails = [
+    {
+      to: "/",
+      pageName: "Home",
+      key: 1,
+      subNavbar: false
+    },
+    {
+      to: "/",
+      pageName: "Electronics",
+      key: 2,
+      subNavbar: true,
+      subNavbarLink: [
+        {
+          subPageName: "Mobile",
+          key: "mobile"
+        },
+        {
+          subPageName: "TV",
+          key: "tv",
+        },
+        {
+          subPageName: "Laptop",
+          key: "laptop",
+        },
+        {
+          subPageName: "Camera",
+          key: "camera",
+        }
+      ]
+    },
+    {
+      to: "/",
+      pageName: "Kitchen",
+      key: 3,
+      subNavbar: false
+    },
+    {
+      to: "/",
+      pageName: "Bicycles",
+      key: 4,
+      subNavbar: false
+    },
+    {
+      to: "/",
+      pageName: "Bottle",
+      key: 5,
+      subNavbar: false
+    },
+    {
+      to: "/",
+      pageName: "Fashion accessories",
+      key: 6,
+      subNavbar: false
+    },
+    {
+      to: "/",
+      pageName: "Clothes",
+      key: 7,
+      subNavbar: true,
+      subNavbarLink: [
+        {
+          subPageName: "Men",
+          key: "men"
+        },
+        {
+          subPageName: "Women",
+          key: "women",
+        },
+        {
+          subPageName: "Kids",
+          key: "kids",
+        },
+      ]
+    },
+    {
+      to: "/",
+      pageName: "Blankets",
+      key: 8,
+      subNavbar: false
+    },
+    {
+      to: "/",
+      pageName: "Footwear",
+      key: 9,
+      subNavbar: false
+    },
+  ]
   return (
     <>
       <div className='border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c]'>
           <div className='mx-auto w-[1400px] py-[20px]'>
               {/* <div></div> */}
               <ul className='flex gap-3 items-center justify-center'>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Home</a></li>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Electronics</a></li>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Kitchen</a></li>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Bicycles</a></li>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Bottle</a></li>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Fashion accessories</a></li>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Clothes</a></li>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Blankets</a></li>
-                  <li className='text-[16px] text-[#000c] font-semibold px-[10px]'><a href='#' className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>Footwear</a></li>
+                {
+                  navbarDetails && navbarDetails.length > 0 && navbarDetails.map(({key,to,pageName,subNavbar,subNavbarLink}) => (
+                    <li key={key} className='group text-[16px] text-[#000c] font-semibold px-[10px] relative'><Link to={to} className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>{pageName}</Link>
+                    { subNavbar == true && (
+                      <ul className='absolute z-[999] bg-white left-[2%] w-[122px] top-[185%] border-[1px] border-black opacity-0 group-hover:opacity-100 group-hover:inline-block transform group-hover:transform group-hover:origin-top transition-all group-hover:transition-all group-hover:duration-[.3s] group-hover:ease-in-out group-hover:scale-100 scale-0'>
+                        {
+                          subNavbarLink && subNavbarLink.length > 0 && subNavbarLink.map(({subPageName,key}) => (
+                            <li key={key} className='py-[5px] px-[30px]'>{subPageName}</li> 
+                          ))
+                        }
+                      </ul>
+
+                    )
+                    }
+                    </li>
+                  ))
+                }
               </ul>
               {/* <div></div> */}
           </div>
