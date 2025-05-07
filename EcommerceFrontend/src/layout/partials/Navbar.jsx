@@ -97,18 +97,19 @@ const Navbar = () => {
               <ul className='flex gap-3 items-center justify-center'>
                 {
                   navbarDetails && navbarDetails.length > 0 && navbarDetails.map(({key,to,pageName,subNavbar,subNavbarLink}) => (
-                    <li key={key} className='group text-[16px] text-[#000c] font-semibold px-[10px] relative'><Link to={to} className='transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>{pageName}</Link>
-                    { subNavbar == true && (
-                      <ul className='absolute z-[999] bg-white left-[2%] w-[122px] top-[185%] border-[1px] border-black opacity-0 group-hover:opacity-100 group-hover:inline-block transform group-hover:transform group-hover:origin-top transition-all group-hover:transition-all group-hover:duration-[.3s] group-hover:ease-in-out group-hover:scale-100 scale-0'>
-                        {
-                          subNavbarLink && subNavbarLink.length > 0 && subNavbarLink.map(({subPageName,key}) => (
-                            <li key={key} className='py-[5px] px-[30px]'>{subPageName}</li> 
-                          ))
-                        }
-                      </ul>
-
-                    )
-                    }
+                    <li key={key} className='group text-[16px]font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>
+                      <Link to={to}>{pageName}
+                      </Link>
+                      { subNavbar == true && (
+                        <ul className='absolute z-[999] bg-white left-[-15%] w-[122px] top-[110%] border-[1px] border-black opacity-0 group-hover:opacity-100 group-hover:inline-block transform group-hover:transform group-hover:origin-top transition-all group-hover:transition-all group-hover:duration-[.5s] group-hover:ease-in-out max-h-0 group-hover:max-h-[200px]'>
+                          {
+                            subNavbarLink && subNavbarLink.length > 0 && subNavbarLink.map(({subPageName,key}) => (
+                              <li key={key} className='py-[5px] px-[30px] text-black'>{subPageName}</li> 
+                            ))
+                          }
+                        </ul>
+                      )
+                      }
                     </li>
                   ))
                 }
