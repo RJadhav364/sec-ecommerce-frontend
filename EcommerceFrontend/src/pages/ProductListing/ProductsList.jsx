@@ -57,37 +57,18 @@ const ProductsList = () => {
                         ))
                     }
                 </div>
-                <h3>Filter By Rating</h3>
-                <div>
-                    <svg
-                        className="h-[20px] w-[20px]"
-                        viewBox="0 0 24 24"
-                        fill={3 ? "#FCCE64" : "#E5E7EB"} // Tailwind gray-200 for unfilled
-                        aria-hidden="true"
-                    >
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                </div>
                 {/* category list end */}
             </div>
             {/* products listing start */}
                 <div className='dark:text-text-color w-[80%] font-display-Montserrat'>
                     {/* listing bar start */}
-                    <div className='bg-[#f1f1f1] p-[8px_30px] w-full mb-4 rounded-md flex items-center justify-between'>
+                    <div className='bg-[#f1f1f1] p-[5px_30px] w-full mb-4 rounded-md flex items-center justify-between'>
                         {/* product count */}
                         <div className='text-black'>15 products</div>
                         {/* if user want to change product view */}
                         <div className='flex gap-[15px]'>
-                            <span className=''>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.5 7C14.433 7 16 5.433 16 3.5C16 1.567 14.433 0 12.5 0C10.567 0 9 1.567 9 3.5C9 5.433 10.567 7 12.5 7Z" fill="black"></path>
-                                    <path d="M3.5 7C5.433 7 7 5.433 7 3.5C7 1.567 5.433 0 3.5 0C1.567 0 0 1.567 0 3.5C0 5.433 1.567 7 3.5 7Z" fill="black"></path>
-                                    <path d="M12.5 16C14.433 16 16 14.433 16 12.5C16 10.567 14.433 9 12.5 9C10.567 9 9 10.567 9 12.5C9 14.433 10.567 16 12.5 16Z" fill="black"></path>
-                                    <path d="M3.5 16C5.433 16 7 14.433 7 12.5C7 10.567 5.433 9 3.5 9C1.567 9 0 10.567 0 12.5C0 14.433 1.567 16 3.5 16Z" fill="black"></path>
-                                </svg>
-                            </span>
-                            <span className=''>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <span className='p-[10px] rounded-[50%] bg-[#c1c1c1]'>
+                                <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 4C3.10457 4 4 3.10457 4 2C4 0.89543 3.10457 0 2 0C0.89543 0 0 0.89543 0 2C0 3.10457 0.89543 4 2 4Z" fill="black"></path>
                                     <path d="M2 10C3.10457 10 4 9.10457 4 8C4 6.89543 3.10457 6 2 6C0.89543 6 0 6.89543 0 8C0 9.10457 0.89543 10 2 10Z" fill="black"></path>
                                     <path d="M2 16C3.10457 16 4 15.1046 4 14C4 12.8954 3.10457 12 2 12C0.89543 12 0 12.8954 0 14C0 15.1046 0.89543 16 2 16Z" fill="black"></path>
@@ -99,7 +80,15 @@ const ProductsList = () => {
                                     <path d="M14 16C15.1046 16 16 15.1046 16 14C16 12.8954 15.1046 12 14 12C12.8954 12 12 12.8954 12 14C12 15.1046 12.8954 16 14 16Z" fill="black"></path>
                                 </svg>
                             </span>
-                            <span className=''>
+                            <span className='p-[10px] rounded-[50%]'>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.5 7C14.433 7 16 5.433 16 3.5C16 1.567 14.433 0 12.5 0C10.567 0 9 1.567 9 3.5C9 5.433 10.567 7 12.5 7Z" fill="black"></path>
+                                    <path d="M3.5 7C5.433 7 7 5.433 7 3.5C7 1.567 5.433 0 3.5 0C1.567 0 0 1.567 0 3.5C0 5.433 1.567 7 3.5 7Z" fill="black"></path>
+                                    <path d="M12.5 16C14.433 16 16 14.433 16 12.5C16 10.567 14.433 9 12.5 9C10.567 9 9 10.567 9 12.5C9 14.433 10.567 16 12.5 16Z" fill="black"></path>
+                                    <path d="M3.5 16C5.433 16 7 14.433 7 12.5C7 10.567 5.433 9 3.5 9C1.567 9 0 10.567 0 12.5C0 14.433 1.567 16 3.5 16Z" fill="black"></path>
+                                </svg>
+                            </span>
+                            <span className='p-[10px] rounded-[50%]'>
                             <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 4C3.10457 4 4 3.10457 4 2C4 0.89543 3.10457 0 2 0C0.89543 0 0 0.89543 0 2C0 3.10457 0.89543 4 2 4Z" fill="black"></path>
                                 <path d="M2 10C3.10457 10 4 9.10457 4 8C4 6.89543 3.10457 6 2 6C0.89543 6 0 6.89543 0 8C0 9.10457 0.89543 10 2 10Z" fill="black"></path>
