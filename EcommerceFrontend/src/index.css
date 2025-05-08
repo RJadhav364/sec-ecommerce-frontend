@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
     --font-display: "Satoshi", "sans-serif";
-    
+    --font-display-Montserrat: "Montserrat", sans-serif;
     --breakpoint-3xl: 120rem;
     --color-avocado-100: oklch(0.99 0 0);
     --color-avocado-200: oklch(0.98 0.04 113.22);
@@ -18,3 +18,25 @@
     --color-text-color: white;
     /* ... */
   }
+
+
+  /* width */
+.scrollProperties::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  background: #ffffff;
+} */
+
+/* Handle */
+.scrollProperties::-webkit-scrollbar-thumb {
+  background: #9c9c9c;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+/* ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} */
