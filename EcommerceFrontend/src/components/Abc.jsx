@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 const details = [
     {
@@ -42,7 +44,7 @@ const Abc = ({popularProductsData}) => {
       console.log(maxOffsetValue)
       setMaxOffset(maxOffsetValue < 0 ? maxOffsetValue : 0);
     }
-    console.log("containerRef.current.offsetWidth",containerRef.current.offsetWidth)
+    // console.log("containerRef.current.offsetWidth",containerRef.current.offsetWidth)
   }, [popularProductsData]);
 
   const handleSliderButton = (direction) => {
@@ -54,7 +56,7 @@ const Abc = ({popularProductsData}) => {
   };
 
   return (
-    <div className="pb-[30px] relative overflow-hidden w-full dark:bg-darkbg-highlight" ref={containerRef}>
+    <div className="pb-[30px] relative overflow-hidden w-full dark:bg-darkbg-highlight">
       <button
         onClick={() => handleSliderButton("prev")}
         className="p-[10px] rounded-full bg-white cursor-pointer absolute left-[13.8%] top-[54%] transform -translate-y-1/2 z-10 shadow-md"
@@ -71,18 +73,27 @@ const Abc = ({popularProductsData}) => {
       {/* <div className="overflow-hidden w-full"> */}
         <div
           className="flex flex-row gap-[5px] transition-transform duration-300 ease-out"
-          style={{ transform: `translateX(${offset == 0 ? "284" : offset}px)` }}
+          // style={{ transform: `translateX(${offset == 0 ? "284" : offset}px)` }}
         >
-          {popularProductsData && popularProductsData.map(({ productName, productBrand,id }) => (
+          {details && details.map(({ productName, productBrand,id }) => (
             <div
               key={id}
               className="shadow-lg rounded-md overflow-hidden border border-[#efe1e1] dark:border-[#959090] w-[290px] flex-shrink-0"
             >
+              <Swiper
+      spaceBetween={50}
+      slidesPerView="auto"
+      // style={{ width: '100%' }}
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+      <SwiperSlide className="w-full">
+        {/* <img src="https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg" alt="" /> */}
+        
               <div className="group imgWrapper w-[100%]  overflow-hidden  rounded-md rounded-bl-none rounded-br-none relative">
                 <a href="/product/67dbe07b6e949cc6cd65781d" data-discover="true">
                 <div className="img h-[200px] overflow-hidden">
                     <img src={`http://localhost:9000/product/get-product-image/${id}`} />
-                    {/* <img src="https://serviceapi.spicezgold.com/download/1742463096956_hbhb2.jpg" className="w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105" /> */}
                 </div>
                 </a>
                 <span className="discount flex items-center absolute top-[10px] left-[10px] z-50 bg-primary text-white rounded-lg p-1 text-[12px] font-[500]">{productBrand}</span>
@@ -108,7 +119,7 @@ const Abc = ({popularProductsData}) => {
                 </button>
                 </div>
                 </div>
-              <div className="info p-3 py-5 relative pb-[50px] h-[190px]">
+              <div className="info p-3 py-5 relative pb-[50px] h-[190px] w-full">
                 <h6 className="text-[13px] !font-[400]">
                     <span className="link transition-all dark:text-text-color">CLAFOUTIS</span>
                 </h6>
@@ -228,10 +239,25 @@ const Abc = ({popularProductsData}) => {
                     </button>
                 </div>
                 </div>
+                </SwiperSlide>
+      </Swiper>
             </div>
           ))}
         </div>
       {/* </div> */}
+      <Swiper
+      spaceBetween={50}
+      slidesPerView={3}
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+      <SwiperSlide>
+        <img src="https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg" alt="" />
+      </SwiperSlide>
+      <SwiperSlide><img src="https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg" alt="" /></SwiperSlide>
+      <SwiperSlide><img src="https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg" alt="" /></SwiperSlide>
+      <SwiperSlide><img src="https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg" alt="" /></SwiperSlide>
+    </Swiper>
     </div>
   );
 };
