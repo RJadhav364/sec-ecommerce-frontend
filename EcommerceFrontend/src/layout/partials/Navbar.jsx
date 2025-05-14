@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
-import navbarDetails from '../../utilitis/NavbarOptions'
+import navbarDetails from '../../utils/NavbarOptions'
+import useCategorysStore from '../../store/categoryStore';
 const Navbar = () => {
-  
+    const {options, getOptions} = useCategorysStore();
+    useEffect(() => {
+    getOptions(); // It will call API only once due to `fetched` flag
+  }, []);
   return (
     <>
       <div className='border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c]'>

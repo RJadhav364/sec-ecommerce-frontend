@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination,Navigation, EffectFade, Autoplay } from 'swiper/modules';
 
 const HomeSlider = ({abc}) => {
   // console.log(abc)
@@ -27,46 +29,30 @@ const HomeSlider = ({abc}) => {
   return (
       <div className='bg-[#F5F0F0] pt-[30px] dark:bg-darkbg-highlight'>
         {/* slider code start */}
-      <div className="overflow-hidden relative mx-auto w-[70%]">
-      <div
-        className={`flex transition ease-out duration-[.5s]`}
-        style={{
-          transform: `translateX(-${current * 100}%)`,
-        }}
-      >
-        {abc && abc.map(({homeSliderImage}) => {
-          return <img className='w-full h-full' src={homeSliderImage} />;
-        })}
-      </div>
-
-      <div className="absolute top-0 h-full w-full justify-between items-center flex text-white px-10 text-3xl abc">
-        <button onClick={previousSlide} className='group p-[10px] rounded-full bg-white cursor-pointer hover:shadow-[inset_200px_0_0_0_#ff5252]'>
-        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg" className='text-black group-hover:text-white'>
-        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        </button>
-        <button onClick={nextSlide} className='p-[10px] rounded-full bg-white cursor-pointer'>
-            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg" className='text-black'>
-            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-      </div>
-
-      <div className="absolute bottom-0 py-4 flex justify-center gap-3 w-full">
-        {abc && abc.map((s, i) => {
-          return (
-            <div
-              onClick={() => {
-                setCurrent(i);
-              }}
-              key={"circle" + i}
-              className={`rounded-full w-5 h-5 cursor-pointer  ${
-                i == current ? "bg-white" : "bg-gray-500"
-              }`}
-            ></div>
-          );
-        })}
-      </div>
+        <div className="mx-auto w-[70%]">
+          <div
+            className={``}
+            // className={`flex transition ease-out duration-[.5s]`}
+          >
+            <Swiper
+            // slidesPerView={1}
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper"
+            >
+              {abc && abc.map(({homeSliderImage}) => (
+                <SwiperSlide>
+                  <img className='w-full h-full' src={homeSliderImage} />;
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
         {/* slider code end */}
     </div>

@@ -8,11 +8,14 @@ import blanket from "../../assets/blanket.png"
 import Abc from '../../components/Abc'
 import HomeSlider from '../../components/HomeSlider.jsx'
 import { homeSliderImages, popularProducts } from './services/apiCalls.jsx'
+import useCategorysStore from '../../store/categoryStore.jsx'
 
 const Home = () => {
   const [data,setData] = useState({sliderData: "", popularProductsData: ""});
+  const {options, getOptions} = useCategorysStore();
   useEffect(() => {
-    callSlider()
+    callSlider();
+    getOptions()
   },[])
   const callSlider = async() => {
     try{
@@ -126,11 +129,12 @@ const Home = () => {
             </div>
             {/* Tabs end */}
           </div>
+          <Abc popularProductsData={data.popularProductsData} />
         </div>
       </div>
       {/* according to tab products start */}
         {/* <div className="pt-5 flex gap-[5px]"> */}
-        <Abc popularProductsData={data.popularProductsData} />
+        {/* <Abc popularProductsData={data.popularProductsData} /> */}
         {/* </div> */}
         {/* according to tab products end */}
       {/* popular products end */}
