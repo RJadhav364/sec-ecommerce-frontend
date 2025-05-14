@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import kitchen from "../../assets/kitchen.png"
 import bycycle from "../../assets/bycycle.png"
 import watter_bottle from "../../assets/water-bottle.png"
@@ -7,12 +7,29 @@ import brand from "../../assets/brand.png"
 import blanket from "../../assets/blanket.png"
 import Abc from '../../components/Abc'
 import HomeSlider from '../../components/HomeSlider.jsx'
+import { homeSliderImages, popularProducts } from './services/apiCalls.jsx'
 
 const Home = () => {
+  const [data,setData] = useState({sliderData: "", popularProductsData: ""});
+  useEffect(() => {
+    callSlider()
+  },[])
+  const callSlider = async() => {
+    try{
+      const getResponse = await homeSliderImages();
+      const getResponse2 = await popularProducts();
+      const data = await getResponse.json();
+      const data2 = await getResponse2.json();
+      // console.log(data.allImages);
+      setData({sliderData: data.allImages, popularProductsData: data2.passedData});
+    } catch(err){
+      console.log(err)
+    }
+  }
   
   return (
     <>
-    <HomeSlider />
+    <HomeSlider abc={data.sliderData}/>
       <div className='py-5 bg-[#F5F0F0] dark:bg-darkbg-highlight'>
         <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px]">
           <div className="">
@@ -113,7 +130,7 @@ const Home = () => {
       </div>
       {/* according to tab products start */}
         {/* <div className="pt-5 flex gap-[5px]"> */}
-        <Abc />
+        <Abc popularProductsData={data.popularProductsData} />
         {/* </div> */}
         {/* according to tab products end */}
       {/* popular products end */}

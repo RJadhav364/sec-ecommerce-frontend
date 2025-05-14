@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-const HomeSlider = () => {
+const HomeSlider = ({abc}) => {
+  // console.log(abc)
     let slides = [
         "https://serviceapi.spicezgold.com/download/1741660907985_NewProject.jpg",
         "https://serviceapi.spicezgold.com/download/1741660862304_NewProject(8).jpg",
@@ -10,19 +11,19 @@ const HomeSlider = () => {
     let [current, setCurrent] = useState(0);
 
     let previousSlide = () => {
-        if (current === 0) setCurrent(slides.length - 1);
+        if (current === 0) setCurrent(abc.length - 1);
         else setCurrent(current - 1);
     };
 
     let nextSlide = () => {
-        if (current === slides.length - 1) setCurrent(0);
+        if (current === abc.length - 1) setCurrent(0);
         else setCurrent(current + 1);
     };
-    useEffect(()=>{
-      setTimeout(()=>{
-        nextSlide();
-      },3000)
-    })
+    // useEffect(()=>{
+    //   setTimeout(()=>{
+    //     nextSlide();
+    //   },3000)
+    // })
   return (
       <div className='bg-[#F5F0F0] pt-[30px] dark:bg-darkbg-highlight'>
         {/* slider code start */}
@@ -33,8 +34,8 @@ const HomeSlider = () => {
           transform: `translateX(-${current * 100}%)`,
         }}
       >
-        {slides.map((s) => {
-          return <img className='w-full h-full' src={s} />;
+        {abc && abc.map(({homeSliderImage}) => {
+          return <img className='w-full h-full' src={homeSliderImage} />;
         })}
       </div>
 
@@ -52,7 +53,7 @@ const HomeSlider = () => {
       </div>
 
       <div className="absolute bottom-0 py-4 flex justify-center gap-3 w-full">
-        {slides.map((s, i) => {
+        {abc && abc.map((s, i) => {
           return (
             <div
               onClick={() => {

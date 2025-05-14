@@ -22,23 +22,9 @@ const details = [
         percent: 90},
         {img: "https://serviceapi.spicezgold.com/download/1742453278959_fgfg1.jpg",
         percent: 100},
-        {img: "https://serviceapi.spicezgold.com/download/1742462909156_gdgd1.jpg",
-            percent: 110},
-        {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
-            percent: 120},
-        {img: "https://serviceapi.spicezgold.com/download/1742462485033_siril-poly-silk-grey-off-white-color-saree-with-blouse-piece-product-images-rvcpwdyagl-0-202304220521.webp",
-            percent: 130},
-        {img: "https://serviceapi.spicezgold.com/download/1742462383488_siril-georgette-brown-color-saree-with-blouse-piece-product-images-rvegeptjtj-3-202308161432.webp",
-            percent: 140},
-        {img: "https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg",
-            percent: 150},
-            {img: "https://serviceapi.spicezgold.com/download/1742462287664_siril-poly-silk-white-beige-color-saree-with-blouse-piece-product-images-rv2vcdkuly-0-202304220523.webp",
-                percent: 70},
-                {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
-                    percent: 30},
 ]
 
-const Abc = () => {
+const Abc = ({popularProductsData}) => {
   const containerRef = useRef(null);
   const [offset, setOffset] = useState(0);
   const [maxOffset, setMaxOffset] = useState(0);
@@ -53,9 +39,11 @@ const Abc = () => {
       const visibleCards = Math.floor(containerWidth / itemWidth);
       const totalCards = details.length;
       const maxOffsetValue = (totalCards - visibleCards) * itemWidth * -1;
+      console.log(maxOffsetValue)
       setMaxOffset(maxOffsetValue < 0 ? maxOffsetValue : 0);
     }
-  }, []);
+    console.log("containerRef.current.offsetWidth",containerRef.current.offsetWidth)
+  }, [popularProductsData]);
 
   const handleSliderButton = (direction) => {
     if (direction === "next") {
@@ -85,19 +73,19 @@ const Abc = () => {
           className="flex flex-row gap-[5px] transition-transform duration-300 ease-out"
           style={{ transform: `translateX(${offset == 0 ? "284" : offset}px)` }}
         >
-          {details.map(({ img, percent }, idx) => (
+          {popularProductsData && popularProductsData.map(({ productName, productBrand,id }) => (
             <div
-              key={idx}
+              key={id}
               className="shadow-lg rounded-md overflow-hidden border border-[#efe1e1] dark:border-[#959090] w-[290px] flex-shrink-0"
             >
               <div className="group imgWrapper w-[100%]  overflow-hidden  rounded-md rounded-bl-none rounded-br-none relative">
                 <a href="/product/67dbe07b6e949cc6cd65781d" data-discover="true">
                 <div className="img h-[200px] overflow-hidden">
-                    <img src={img} />
-                    <img src="https://serviceapi.spicezgold.com/download/1742463096956_hbhb2.jpg" className="w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105" />
+                    <img src={`http://localhost:9000/product/get-product-image/${id}`} />
+                    {/* <img src="https://serviceapi.spicezgold.com/download/1742463096956_hbhb2.jpg" className="w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105" /> */}
                 </div>
                 </a>
-                <span className="discount flex items-center absolute top-[10px] left-[10px] z-50 bg-primary text-white rounded-lg p-1 text-[12px] font-[500]">{percent}</span>
+                <span className="discount flex items-center absolute top-[10px] left-[10px] z-50 bg-primary text-white rounded-lg p-1 text-[12px] font-[500]">{productBrand}</span>
                 <div className="actions absolute top-[-20px] right-[5px] z-50 flex items-center gap-2 flex-col w-[50px] transition-all duration-300 group-hover:top-[15px] opacity-0 group-hover:opacity-100">
                 <button className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary hover:text-white group css-iyey26" tabindex="0" type="button">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" className="text-[18px] !text-black group-hover:text-white hover:!text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -130,7 +118,7 @@ const Abc = () => {
                     href="/product/67dbe07b6e949cc6cd65781d"
                     data-discover="true"
                     >
-                    Men Opaque Casual Shirt...
+                    {productName}
                     </a>
                 </h3>
                 <span
