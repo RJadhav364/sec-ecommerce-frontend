@@ -4,6 +4,7 @@ import navbarDetails from '../../utils/NavbarOptions'
 import useCategorysStore from '../../store/categoryStore';
 const Navbar = () => {
     const {options, getOptions} = useCategorysStore();
+    console.log(options)
     useEffect(() => {
     getOptions(); // It will call API only once due to `fetched` flag
   }, []);
@@ -16,14 +17,14 @@ const Navbar = () => {
               <li className='group text-[16px]font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'><Link to={"/"}>Home
               </Link></li>
                 {
-                  navbarDetails && navbarDetails.length > 0 && navbarDetails.map(({key,to,pageName,subNavbar,subNavbarLink}) => (
-                    <li key={key} className='group text-[16px]font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>
-                      <Link to={to}>{pageName}
+                  options && options.passedData && options.passedData.length > 0 && options.passedData.map(({id,categoryName,subNavbar,children}) => (
+                    <li key={id} className='group text-[16px]font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'>
+                      <Link to={`products?catId=${id}`}>{categoryName}
                       </Link>
                       { subNavbar == true && (
                         <ul className='absolute z-[999] bg-white left-[-15%] w-[122px] top-[125%] border-[1px] border-black opacity-0 group-hover:opacity-100 group-hover:inline-block transform group-hover:transform group-hover:origin-top transition-all group-hover:transition-all group-hover:duration-[.3s] group-hover:ease-in-out max-h-0 group-hover:max-h-[200px]'>
                           {
-                            subNavbarLink && subNavbarLink.length > 0 && subNavbarLink.map(({subPageName,key}) => (
+                            children && children.length > 0 && children.map(({subPageName,key}) => (
                               <li key={key} className='py-[5px] px-[30px] text-black'>{subPageName}</li> 
                             ))
                           }

@@ -104,8 +104,8 @@ const Home = () => {
       </div>
       {/* popular products start */}
       <div className='dark:bg-darkbg-highlight'>
-        <div className='mx-auto w-[70%] pt-[10px] pb-[33px]'>
-          <div className="flex">
+        <div className='mx-auto w-[70%] pt-[10px]'>
+          <div className="flex pb-[30px]">
             <div className='w-[40%]'>
               <p className='text-[20px] font-[600] dark:text-text-color'>
                 Popular Products

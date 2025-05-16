@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import navbarDetails from '../../utils/NavbarOptions'
+import { useSearchParams } from 'react-router-dom';
+import { getProduct } from './services/ProductRelatedApis';
 
 const ProductsList = () => {
     const details = [
@@ -38,10 +40,32 @@ const ProductsList = () => {
                     percent: 70},
                     {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
                         percent: 30},
-    ]
+    ];
+    const [searchParams] = useSearchParams();
+    const catId = searchParams.get('catId');
+    console.log("catId",catId)
+    const abc = useRef();
+    const getData = async() => {
+        // const url = "https://example.org/products.json";
+        try {
+            const response = await getProduct(`catId=${catId}`);
+            if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+            }
+
+            const json = await response.json();
+            console.log(json);
+            abc.current = json
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+    useEffect(()=>{
+        getData();
+    })
   return (
     <div className='dark:bg-darkbg-highlight py-[30px] font-display-Montserrat'>
-        <div className="mx-auto w-[1400px] flex gap-[10px] h-[600px] overflow-y-scroll">
+        <div className="mx-auto w-[1400px] flex gap-[10px]">
             <div className='dark:text-text-color w-[20%]'>
                 {/* category list start */}
                 <h3 className='w-full mb-[5px] text-[16px] font-[600] flex items-center pr-5 font-display-Montserrat'>Product Categories</h3>
