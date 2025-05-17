@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
 import navbarDetails from '../../utils/NavbarOptions'
-import useCategorysStore from '../../store/categoryStore';
+import { fetchCategories } from "../../utils/fetchCategory";
+import useCategoryStore from '../../store/categoryStore';
+
 const Navbar = () => {
-    const {options, getOptions} = useCategorysStore();
-    console.log(options)
+    const [options, setOptions] = useState();
+    // console.log(options)
+    const storeCategory = useCategoryStore();
+    const getCategories = async() => {
+      const data = await fetchCategories(); // API call
+      storeCategory.setAuth({
+      isLoading: true,
+      data: data
+      })
+      setOptions(data);
+    }
     useEffect(() => {
-    getOptions(); // It will call API only once due to `fetched` flag
+    getCategories(); // It will call API only once due to `fetched` flag
   }, []);
   return (
     <>
@@ -24,8 +35,8 @@ const Navbar = () => {
                       { subNavbar == true && (
                         <ul className='absolute z-[999] bg-white left-[-15%] w-[122px] top-[125%] border-[1px] border-black opacity-0 group-hover:opacity-100 group-hover:inline-block transform group-hover:transform group-hover:origin-top transition-all group-hover:transition-all group-hover:duration-[.3s] group-hover:ease-in-out max-h-0 group-hover:max-h-[200px]'>
                           {
-                            children && children.length > 0 && children.map(({subPageName,key}) => (
-                              <li key={key} className='py-[5px] px-[30px] text-black'>{subPageName}</li> 
+                            children && children.length > 0 && children.map(({subCategoryName,_id,parentCategory}) => (
+                              <li key={_id} className='py-[5px] px-[30px] text-black'>{subCategoryName}</li> 
                             ))
                           }
                         </ul>

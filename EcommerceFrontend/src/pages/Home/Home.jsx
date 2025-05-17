@@ -11,20 +11,43 @@ import { homeSliderImages, popularProducts } from './services/apiCalls.jsx'
 import useCategorysStore from '../../store/categoryStore.jsx'
 
 const Home = () => {
-  const [data,setData] = useState({sliderData: "", popularProductsData: ""});
-  const {options, getOptions} = useCategorysStore();
+  const [result,setResult] = useState({sliderData: "", popularProductsData: ""});
+  const {data} = useCategorysStore();
   useEffect(() => {
     callSlider();
-    getOptions()
+    // getOptions()
   },[])
+  const details = [
+    {
+        img: "https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg",
+        percent: 10},
+        {img: "https://serviceapi.spicezgold.com/download/1742462909156_gdgd1.jpg",
+        percent: 20},
+        {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
+        percent: 30},
+        {img: "https://serviceapi.spicezgold.com/download/1742462552739_siril-georgette-pink-color-saree-with-blouse-piece-product-images-rvrk9p11sk-0-202308161432.webp",
+        percent: 40},
+        {img: "https://serviceapi.spicezgold.com/download/1742462485033_siril-poly-silk-grey-off-white-color-saree-with-blouse-piece-product-images-rvcpwdyagl-0-202304220521.webp",
+        percent: 50},
+        {img: "https://serviceapi.spicezgold.com/download/1742462383488_siril-georgette-brown-color-saree-with-blouse-piece-product-images-rvegeptjtj-3-202308161432.webp",
+        percent: 60},
+        {img: "https://serviceapi.spicezgold.com/download/1742462287664_siril-poly-silk-white-beige-color-saree-with-blouse-piece-product-images-rv2vcdkuly-0-202304220523.webp",
+        percent: 70},
+        {img: "https://serviceapi.spicezgold.com/download/1742462212409_ascscscscccswefsdvdd1.jpg",
+        percent: 80},
+        {img: "https://serviceapi.spicezgold.com/download/1742453374891_1000014029787-Green-GREEN-1000014029787_01-2100.jpg",
+        percent: 90},
+        {img: "https://serviceapi.spicezgold.com/download/1742453278959_fgfg1.jpg",
+        percent: 100},
+]
   const callSlider = async() => {
     try{
       const getResponse = await homeSliderImages();
-      const getResponse2 = await popularProducts();
+      // const getResponse2 = await popularProducts();
       const data = await getResponse.json();
-      const data2 = await getResponse2.json();
+      // const data2 = await getResponse2.json();
       // console.log(data.allImages);
-      setData({sliderData: data.allImages, popularProductsData: data2.passedData});
+      setResult({sliderData: data.allImages, popularProductsData: details});
     } catch(err){
       console.log(err)
     }
@@ -35,7 +58,7 @@ const Home = () => {
     <HomeSlider abc={data.sliderData}/>
       <div className='py-5 bg-[#F5F0F0] dark:bg-darkbg-highlight'>
         <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px]">
-          <div className="">
+          {/* <div className="">
             <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true" >
               <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
                 
@@ -99,7 +122,19 @@ const Home = () => {
                   <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Footwear</h3>
               </div>
             </a>
-          </div>
+          </div> */}
+          {
+            data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
+              <div className="" key='id'>
+                <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
+                  <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
+                    <img src={`http://localhost:9000/category/get-category-image/${id}`} className="w-[44%]" />
+                      <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">{categoryName}</h3>
+                  </div>
+                </a>
+              </div>
+            ))
+          }
         </div>
       </div>
       {/* popular products start */}
