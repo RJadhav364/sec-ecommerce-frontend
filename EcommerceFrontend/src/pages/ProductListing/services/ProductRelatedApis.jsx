@@ -1,6 +1,6 @@
 const getProduct = async(id) => {
     try{
-        const response = await fetch(`http://localhost:9000/product/get-all-products/id`);
+        const response = await fetch(`http://localhost:9000/product/get-all-products/${id}`);
         return response
         // return data;
     } catch(error){

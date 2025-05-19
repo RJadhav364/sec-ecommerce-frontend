@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import navbarDetails from '../../utils/NavbarOptions'
 import { useSearchParams } from 'react-router-dom';
 import { getProduct } from './services/ProductRelatedApis';
@@ -41,28 +41,43 @@ const ProductsList = () => {
                     {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
                         percent: 30},
     ];
+    const [changedInId, setChangedInId] = useState("")
+    const paramMap = {
+        catId: 'categoryId',
+        subCatId: 'subCategoryId',
+        thirdLevelcategoryId: 'thirdLevelcategoryId',
+    };
     const [searchParams] = useSearchParams();
-    const catId = searchParams.get('catId');
-    console.log("catId",catId)
-    const abc = useRef();
+    let filterKey = null;
+    let filterValue = null;
+    for(const [key, value] of Object.entries(paramMap)){
+        // console.log(key, key)
+        const Id = searchParams.get(key);
+        if(Id){
+            filterKey = value;
+            filterValue = Id;
+            // setChangedInId(filterValue);
+        }
+    }
+    const [products,setProducts] = useState([]);
     const getData = async() => {
         // const url = "https://example.org/products.json";
         try {
-            const response = await getProduct(`catId=${catId}`);
+            const response = await getProduct(`${[filterKey]}=${filterValue}`);
             if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
             }
 
             const json = await response.json();
-            console.log(json);
-            abc.current = json
+            console.log(json.passedData);
+            setProducts(json.passedData)
         } catch (error) {
             console.error(error.message);
         }
     }
     useEffect(()=>{
         getData();
-    })
+    },[filterValue])
   return (
     <div className='dark:bg-darkbg-highlight py-[30px] font-display-Montserrat'>
         <div className="mx-auto w-[1400px] flex gap-[10px]">
@@ -88,7 +103,7 @@ const ProductsList = () => {
                     {/* listing bar start */}
                     <div className='bg-[#f1f1f1] p-[5px_30px] w-full mb-4 rounded-md flex items-center justify-between'>
                         {/* product count */}
-                        <div className='text-black'>15 products</div>
+                        <div className='text-black'>{products.length} products</div>
                         {/* if user want to change product view */}
                         <div className='flex gap-[15px]'>
                             <span className='p-[10px] rounded-[50%] bg-[#c1c1c1]'>
@@ -126,19 +141,20 @@ const ProductsList = () => {
                     </div>
                     {/* listing bar end */}
                     <div className='grid grid-cols-4 gap-[10px]'>
-                    {details.map(({ img, percent }, idx) => (
+                    {products && products.map(({ id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId }) => (
                         <div
-                        key={idx}
+                        key={id}
                         className="shadow-lg rounded-md overflow-hidden border border-[#efe1e1] dark:border-[#959090] w-full flex-shrink-0"
                         >
                             <div className="group imgWrapper w-[100%]  overflow-hidden  rounded-md rounded-bl-none rounded-br-none relative">
                                 <a href="/product/67dbe07b6e949cc6cd65781d" data-discover="true">
                                 <div className="img h-[200px] overflow-hidden">
-                                    <img src={img} />
-                                    <img src="https://serviceapi.spicezgold.com/download/1742463096956_hbhb2.jpg" className="w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105" />
+                                    <img src={`http://localhost:9000/product/get-product-image/${id}/0`} />
+                                    <img src={`http://localhost:9000/product/get-product-image/${id}/1`} className="w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105"></img>
+
                                 </div>
                                 </a>
-                                <span className="discount flex items-center absolute top-[10px] left-[10px] z-50 bg-primary text-white rounded-lg p-1 text-[12px] font-[500]">{percent}</span>
+                                <span className="discount flex items-center absolute top-[10px] left-[10px] z-50 bg-primary text-white rounded-lg p-1 text-[12px] font-[500] bg-[#ff5252]">{productDiscount}%</span>
                                 <div className="actions absolute top-[-20px] right-[5px] z-50 flex items-center gap-2 flex-col w-[50px] transition-all duration-300 group-hover:top-[15px] opacity-0 group-hover:opacity-100">
                                 <button className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary !w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary hover:text-white group css-iyey26" tabindex="0" type="button">
                                     <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="text-[18px] !text-black group-hover:text-white hover:!text-white" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -163,15 +179,15 @@ const ProductsList = () => {
                             </div>
                             <div className="info p-3 py-5 relative pb-[50px] h-[190px]">
                                 <h6 className="text-[13px] !font-[400]">
-                                    <span className="link transition-all dark:text-text-color">CLAFOUTIS</span>
+                                    <span className="link transition-all dark:text-text-color">{productBrand}</span>
                                 </h6>
                                 <h3 className="text-[12px] lg:text-[13px] title mt-1 font-[500] mb-1 text-[#000]">
                                     <a
-                                    className="link transition-all dark:text-text-color"
+                                    className="link transition-all dark:text-text-color whitespace-nowrap w-[240px] overflow-hidden text-ellipsis inline-block"
                                     href="/product/67dbe07b6e949cc6cd65781d"
                                     data-discover="true"
                                     >
-                                    Men Opaque Casual Shirt...
+                                    {productName}
                                     </a>
                                 </h3>
                                 <span
@@ -252,10 +268,10 @@ const ProductsList = () => {
                                 </span>
                                 <div className="flex items-center gap-4 justify-between">
                                     <span className="oldPrice line-through text-gray-500 text-[12px] lg:text-[14px] font-[500]">
-                                    ₹1,650.00
+                                        ₹{productOldPrice}.00
                                     </span>
                                     <span className="price text-primary text-[12px] lg:text-[14px]  font-[600] dark:text-text-color">
-                                    ₹1,450.00
+                                    ₹{productCurrentPrice}.00
                                     </span>
                                 </div>
                                 <div className="!absolute bottom-[15px] left-0 pl-3 pr-3 w-full">

@@ -33,12 +33,43 @@ const Navbar = () => {
                       <Link to={`products?catId=${id}`}>{categoryName}
                       </Link>
                       { subNavbar == true && (
-                        <ul className='absolute z-[999] bg-white left-[-15%] w-[122px] top-[125%] border-[1px] border-black opacity-0 group-hover:opacity-100 group-hover:inline-block transform group-hover:transform group-hover:origin-top transition-all group-hover:transition-all group-hover:duration-[.3s] group-hover:ease-in-out max-h-0 group-hover:max-h-[200px]'>
+                        <ul className='absolute z-[999] bg-white left-[-15%] w-[122px] top-[125%] border-[1px] shadow-md  opacity-0 group-hover:opacity-100 group-hover:inline-block transform group-hover:transform group-hover:origin-top transition-all group-hover:transition-all group-hover:duration-[.3s] group-hover:ease-in-out max-h-0 group-hover:max-h-[200px]'>
                           {
-                            children && children.length > 0 && children.map(({subCategoryName,_id,parentCategory}) => (
-                              <li key={_id} className='py-[5px] px-[30px] text-black'>{subCategoryName}</li> 
+                            children && children.length > 0 && children.map(({subCategoryName,id,parentCategory, children}) => (
+                              <>
+                              <Link to={`products?subCatId=${id}`}>
+                              <li key={id} className='py-[5px] px-[30px] text-black cursor-pointer relative group/subgroup'>{subCategoryName}
+                              
+                              <ul className='absolute left-[101%] w-[122px] top-[-2%] transform translate-x-0 opacity-0 origin-left bg-white group-hover/subgroup:opacity-100 transition-all duration-300 ease-in-out max-h-0 group-hover/subgroup:max-h-[200px] group-hover/subgroup:-translate-x-[5px]'>
+                                {
+                                  // children && children.length > 0 && children.map(({children,_id}) => (
+                                    children.length > 0 && children.map(({thirdLevelCatName,_id}) => (
+                                      <Link to={`products?thirdLevelcategoryId=${_id}`}>
+                                        <li key={_id} className='py-[5px] px-[30px] text-black cursor-pointer'>{thirdLevelCatName}</li>
+                                      </Link>
+                                    ))
+                                  // ))
+                                }
+                              </ul>
+                              </li>
+                              </Link>
+                              </>
                             ))
                           }
+                          {/* <ul className='childrem absolute z-[999] bg-white left-[-15%] w-[122px] top-[125%] border-[1px] border-black opacity-0 group-hover:opacity-100 group-hover:inline-block transform group-hover:transform group-hover:origin-top transition-all group-hover:transition-all group-hover:duration-[.3s] group-hover:ease-in-out max-h-0 group-hover:max-h-[200px]'>'>
+                          {
+                            children && children.length > 0 && children.map(({children,_id}) => (
+                              children.length > 0 && children.map(({thirdLevelCatName,_id}) => (
+                                <li key={_id} className='py-[5px] px-[30px] text-black cursor-pointer'>{thirdLevelCatName}</li>
+                              ))
+                            ))
+                          }
+                          </ul> */}
+                          {/* {
+                            children && children.children && children.children.length > 0 && (
+                              
+                            )
+                          } */}
                         </ul>
                       )
                       }
