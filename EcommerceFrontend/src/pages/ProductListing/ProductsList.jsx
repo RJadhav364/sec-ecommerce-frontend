@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import navbarDetails from '../../utils/NavbarOptions'
 import { useSearchParams } from 'react-router-dom';
 import { getProduct } from './services/ProductRelatedApis';
+import ProductRating from '../../components/ProductRating';
 
 const ProductsList = () => {
     const details = [
@@ -195,76 +196,9 @@ const ProductsList = () => {
                                     role="img"
                                     aria-label="5 Stars"
                                 >
-                                    <span>
-                                    <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
-                                        <svg
-                                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
-                                        focusable="false"
-                                        aria-hidden="true"
-                                        viewBox="0 0 24 24"
-                                        data-testid="StarIcon"
-                                        fill="#FCCE64"
-                                        >
-                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                        </svg>
-                                    </span>
-                                    </span>
-                                    <span>
-                                    <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
-                                        <svg
-                                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
-                                        focusable="false"
-                                        aria-hidden="true"
-                                        viewBox="0 0 24 24"
-                                        data-testid="StarIcon"
-                                        fill="#FCCE64"
-                                        >
-                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                        </svg>
-                                    </span>
-                                    </span>
-                                    <span>
-                                    <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
-                                        <svg
-                                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
-                                        focusable="false"
-                                        aria-hidden="true"
-                                        viewBox="0 0 24 24"
-                                        data-testid="StarIcon"
-                                        fill="#FCCE64"
-                                        >
-                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                        </svg>
-                                    </span>
-                                    </span>
-                                    <span>
-                                    <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
-                                        <svg
-                                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
-                                        focusable="false"
-                                        aria-hidden="true"
-                                        viewBox="0 0 24 24"
-                                        data-testid="StarIcon"
-                                        fill="#FCCE64"
-                                        >
-                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                        </svg>
-                                    </span>
-                                    </span>
-                                    <span>
-                                    <span className="MuiRating-icon MuiRating-iconFilled css-e8k0ez">
-                                        <svg
-                                        className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1l6e05 h-[20px] w-[20px]"
-                                        focusable="false"
-                                        aria-hidden="true"
-                                        viewBox="0 0 24 24"
-                                        data-testid="StarIcon"
-                                        fill="#FCCE64"
-                                        >
-                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                                        </svg>
-                                    </span>
-                                    </span>
+                                    {/* shows product rating code start */}
+                                    <ProductRating stars={productRating} />
+                                    {/* shows product rating code end */}
                                 </span>
                                 <div className="flex items-center gap-4 justify-between">
                                     <span className="oldPrice line-through text-gray-500 text-[12px] lg:text-[14px] font-[500]">
