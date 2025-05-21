@@ -43,8 +43,8 @@ const Footer = () => {
         <div className="mx-auto w-[70%]">
         <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 py-[40px_58px] border-b border-b-[#e3e2e2] border-b-[2px]">
             {
-                companyServices && companyServices.length > 0 && companyServices.map(({icon_light,icon_dark,box_title,box_content}) => (
-                    <div className="flex items-center justify-center text-center sm:text-left">
+                companyServices && companyServices.length > 0 && companyServices.map(({icon_light,icon_dark,box_title,box_content},index) => (
+                    <div key={index} className="flex items-center justify-center text-center sm:text-left">
                 <img src={icon_dark} alt="" className="w-[70px] dark:hidden inline-block" />
                 <img src={icon_light} alt="" className="w-[70px] hidden dark:inline-block" />
                 <div className="ml-4">

@@ -11,7 +11,7 @@ import { homeSliderImages, popularProducts } from './services/apiCalls.jsx'
 import useCategorysStore from '../../store/categoryStore.jsx'
 
 const Home = () => {
-  const [result,setResult] = useState({sliderData: "", popularProductsData: ""});
+  const [result,setResult] = useState({sliderData: [], popularProductsData: ""});
   const {data} = useCategorysStore();
   useEffect(() => {
     callSlider();
@@ -46,7 +46,6 @@ const Home = () => {
       // const getResponse2 = await popularProducts();
       const data = await getResponse.json();
       // const data2 = await getResponse2.json();
-      // console.log(data.allImages);
       setResult({sliderData: data.allImages, popularProductsData: details});
     } catch(err){
       console.log(err)
@@ -55,7 +54,7 @@ const Home = () => {
   
   return (
     <>
-    <HomeSlider abc={data.sliderData}/>
+    <HomeSlider abc={result.sliderData}/>
       <div className='py-5 bg-[#F5F0F0] dark:bg-darkbg-highlight'>
         <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px]">
           {/* <div className="">
@@ -164,7 +163,7 @@ const Home = () => {
             </div>
             {/* Tabs end */}
           </div>
-          <Abc popularProductsData={data.popularProductsData} />
+          <Abc popularProductsData={result.popularProductsData} />
         </div>
       </div>
       {/* according to tab products start */}
