@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination,Navigation, EffectFade, Autoplay } from 'swiper/modules';
 
 const HomeSlider = ({abc}) => {
-  console.log(abc)
+  // console.log(abc)
     let slides = [
         "https://serviceapi.spicezgold.com/download/1741660907985_NewProject.jpg",
         "https://serviceapi.spicezgold.com/download/1741660862304_NewProject(8).jpg",

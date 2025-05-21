@@ -40,3 +40,10 @@
 /* ::-webkit-scrollbar-thumb:hover {
   background: #555;
 } */
+
+/* particular product swiper slider css */
+.singleProductSwiper .swiper-wrapper{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+} 
