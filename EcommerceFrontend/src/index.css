@@ -41,9 +41,12 @@
   background: #555;
 } */
 
-/* particular product swiper slider css */
-.singleProductSwiper .swiper-wrapper{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-} 
+/*  */
+.mySwiperSingleProduct .swiper-slide-thumb-active, .mySwiperSingleProduct .swiper-slide-active {
+  opacity: 1;
+}
+
+.mySwiperSingleProduct .swiper-wrapper .swiper-slide {
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}

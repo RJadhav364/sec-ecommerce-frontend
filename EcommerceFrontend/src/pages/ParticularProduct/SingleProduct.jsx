@@ -36,7 +36,7 @@ const SingleProduct = () => {
               freeMode={true}
               watchSlidesProgress={true}
               modules={[FreeMode, Navigation, Thumbs]}
-              className="mySwiper"
+              className="mySwiperSingleProduct"
               style={{ height: "400px" }}
             >
               {
@@ -51,7 +51,7 @@ const SingleProduct = () => {
               }
             </Swiper>
           </div>
-          <div className='w-[85%]'>
+          <div className='w-[75%]'>
             {/* <img src="" alt="" /> */}
             <Swiper
               style={{
@@ -60,41 +60,25 @@ const SingleProduct = () => {
               }}
               loop={true}
               spaceBetween={10}
-              navigation={true}
+              // navigation={true}
               thumbs={{ swiper: thumbsSwiper }}
               modules={[FreeMode, Navigation, Thumbs]}
               className="mySwiper2"
+              // direction='vertical'
             >
-              <SwiperSlide>
+              {
+                data && data.images && data.images.map((image,index) => (
+                    // console.log(image)
+                    <SwiperSlide key={index}>
+                      <div className='h-full overflow-hidden rounded-md'>
+                        <img src={image} />
+                      </div>
+                    </SwiperSlide>
+                  ))
+              }
+              {/* <SwiperSlide>
                 <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-              </SwiperSlide>
-              <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-              </SwiperSlide>
+              </SwiperSlide> */}
             </Swiper>
           </div>
         </div>
