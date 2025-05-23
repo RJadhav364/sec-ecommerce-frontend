@@ -42,8 +42,12 @@
 } */
 
 /*  */
-.mySwiperSingleProduct .swiper-slide-thumb-active, .mySwiperSingleProduct .swiper-slide-active {
+.mySwiperSingleProduct .swiper-slide-thumb-active {
   opacity: 1 !important;
+}
+
+.mySwiperSingleProduct .swiper-slide-active{
+  opacity: 1;
 }
 
 .mySwiperSingleProduct .swiper-wrapper .swiper-slide {
