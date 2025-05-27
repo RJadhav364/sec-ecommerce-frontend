@@ -86,20 +86,20 @@ const SingleProduct = () => {
           </div>
         </div>
         <div className='w-full lg:w-[60%] pr-2 pl-2 lg:pr-10 lg:pl-10 dark:text-white'>
-          <h1 class="text-[18px] sm:text-[22px] font-[600] mb-2">Apple iPhone 15 (Blue, 128 GB)</h1>
-          <div className='flex'>
-            <span className='productBrand'>productBrand</span><span className='productRating flex flex-row'><ProductRating stars={4} /></span>
+          <h1 class="text-[18px] sm:text-[22px] font-[600] mb-2">{data.productName}</h1>
+          <div className='flex gap-3'>
+            <span className='productBrand text-gray-400 text-[13px]'>Brand: <span className='font-[500] text-black dark:text-text-color opacity-75'>{data.productBrand}</span></span><span className='productRating flex flex-row'><ProductRating stars={data.productRating} /></span>
           </div>
-          <div className='pt-[16px]'>
-            <div>
-              <div>
-                productOldPrice
+          <div className='pt-[16px] flex items-center gap-3'>
+            <div className='flex gap-3'>
+              <div className='oldPrice line-through text-gray-500 dark:text-[#c9cbcf] text-[20px] font-[500]'>
+                &#8377;{data.productOldPrice}
               </div>
-              <div>
-                productCurrentPrice
+              <div className='price text-[#ff5252] text-[20px] font-[600]'>
+                &#8377;{data.productCurrentPrice}
               </div>
             </div>
-            <div>
+            <div className='text-[14px]'>
               Available IN Stock
             </div>
           </div>
