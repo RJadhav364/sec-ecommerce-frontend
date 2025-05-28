@@ -16,6 +16,7 @@
     --color-darkbg-default: #000000;
     --color-darkbg-highlight: #121212;
     --color-text-color: white;
+    --color-text-ff5252: #ff5252;
     /* ... */
   }
 
@@ -53,4 +54,14 @@
 .mySwiperSingleProduct .swiper-wrapper .swiper-slide {
   opacity: 0.4;
   transition: opacity 0.3s;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  -moz-appearance: textfield; /* Firefox */
 }
