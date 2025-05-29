@@ -1,10 +1,12 @@
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { toast } from 'react-toastify';
+import { Bounce, Slide, toast } from 'react-toastify';
 import { emailregx } from '../../Validation/inputValidation';
 import { createNewCustomer } from './services/registerRelatedApi';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const navigate = useNavigate();
     const createdCustomerData = useRef({
         username: "",
         email: "",
@@ -59,12 +61,54 @@ const Register = () => {
                 let {confirm_password , ...resValues} = formValues;
                 // console.log(resValues);
                 const result = await createNewCustomer(resValues);
-                console.log(result)
+                // console.log(result)
+                switch(true){
+                    case result.status == 200:
+                        toast.success('Registration Completed', {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: false,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "drak",
+                            transition: Bounce,
+                        });
+                        navigate("/login");
+                        break;
+                    case result.status == 409:
+                        toast.error('User already Registered with this email', {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: false,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark", 
+                            transition: Slide,
+                        });
+                        break;
+                    default:
+                        toast.error('Something went wrong', {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: false,
+                            pauseOnHover: false,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark", 
+                            transition: Slide,
+                        });
+                        break;
+                }
         }
     }
   return (
     <section className='dark:bg-darkbg-highlight dark:text-white font-display-Montserrat'>
-        <div className='mx-auto w-[1400px] py-[20px] flex items-center flex-col'>
+        <div className='mx-auto w-[1400px] py-[50px] flex items-center flex-col'>
             <div className='dark:bg-[#181818] bg-[#ebebeb] p-[20px] w-[600px] rounded-[10px] shadow-[0px_0px_7px_0px_#ebebeb]'>
                 <h3 class="text-center text-[20px] font-[600]">Login to your account</h3>
                 <h5 className='text-center text-[18px] text-[#bdbdbd] mt-[5px]'>Don't have an account yet? <Link className='hover:underline hover:underline-offset-1 hover:decoration-[#bdbdbd] font-bold'>Sign up</Link></h5>

@@ -6,6 +6,9 @@ const useCustomerStore = create(
     (set) => ({
       isCustomerLogin: false,
       token: null,
+      email: null,
+      id: null,
+      username: null,
       setAuth: (newState) => {
         set((state) => newState)
     },

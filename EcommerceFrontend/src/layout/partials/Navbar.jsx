@@ -21,7 +21,7 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <div className='border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c]'>
+      <div className='border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c] font-display-Montserrat'>
           <div className='mx-auto w-[1400px] py-[20px]'>
               {/* <div></div> */}
               <ul className='flex gap-3 items-center justify-center'>
