@@ -7,6 +7,10 @@ import label_dark from "../../assets/label-dark.png"
 import label_light from "../../assets/label-light.png"
 import shopping_bag_dark from "../../assets/shopping-bag_dark.png"
 import shopping_bag_light from "../../assets/shopping-bag-light.png"
+import logout_dark from "../../assets/logout-dark.png"
+import logout_light from "../../assets/logout-light.png"
+import log_out_dark from "../../assets/log-out_&.png"
+import logout123_light from "../../assets/log-out.png"
 import useCustomerStore from '../../store/customerStore';
 
 const Header = () => {
@@ -122,8 +126,8 @@ const Header = () => {
                             href="#"
                             className="flex items-center gap-[10px] px-4 py-2 text-sm text-gray-700 dark:text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
                           >
-                            <img src={img_dark} className={`dark:hidden inline-block w-[${width}] h-[${height}]`} alt="" />
-                            <img src={img_light} className={`hidden dark:inline-block w-[${width}] h-[${height}]`} alt="" />
+                            <img src={img_dark} className={`dark:hidden inline-block w-[30px] h-[30px]`} alt="" />
+                            <img src={img_light} className={`hidden dark:inline-block w-[30px] h-[30px]`} alt="" />
                             {label}
                           </a>
                         </div>
@@ -134,8 +138,10 @@ const Header = () => {
                     <div>
                       <a
                         href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 dark:text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
+                        className="flex items-center gap-[10px] px-4 py-2 text-sm text-gray-700 dark:text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden pl-[25px]"
                       >
+                        <img src={log_out_dark} className={`dark:hidden inline-block w-[25px] h-[25px]`} alt="" />
+                        <img src={logout123_light} className={`hidden dark:inline-block w-[25px] h-[25px]`} alt="" />
                         Logout
                       </a>
                     </div>
