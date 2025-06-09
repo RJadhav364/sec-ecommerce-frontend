@@ -10,6 +10,8 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/thumbs';
 import 'swiper/css/free-mode';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

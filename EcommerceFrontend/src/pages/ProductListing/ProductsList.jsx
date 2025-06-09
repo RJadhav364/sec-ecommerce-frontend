@@ -85,7 +85,7 @@ const ProductsList = () => {
     useEffect(()=>{
         getData();
     },[filterValue])
-    const addProductInFavourite = async(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId,token) => {
+    const addProductInFavourite = async(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId) => {
         // const response = await fetch(`http://localhost:9000/favourite/add-wishlist`, {
         //     method: 'POST',
         //     headers: {
@@ -97,7 +97,7 @@ const ProductsList = () => {
         const response = await productInWishList(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId,token);
         switch(true){
             case response.status == 200:
-                toast.success('Product Added in Cart &#128512;', {
+                toast.success(`Product Added in Cart \u{1F600}`, {
                     position: "top-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -105,7 +105,19 @@ const ProductsList = () => {
                     pauseOnHover: false,
                     draggable: true,
                     progress: undefined,
-                    theme: "drak",
+                    theme: "colored",
+                });
+                break;
+            case response.status == 409:
+                toast.error(`Product already in Cart`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
                 });
                 break;
             case response.status == 403:
@@ -269,7 +281,7 @@ const ProductsList = () => {
                 {/* products listing end */}
             </div>
         </div>
-        <ConfirmationBox setConfirmationBoxOpen={setConfirmationBoxOpen} confirmationBoxOpen={confirmationBoxOpen} handleConfirmButtonFn={addProductInFavourite} confirmationHeading="Something went wrong" confirmationContent="Token has expired need to relogin" />
+        {/* <ConfirmationBox setConfirmationBoxOpen={setConfirmationBoxOpen} confirmationBoxOpen={confirmationBoxOpen} handleConfirmButtonFn={addProductInFavourite} confirmationHeading="Something went wrong" confirmationContent="Token has expired need to relogin" /> */}
         <Relogin 
             isReloginModelOpen={isReloginModelOpen}
             onReloginModelClosed={() => setIsReloginModelOpen(false)}
