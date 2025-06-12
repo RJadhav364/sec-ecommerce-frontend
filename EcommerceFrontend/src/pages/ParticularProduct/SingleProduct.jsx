@@ -85,7 +85,7 @@ const SingleProduct = () => {
   }
 
   const {isCustomerLogin} = useCustomerStore();
-  console.log(isCustomerLogin)
+  // console.log(isCustomerLogin)
   const productAddToCart = () => {
     switch(true){
       case isCustomerLogin == false:

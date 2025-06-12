@@ -28,4 +28,19 @@ const productInWishList = async(userId,id,productDiscount, productName, productO
     }
 }
 
-export {getProduct , productInWishList}
+const getWishListDetails = async(token,userId) => {
+    try {
+        const apiResponse = await fetch(`${Service_url}/favourite/get-wishlist/${userId}` , {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        return apiResponse
+    } catch (error) {
+        throw error
+    }
+}
+
+export {getProduct , productInWishList , getWishListDetails}
