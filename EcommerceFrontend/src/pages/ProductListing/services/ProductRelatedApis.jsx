@@ -43,4 +43,20 @@ const getWishListDetails = async(token,userId) => {
     }
 }
 
-export {getProduct , productInWishList , getWishListDetails}
+const removeProductFromFavourite = async(token, productId, userId) => {
+    try {
+        const apiResponse = await fetch(`${Service_url}/favourite/wishlist-removed` , {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(productId,userId)
+        })
+        return apiResponse;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export {getProduct , productInWishList , getWishListDetails, removeProductFromFavourite}

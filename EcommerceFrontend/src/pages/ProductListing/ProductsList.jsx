@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import navbarDetails from '../../utils/NavbarOptions'
 import { useSearchParams } from 'react-router-dom';
-import { getProduct, productInWishList } from './services/ProductRelatedApis';
+import { getProduct, getWishListDetails, productInWishList, removeProductFromFavourite } from './services/ProductRelatedApis';
 import ProductRating from '../../components/ProductRating';
 import {Link} from "react-router-dom"
 import useCustomerStore from '../../store/customerStore';
@@ -11,45 +11,9 @@ import Relogin from '../../components/Relogin';
 import useCartStore from '../../store/cartStore';
 
 const ProductsList = () => {
-    const details = [
-        {
-            img: "https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg",
-            percent: 10},
-            {img: "https://serviceapi.spicezgold.com/download/1742462909156_gdgd1.jpg",
-            percent: 20},
-            {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
-            percent: 30},
-            {img: "https://serviceapi.spicezgold.com/download/1742462552739_siril-georgette-pink-color-saree-with-blouse-piece-product-images-rvrk9p11sk-0-202308161432.webp",
-            percent: 40},
-            {img: "https://serviceapi.spicezgold.com/download/1742462485033_siril-poly-silk-grey-off-white-color-saree-with-blouse-piece-product-images-rvcpwdyagl-0-202304220521.webp",
-            percent: 50},
-            {img: "https://serviceapi.spicezgold.com/download/1742462383488_siril-georgette-brown-color-saree-with-blouse-piece-product-images-rvegeptjtj-3-202308161432.webp",
-            percent: 60},
-            {img: "https://serviceapi.spicezgold.com/download/1742462287664_siril-poly-silk-white-beige-color-saree-with-blouse-piece-product-images-rv2vcdkuly-0-202304220523.webp",
-            percent: 70},
-            {img: "https://serviceapi.spicezgold.com/download/1742462212409_ascscscscccswefsdvdd1.jpg",
-            percent: 80},
-            {img: "https://serviceapi.spicezgold.com/download/1742453374891_1000014029787-Green-GREEN-1000014029787_01-2100.jpg",
-            percent: 90},
-            {img: "https://serviceapi.spicezgold.com/download/1742453278959_fgfg1.jpg",
-            percent: 100},
-            {img: "https://serviceapi.spicezgold.com/download/1742462909156_gdgd1.jpg",
-                percent: 110},
-            {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
-                percent: 120},
-            {img: "https://serviceapi.spicezgold.com/download/1742462485033_siril-poly-silk-grey-off-white-color-saree-with-blouse-piece-product-images-rvcpwdyagl-0-202304220521.webp",
-                percent: 130},
-            {img: "https://serviceapi.spicezgold.com/download/1742462383488_siril-georgette-brown-color-saree-with-blouse-piece-product-images-rvegeptjtj-3-202308161432.webp",
-                percent: 140},
-            {img: "https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg",
-                percent: 150},
-                {img: "https://serviceapi.spicezgold.com/download/1742462287664_siril-poly-silk-white-beige-color-saree-with-blouse-piece-product-images-rv2vcdkuly-0-202304220523.webp",
-                    percent: 70},
-                    {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
-                        percent: 30},
-    ];
     const {token, id: userId} = useCustomerStore();
-    const {cartData} = useCartStore();
+    console.log(token,userId)
+    const {cartData , setAuth} = useCartStore();
     const [isReloginModelOpen, setIsReloginModelOpen] = useState(false)
     const paramMap = {
         catId: 'categoryId',
@@ -88,27 +52,22 @@ const ProductsList = () => {
         getData();
     },[filterValue])
     const addProductInFavourite = async(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId) => {
-        // const response = await fetch(`http://localhost:9000/favourite/add-wishlist`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Authorization': `Bearer ${token}`
-        //     },
-        //     body: JSON.stringify({userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId})
-        // });
         const response = await productInWishList(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId,token);
         switch(true){
             case response.status == 200:
                 toast.success(`Product Added in Cart \u{1F600}`, {
                     position: "top-center",
                     autoClose: 5000,
-                    hideProgressBar: false,
+                    hideProgressBar: true,
                     closeOnClick: false,
                     pauseOnHover: false,
-                    draggable: true,
+                    draggable: false,
                     progress: undefined,
                     theme: "colored",
                 });
+                const getResponse = await getWishListDetails(token ,userId);
+                const updatedCart = await getResponse.json();
+                setAuth({cartData: updatedCart.data})
                 break;
             case response.status == 409:
                 toast.error(`Product already in Cart`, {
@@ -127,11 +86,31 @@ const ProductsList = () => {
                 break;
         }
     }
-    const removeFromWishLIst = () => {
+    const removeFromWishLIst = async(productId, userId) => {
         try {
-            
+            const result = await removeProductFromFavourite(token,productId, userId);
+            const convertedResult = await result.json();
+            switch(true){
+                    case result.status == 200:
+                        toast.success(`Product removed from cart`, {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                    const getResponse = await getWishListDetails(token, productId.userId);
+                    const updatedCart = await getResponse.json();
+                    setAuth({cartData: updatedCart.data})
+                    break;
+                default:
+                    alert("Something went wrong")
+            }
         } catch (error) {
-            
+            console.log(error);
         }
     }
   return (
@@ -226,7 +205,7 @@ const ProductsList = () => {
                                             (() => {
                                                 const isFavourite = cartData?.some(({productId}) => productId == id);
                                                 return isFavourite ? (
-                                                    <button className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary  group css-iyey26 cursor-pointer flex justify-center items-center" tabIndex="0" type="button" onClick={() => removeFromWishLIst({productId: id , userId})}>
+                                                    <button className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary  group css-iyey26 cursor-pointer flex justify-center items-center" tabIndex="0" type="button" onClick={() => removeFromWishLIst({productId: id ,userId})}>
                                                         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" className="text-[18px] text-[red]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 448l-30.164-27.211C118.718 322.442 48 258.61 48 179.095 48 114.221 97.918 64 162.4 64c36.399 0 70.717 16.742 93.6 43.947C278.882 80.742 313.199 64 349.6 64 414.082 64 464 114.221 464 179.095c0 79.516-70.719 143.348-177.836 241.694L256 448z"></path></svg>
                                                     </button>
                                                 ) : (
