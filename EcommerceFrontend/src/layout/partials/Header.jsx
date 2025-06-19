@@ -94,7 +94,7 @@ const Header = () => {
 
   return (
     <>
-      <div className='border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c] font-display-Montserrat'>
+      <header className='border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c] font-display-Montserrat fixed w-full top-0 z-[101]'>
         <div className='mx-auto w-[1400px] py-[20px] grid grid-cols-3 items-center'>
           <div>
             {/* <img src="	https://serviceapi.spicezgold.com/download/1744255975457_logo.jpg" alt="" /> */}
@@ -182,7 +182,7 @@ const Header = () => {
             </button>
           </div>
         </div>
-      </div>
+      </header>
       <div onClick={toggleDropdown} className={`${isOpen ? "absolute top-0 left-0 right-0 bottom-0 z-1 bg-[rgba(145,145,145,0.5)]" : "hidden"}`}></div>
     </>
   )

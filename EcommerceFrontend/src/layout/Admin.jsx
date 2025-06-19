@@ -8,7 +8,9 @@ const Admin = () => {
     <>
         <Header />
         <Navbar />
-        <Outlet />
+        <div className='mt-[178px]'>
+          <Outlet />
+        </div>
         <Footer />
     </>  
   )

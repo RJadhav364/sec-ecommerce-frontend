@@ -3,10 +3,14 @@ import undraw from "../../assets/undraw.png"
 import useCustomerStore from '../../store/customerStore'
 import { getWishListProduct, handleRemoveFromFavourite } from './services/profileApis';
 import { toast } from 'react-toastify';
+import My_profile from '../../components/My_profile';
+import WishList from '../../components/WishList';
+import Address from '../../components/Address';
 
 const Profile = () => {
     const {username , email , token , id} = useCustomerStore();
     const [myList , setMyList] = useState([]);
+    const [activeTab , setActiveTab] = useState("my-profile");
     useEffect(() => {
         getAllWishProducts();
     },[])
@@ -58,11 +62,36 @@ const Profile = () => {
                 break;
         }
     }
+    const tabs = [
+        {
+            id: "my-profile" , label: " My Profile" , svg : <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" className="text-[15px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"></path></svg>
+        },
+        {
+            id: "address" , label: " Address" , svg: <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" className="text-[18px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        },
+        {
+            id: "my-wishlist" , label: " My List" , svg: <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" className="text-[17px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M349.6 64c-36.4 0-70.7 16.7-93.6 43.9C233.1 80.7 198.8 64 162.4 64 97.9 64 48 114.2 48 179.1c0 79.5 70.7 143.3 177.8 241.7L256 448l30.2-27.2C393.3 322.4 464 258.6 464 179.1 464 114.2 414.1 64 349.6 64zm-80.8 329.3l-4.2 3.9-8.6 7.8-8.6-7.8-4.2-3.9c-50.4-46.3-94-86.3-122.7-122-28-34.7-40.4-63.1-40.4-92.2 0-22.9 8.4-43.9 23.7-59.3 15.2-15.4 36-23.8 58.6-23.8 26.1 0 52 12.2 69.1 32.5l24.5 29.1 24.5-29.1c17.1-20.4 43-32.5 69.1-32.5 22.6 0 43.4 8.4 58.7 23.8 15.3 15.4 23.7 36.5 23.7 59.3 0 29-12.5 57.5-40.4 92.2-28.8 35.7-72.3 75.7-122.8 122z"></path></svg>
+        },
+        {
+            id: "my-orders" , label: " My Orders" , svg: <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" className="text-[18px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M312 372c-7.7 0-14 6.3-14 14 0 9.9-8.1 18-18 18H94c-9.9 0-18-8.1-18-18V126c0-9.9 8.1-18 18-18h186c9.9 0 18 8.1 18 18 0 7.7 6.3 14 14 14s14-6.3 14-14c0-25.4-20.6-46-46-46H94c-25.4 0-46 20.6-46 46v260c0 25.4 20.6 46 46 46h186c25.4 0 46-20.6 46-46 0-7.7-6.3-14-14-14z"></path><path d="M372.9 158.1c-2.6-2.6-6.1-4.1-9.9-4.1-3.7 0-7.3 1.4-9.9 4.1-5.5 5.5-5.5 14.3 0 19.8l65.2 64.2H162c-7.7 0-14 6.3-14 14s6.3 14 14 14h256.6L355 334.2c-5.4 5.4-5.4 14.3 0 19.8l.1.1c2.7 2.5 6.2 3.9 9.8 3.9 3.8 0 7.3-1.4 9.9-4.1l82.6-82.4c4.3-4.3 6.5-9.3 6.5-14.7 0-5.3-2.3-10.3-6.5-14.5l-84.5-84.2z"></path></svg>
+        }
+    ];
+    const tabContent = {
+        "my-profile" : (
+            <My_profile />
+        ),
+        "my-wishlist" : (
+            <WishList />
+        ),
+        "address" : (
+            <Address />
+        )
+    }
   return (
     <div className='dark:bg-darkbg-highlight bg-[#F5F0F0] dark:text-white font-display-Montserrat'>
       <div className='mx-auto w-[1400px] flex gap-[20px]'>
         <div className='dark:text-text-color w-[20%] py-6'>
-            <div className='shadow-md rounded-md'>
+            <div className='shadow-md rounded-md sticky top-[190px]'>
                 <div className="w-full p-5 flex items-center justify-center flex-col dark:bg-darkbg-default bg-white">
                     <div className="w-[110px] h-[110px] rounded-full overflow-hidden mb-4 relative group flex items-center justify-center bg-gray-200">
                         <img src={undraw} className="w-full h-full object-cover" />
@@ -76,7 +105,18 @@ const Profile = () => {
                     <h6 className="text-[13px] font-[500]">{email}</h6>
                 </div>
                 <ul className="list-none pb-5 dark:bg-darkbg-default bg-[#f1f1f1] myAccountTabs">
-                    <li className="w-full">
+                    {
+                        tabs && tabs.map(({id,label,svg}) => (
+                        <li className="w-full" key={id} onClick={() => {setActiveTab(id)}}>
+                            <a activeclassname="isActive" className="" data-discover="true">
+                                <button className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full !text-left !py-2 !px-5 !justify-start !capitalize dark:text-white text-[rgba(0,0,0,0.8)] !rounded-none flex items-center gap-2 css-iyey26" tabindex="0" type="button">
+                                    {svg} {label}<span className="MuiTouchRipple-root css-4mb1j7"></span>
+                                </button>
+                            </a>
+                        </li>
+                        ))
+                    }
+                    {/* <li className="w-full">
                         <a activeclassname="isActive" className="" href="/my-account" data-discover="true">
                             <button className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full !text-left !py-2 !px-5 !justify-start !capitalize dark:text-white text-[rgba(0,0,0,0.8)] !rounded-none flex items-center gap-2 css-iyey26" tabindex="0" type="button">
                                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" className="text-[15px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"></path></svg> My Profile<span className="MuiTouchRipple-root css-4mb1j7"></span>
@@ -104,11 +144,16 @@ const Profile = () => {
                     <li className="w-full">
                         <button className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full !py-2 !text-left !px-5 !justify-start !capitalize dark:text-white text-[rgba(0,0,0,0.8)] !rounded-none flex items-center gap-2 css-iyey26" tabindex="0" type="button"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" className="text-[18px]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M312 372c-7.7 0-14 6.3-14 14 0 9.9-8.1 18-18 18H94c-9.9 0-18-8.1-18-18V126c0-9.9 8.1-18 18-18h186c9.9 0 18 8.1 18 18 0 7.7 6.3 14 14 14s14-6.3 14-14c0-25.4-20.6-46-46-46H94c-25.4 0-46 20.6-46 46v260c0 25.4 20.6 46 46 46h186c25.4 0 46-20.6 46-46 0-7.7-6.3-14-14-14z"></path><path d="M372.9 158.1c-2.6-2.6-6.1-4.1-9.9-4.1-3.7 0-7.3 1.4-9.9 4.1-5.5 5.5-5.5 14.3 0 19.8l65.2 64.2H162c-7.7 0-14 6.3-14 14s6.3 14 14 14h256.6L355 334.2c-5.4 5.4-5.4 14.3 0 19.8l.1.1c2.7 2.5 6.2 3.9 9.8 3.9 3.8 0 7.3-1.4 9.9-4.1l82.6-82.4c4.3-4.3 6.5-9.3 6.5-14.7 0-5.3-2.3-10.3-6.5-14.5l-84.5-84.2z"></path></svg> Logout
                         </button>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </div>
         <div className='dark:text-text-color w-[80%] py-6'>
+            <div className='shadow-md rounded-md bg-white dark:bg-darkbg-default'>
+                {
+                    tabContent[activeTab]
+                }
+            </div>
         {/* wish list code start */}
             {/* <div className='shadow-md rounded-md bg-white dark:bg-darkbg-default'>
                 <div className="py-5 px-3 border-b border-[rgba(0,0,0,0.1)] dark:border-[#4c4c4c]">
@@ -144,7 +189,7 @@ const Profile = () => {
             </div> */}
         {/* wish list code start */}
         {/* profile code start */}
-            <div className='shadow-md rounded-md bg-white dark:bg-darkbg-default'>
+            {/* <div className='shadow-md rounded-md bg-white dark:bg-darkbg-default'>
                 <div className="py-5 px-3 border-b border-[rgba(0,0,0,0.1)] dark:border-[#4c4c4c] flex justify-between">
                     <h2>My Profile</h2>
                     <p className="mt-0 mb-0 text-[#ff2727] p[2px_5px] cursor-pointer hover:underline">Change Password</p>
@@ -161,12 +206,11 @@ const Profile = () => {
                             <div className=""><div className="relative w-full h-10 z-[1]"><input className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 disabled:cursor-not-allowed transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2   placeholder:opacity-0 focus:placeholder:opacity-100 text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900 dark:focus:border-white" placeholder=" " value={email} /><label className="absolute top-[8px] left-[12px] peer-focus:text-text-ff5252 transition-all peer-focus:-translate-y-[16px] peer-focus:text-[12px] dark:peer-focus:bg-[#000000] peer-focus:bg-white peer-focus:px-[5px] -z-[1] peer-focus:z-10">Phone Number </label></div></div>
                         </div>
                     </div>
-                    {/* </div> */}
                     <p className='mt-[30px]'>
                         <button className='bg-text-ff5252 p-[5px_20px] text-[15px] rounded-[5px] cursor-pointer'>Update Profile</button>
                     </p>
                 </form>
-            </div>
+            </div> */}
         {/* profile code send */}
         </div>
       </div>
