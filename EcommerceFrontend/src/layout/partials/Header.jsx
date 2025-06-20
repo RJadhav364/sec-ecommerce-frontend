@@ -183,7 +183,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div onClick={toggleDropdown} className={`${isOpen ? "absolute top-0 left-0 right-0 bottom-0 z-1 bg-[rgba(145,145,145,0.5)]" : "hidden"}`}></div>
+      <div onClick={toggleDropdown} className={`${isOpen ? "fixed top-0 left-0 right-0 bottom-0 z-1 bg-[rgba(145,145,145,0.5)]" : "hidden"}`}></div>
     </>
   )
 }
