@@ -9,6 +9,7 @@ const useCustomerStore = create(
       email: null,
       id: null,
       username: null,
+      customeProfilePic: null,
       setAuth: (newState) => {
         set((state) => newState)
     },

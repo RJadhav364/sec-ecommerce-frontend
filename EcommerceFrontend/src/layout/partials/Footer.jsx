@@ -71,8 +71,8 @@ const Footer = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="lucide lucide-lock flex-shrink-0 h-10 w-10 text-gray-600"
                 aria-hidden="true"
                 >
@@ -93,8 +93,8 @@ const Footer = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="lucide lucide-rotate-ccw flex-shrink-0 h-10 w-10 text-gray-600"
                 aria-hidden="true"
                 >
@@ -115,8 +115,8 @@ const Footer = () => {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="lucide lucide-clock flex-shrink-0 h-10 w-10 text-gray-600"
                 aria-hidden="true"
                 >

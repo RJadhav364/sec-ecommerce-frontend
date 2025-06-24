@@ -13,7 +13,7 @@ import useCustomerStore from '../../store/customerStore';
 import { getWishListDetails } from '../../pages/ProductListing/services/ProductRelatedApis';
 import useCartStore from '../../store/cartStore';
 
-const Header = () => {
+const Header = ({handleChild1Data}) => {
   const [theme, setTheme] = useState(null);
   const {username , email , isCustomerLogin, wishList, token , id} = useCustomerStore();
   const storeCartData = useCartStore();
@@ -21,6 +21,7 @@ const Header = () => {
   const [cartCount, setCartCount] = useState(0);
   const toggleDropdown = () => {
        setIsOpen(!isOpen);
+       handleChild1Data(!isOpen)
   };
   
   useEffect(() => {
@@ -183,7 +184,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div onClick={toggleDropdown} className={`${isOpen ? "fixed top-0 left-0 right-0 bottom-0 z-1 bg-[rgba(145,145,145,0.5)]" : "hidden"}`}></div>
+      <div onClick={toggleDropdown} className={`${isOpen ? "fixed top-0 left-0 right-0 bottom-0 z-[10] bg-[rgba(145,145,145,0.5)]" : "hidden"}`}></div>
     </>
   )
 }

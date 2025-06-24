@@ -34,5 +34,21 @@ const handleRemoveFromFavourite = async(token , productId , userId) => {
     }
 }
 
+const handleChangeUserData = async(token ,userId, formData) => {
+    console.log(token ,userId, formData)
+    try {
+        const response = await fetch(`${Service_url}/customer/customer-edit/${userId}` ,{
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        });
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-export { getWishListProduct , handleRemoveFromFavourite}
+
+export { getWishListProduct , handleRemoveFromFavourite , handleChangeUserData}

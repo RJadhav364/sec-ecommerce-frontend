@@ -3,8 +3,9 @@ import {Link} from "react-router-dom"
 import navbarDetails from '../../utils/NavbarOptions'
 import { fetchCategories } from "../../utils/fetchCategory";
 import useCategoryStore from '../../store/categoryStore';
+import useCustomerStore from '../../store/customerStore';
 
-const Navbar = () => {
+const Navbar = ({blockBg}) => {
     const [options, setOptions] = useState();
     // console.log(options)
     const storeCategory = useCategoryStore();
@@ -19,9 +20,10 @@ const Navbar = () => {
     useEffect(() => {
     getCategories(); // It will call API only once due to `fetched` flag
   }, []);
+  const {isCustomerLogin} = useCustomerStore();
   return (
     <>
-      <div className='border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c] font-display-Montserrat fixed w-full top-[93px] z-[101]'>
+      <div className={`border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c] font-display-Montserrat fixed w-full ${isCustomerLogin ? "top-[93px]" : "top-[91px]" } ${blockBg ? "z-[-1]" : "z-[101]" }`}>
           <div className='mx-auto w-[1400px] py-[20px]'>
               {/* <div></div> */}
               <ul className='flex gap-3 items-center justify-center'>

@@ -67,6 +67,7 @@ const Login = () => {
                             email: finalResult.data.email,
                             id: finalResult.data.id,
                             username: finalResult.data.username,
+                            customeProfilePic: finalResult.data.customeProfilePic,
                             wishList: finalResult.data.wishList,
                         })
                         navigate("/");
