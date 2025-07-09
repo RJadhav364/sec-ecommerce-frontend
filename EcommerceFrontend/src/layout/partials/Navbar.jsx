@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
-import navbarDetails from '../../utils/NavbarOptions'
 import { fetchCategories } from "../../utils/fetchCategory";
 import useCategoryStore from '../../store/categoryStore';
 import useCustomerStore from '../../store/customerStore';
