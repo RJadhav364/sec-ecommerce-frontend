@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useCustomerStore from '../store/customerStore';
+import { toast } from 'react-toastify';
 
 const My_profile = () => {
     const {username , email , token , id, phonenumber} = useCustomerStore();
@@ -15,7 +16,22 @@ const My_profile = () => {
         // for(let key in extraData.current){
         //     setCustomerUpdatedData({[key] : extraData.current[key].value})
         // }
-        console.log(customerUpdatedData);
+        for(let abc in customerUpdatedData){
+            console.log(abc)
+            switch(true){
+            case customerUpdatedData[abc] == "" :
+                toast.error(`${abc} is required`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored", 
+                });
+            }
+        }
     }
     const opnPasswordModel = () => {
         setIsOpen(!isOpen);

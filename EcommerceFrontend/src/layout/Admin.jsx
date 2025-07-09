@@ -8,7 +8,6 @@ const Admin = () => {
   const {isCustomerLogin} = useCustomerStore();
   const [blockBg , setBlockBg] = useState(false);
   const handleChild1Data = (data) => {
-    console.log("isopen",data)
     setBlockBg(data); // Store data from Child1
   };
   return (
