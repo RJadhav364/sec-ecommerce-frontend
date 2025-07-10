@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import navbarDetails from '../../utils/NavbarOptions'
 import { useSearchParams } from 'react-router-dom';
 import { getProduct, getWishListDetails, productInWishList, removeProductFromFavourite } from './services/ProductRelatedApis';
 import ProductRating from '../../components/ProductRating';
@@ -9,19 +8,30 @@ import { toast } from 'react-toastify';
 import ConfirmationBox from '../../components/ConfirmationBox';
 import Relogin from '../../components/Relogin';
 import useCartStore from '../../store/cartStore';
+import useCategoryStore from '../../store/categoryStore';
+import NineProductGrid from '../../svg/NineProductGrid';
+import CustomIcon from '../../components/CustomIcon';
+import ForthProductGrid from '../../svg/ForthProductGrid';
+import SingleProductGrid from '../../svg/SingleProductGrid';
+import productGridArray from '../../utils/ProductGridArray';
 
 const ProductsList = () => {
     const {token, id: userId} = useCustomerStore();
-    console.log(token,userId)
     const {cartData , setAuth} = useCartStore();
-    const [isReloginModelOpen, setIsReloginModelOpen] = useState(false)
+    const [isReloginModelOpen, setIsReloginModelOpen] = useState(false);
+    const [layoutProduct, setLayoutProduct] = useState({
+        setActiveLayout: 0,
+        layoutCount: ""
+    })
     const paramMap = {
         catId: 'categoryId',
         subCatId: 'subCategoryId',
         thirdLevelcategoryId: 'thirdLevelcategoryId',
     };
     const [searchParams] = useSearchParams();
+    const [resultedKey, setResultedKey] = useState([searchParams.get("catId")])
     const [confirmationBoxOpen, setConfirmationBoxOpen] = useState(false);
+    const category_data = useCategoryStore();
     let filterKey = null;
     let filterValue = null;
     for(const [key, value] of Object.entries(paramMap)){
@@ -30,11 +40,25 @@ const ProductsList = () => {
         if(Id){
             filterKey = value;
             filterValue = Id;
+            // if(key == "catId"){
+            //     console.log(key, value)
+            //     // setAbc(true)
+            //     // setResultedKey({filterKeyValue: true})
+            //     // setResultedKey({filterKeyId: filterValue})
+            //     // resultedKey.current.filterKeyId = filterValue;
+            // }
             // setChangedInId(filterValue);
         }
     }
     const [products,setProducts] = useState([]);
     const getData = async() => {
+        // if(filterKey == "categoryId"){
+        //         console.log(filterValue)
+        //         setAbc(true)
+        //         setResultedKey({filterKeyValue: true})
+        //         setResultedKey({filterKeyId: filterValue})
+        //         // resultedKey.current.filterKeyId = filterValue;
+        //     }
         // const url = "https://example.org/products.json";
         try {
             const response = await getProduct(`${[filterKey]}=${filterValue}`);
@@ -51,6 +75,16 @@ const ProductsList = () => {
     useEffect(()=>{
         getData();
     },[filterValue])
+    useEffect(()=>{
+        console.log(resultedKey);
+    },[resultedKey])
+    // useEffect(() => {
+    //     // if(filterKey == "categoryId"){
+    //     //     console.log("typeof",typeof resultedKey)
+    //         console.log(layoutProduct);
+    //     //     setResultedKey(filterValue)
+    //     // }
+    // },[layoutProduct])
     const addProductInFavourite = async(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId) => {
         const response = await productInWishList(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId,token);
         switch(true){
@@ -113,6 +147,17 @@ const ProductsList = () => {
             console.log(error);
         }
     }
+    const handleCheckboxChecked = (checkedId) => {
+        setResultedKey((prevSelected) => prevSelected.includes(checkedId) ? prevSelected.filter((id) => id !== checkedId) : [...prevSelected, checkedId]
+        );
+    }
+    // onclick event that change the product grid layout
+    const changeProductgridLayout = (keyID) => {
+        // console.log(layoutProduct.current.setActiveLayout)
+        // layoutProduct.current.classList.add("bg-[#c1c1c1]")
+        setLayoutProduct({setActiveLayout : keyID})
+    //    layoutProduct.current.setActiveLayout = layoutProduct.current.setActiveLayout + keyID;
+    }
   return (
     <>
         <div className='dark:bg-darkbg-highlight py-[30px] font-display-Montserrat'>
@@ -122,11 +167,12 @@ const ProductsList = () => {
                     <h3 className='w-full mb-[5px] text-[16px] font-[600] flex items-center pr-5 font-display-Montserrat'>Product Categories</h3>
                     <div className='h-[200px] overflow-y-scroll scrollProperties'>
                         {
-                            navbarDetails && navbarDetails.length > 0 && navbarDetails.map(({key,to,pageName,subNavbar,subNavbarLink}) => (
-                                <div key={key} className='flex items-center p-[5px_10px]'>
-                                    <input type="checkbox" name={key} id={key} className='mr-2 h-4 border-gray-300 rounded focus:ring-indigo-500 hover:cursor-pointer' />
-                                    <label htmlFor={key} className='text-sm text-gray-700 hover:cursor-pointer w-full dark:text-text-color text-[13px]'>
-                                        {pageName}
+                            category_data && category_data?.data?.passedData.length > 0 && category_data?.data?.passedData.map(({id,categoryName}) => (
+                                // console.log(navbarDetails),
+                                <div key={id} className='flex items-center p-[5px_10px]'>
+                                    <input type="checkbox" name={id} id={id} className='mr-2 w-[20px] h-[20px] border-gray-300 rounded focus:ring-indigo-500 hover:cursor-pointer' onChange={() => handleCheckboxChecked(id)} checked={resultedKey.includes(id)} />
+                                    <label htmlFor={id} className='text-sm text-gray-700 hover:cursor-pointer w-full dark:text-text-color text-[13px]'>
+                                        {categoryName}
                                     </label>
                                 </div>
                             ))
@@ -142,7 +188,17 @@ const ProductsList = () => {
                             <div className='text-black'>{products.length} products</div>
                             {/* if user want to change product view */}
                             <div className='flex gap-[15px]'>
-                                <span className='p-[10px] rounded-[50%] bg-[#c1c1c1]'>
+                                {
+                                    productGridArray?.map((result, index) => (
+                                        // console.log(productGridArray);
+                                        <CustomIcon key={index} id={index} handleIconActive={() => changeProductgridLayout(index)} classes={`p-[10px] rounded-[50%] cursor-pointer ${layoutProduct.setActiveLayout == index ? "bg-[#c1c1c1]" : ""}`} insideContent={result} />
+                                    ))
+                                }
+                                {/* ${layoutProduct.current.setActiveLayout == index ? "bg-[#c1c1c1]" : ""} */}
+                                {/* <CustomIcon classes="p-[10px] rounded-[50%]" insideContent={<NineProductGrid />} />
+                                <CustomIcon classes="p-[10px] rounded-[50%]" insideContent={<ForthProductGrid />} />
+                                <CustomIcon classes="p-[10px] rounded-[50%]" insideContent={<SingleProductGrid />} /> */}
+                                {/* <span className='p-[10px] rounded-[50%] bg-[#c1c1c1]'>
                                     <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 4C3.10457 4 4 3.10457 4 2C4 0.89543 3.10457 0 2 0C0.89543 0 0 0.89543 0 2C0 3.10457 0.89543 4 2 4Z" fill="black"></path>
                                         <path d="M2 10C3.10457 10 4 9.10457 4 8C4 6.89543 3.10457 6 2 6C0.89543 6 0 6.89543 0 8C0 9.10457 0.89543 10 2 10Z" fill="black"></path>
@@ -154,16 +210,16 @@ const ProductsList = () => {
                                         <path d="M14 10C15.1046 10 16 9.10457 16 8C16 6.89543 15.1046 6 14 6C12.8954 6 12 6.89543 12 8C12 9.10457 12.8954 10 14 10Z" fill="black"></path>
                                         <path d="M14 16C15.1046 16 16 15.1046 16 14C16 12.8954 15.1046 12 14 12C12.8954 12 12 12.8954 12 14C12 15.1046 12.8954 16 14 16Z" fill="black"></path>
                                     </svg>
-                                </span>
-                                <span className='p-[10px] rounded-[50%]'>
+                                </span> */}
+                                {/* <span className='p-[10px] rounded-[50%]' key={1} onClick={() => changeProductgridLayout(1)}>
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.5 7C14.433 7 16 5.433 16 3.5C16 1.567 14.433 0 12.5 0C10.567 0 9 1.567 9 3.5C9 5.433 10.567 7 12.5 7Z" fill="black"></path>
                                         <path d="M3.5 7C5.433 7 7 5.433 7 3.5C7 1.567 5.433 0 3.5 0C1.567 0 0 1.567 0 3.5C0 5.433 1.567 7 3.5 7Z" fill="black"></path>
                                         <path d="M12.5 16C14.433 16 16 14.433 16 12.5C16 10.567 14.433 9 12.5 9C10.567 9 9 10.567 9 12.5C9 14.433 10.567 16 12.5 16Z" fill="black"></path>
                                         <path d="M3.5 16C5.433 16 7 14.433 7 12.5C7 10.567 5.433 9 3.5 9C1.567 9 0 10.567 0 12.5C0 14.433 1.567 16 3.5 16Z" fill="black"></path>
                                     </svg>
-                                </span>
-                                <span className='p-[10px] rounded-[50%]'>
+                                </span> */}
+                                {/* <span className='p-[10px] rounded-[50%]' key={2} onClick={() => changeProductgridLayout(2)}>
                                 <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 4C3.10457 4 4 3.10457 4 2C4 0.89543 3.10457 0 2 0C0.89543 0 0 0.89543 0 2C0 3.10457 0.89543 4 2 4Z" fill="black"></path>
                                     <path d="M2 10C3.10457 10 4 9.10457 4 8C4 6.89543 3.10457 6 2 6C0.89543 6 0 6.89543 0 8C0 9.10457 0.89543 10 2 10Z" fill="black"></path>
@@ -172,11 +228,11 @@ const ProductsList = () => {
                                     <path d="M20 8C20 8.552 19.553 9 19 9H7C6.448 9 6 8.552 6 8C6 7.448 6.448 7 7 7H19C19.553 7 20 7.447 20 8Z" fill="black"></path>
                                     <path d="M20 14C20 14.552 19.553 15 19 15H7C6.448 15 6 14.552 6 14C6 13.447 6.448 13 7 13H19C19.553 13 20 13.447 20 14Z" fill="black"></path>
                                 </svg>
-                                </span>
+                                </span> */}
                             </div>
                         </div>
                         {/* listing bar end */}
-                        <div className='grid grid-cols-4 gap-[10px]'>
+                        <div className={`grid ${layoutProduct.setActiveLayout == 0 ? " grid-cols-4" : layoutProduct.setActiveLayout == 1 ? " grid-cols-3" : " grid-cols-1"} gap-[10px]`}>
                         {products && products.map(({ id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId }) => (
                             <div
                             key={id}
@@ -184,15 +240,15 @@ const ProductsList = () => {
                             >
                                 {/* <Link to={`/products/${id}`}> */}
                                     <div className="group imgWrapper w-[100%]  overflow-hidden  rounded-md rounded-bl-none rounded-br-none relative z-0">
-                                        <a href="/product/67dbe07b6e949cc6cd65781d" data-discover="true">
-                                        <div className="img h-[200px] overflow-hidden">
+                                        {/* <a data-discover="true"> */}
+                                        <div className={`img ${layoutProduct.setActiveLayout == 1 ? "h-[300px]" : "h-[200px]    "} overflow-hidden`}>
                                             <Link to={`/products/${id}`}>
                                                 <img src={`http://localhost:9000/product/get-product-image/${id}/0`} />
                                                 <img src={`http://localhost:9000/product/get-product-image/${id}/1`} className="w-full transition-all duration-700 absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:scale-105"></img>
                                             </Link>
 
                                         </div>
-                                        </a>
+                                        {/* </a> */}
                                         <span className="discount flex items-center absolute top-[10px] left-[10px] z-50 bg-primary text-white rounded-lg p-1 text-[12px] font-[500] bg-[#ff5252]">{productDiscount}%</span>
                                         <div className="actions absolute top-[-20px] right-[5px] z-50 flex items-center gap-2 flex-col w-[50px] transition-all duration-300 group-hover:top-[15px] opacity-0 group-hover:opacity-100">
                                         <button className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary css-iyey26 flex justify-center items-center" tabIndex="0" type="button">
@@ -203,7 +259,7 @@ const ProductsList = () => {
                                         </button>
                                         {
                                             (() => {
-                                                const isFavourite = cartData?.some(({productId}) => productId == id);
+                                                const isFavourite = cartData && cartData?.some(({productId}) => productId == id);
                                                 return isFavourite ? (
                                                     <button className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary  group css-iyey26 cursor-pointer flex justify-center items-center" tabIndex="0" type="button" onClick={() => removeFromWishLIst({productId: id ,userId})}>
                                                         <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" className="text-[18px] text-[red]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 448l-30.164-27.211C118.718 322.442 48 258.61 48 179.095 48 114.221 97.918 64 162.4 64c36.399 0 70.717 16.742 93.6 43.947C278.882 80.742 313.199 64 349.6 64 414.082 64 464 114.221 464 179.095c0 79.516-70.719 143.348-177.836 241.694L256 448z"></path></svg>

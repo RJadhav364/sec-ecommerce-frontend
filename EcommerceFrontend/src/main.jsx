@@ -24,8 +24,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   <ToastContainer />
   </>
-    // {/* <ToastContainer /> */}
-  // </React.StrictMode>,
+    //  {/* <ToastContainer /> */}
+  //  </React.StrictMode>,
   // <div className='text-white'>
   // Rohan</div>
 )
