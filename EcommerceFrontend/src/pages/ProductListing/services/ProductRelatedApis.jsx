@@ -1,8 +1,18 @@
 import { Service_url } from "../../../../config/app.config";
-
-const getProduct = async(id) => {
+ /* eslint-disable */
+// get all products list by category id
+const getProduct = async(filterkey, filtervalue) => {
     try{
-        const response = await fetch(`${Service_url}/product/get-all-products/${id}`);
+        let sendObj = {
+            [filterkey] : filtervalue
+        }
+        const response = await fetch(`${Service_url}/product/get-all-products`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Indicates the body content type
+            },
+            body: JSON.stringify(sendObj)
+        });
         return response
         // return data;
     } catch(error){

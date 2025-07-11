@@ -30,55 +30,54 @@ const ProductsList = () => {
         thirdLevelcategoryId: 'thirdLevelcategoryId',
     };
     const [searchParams] = useSearchParams();
-    const [resultedKey, setResultedKey] = useState([searchParams.get("catId")])
+    // console.log(searchParams.keys())
+    
+    const [resultedKey, setResultedKey] = useState({
+        keyFilter: "",
+        filterIds: []
+    })
     const [confirmationBoxOpen, setConfirmationBoxOpen] = useState(false);
     const category_data = useCategoryStore();
-    let filterKey = null;
     let filterValue = null;
-    for(const [key, value] of Object.entries(paramMap)){
-        // console.log(key, key)
-        const Id = searchParams.get(key);
-        if(Id){
-            filterKey = value;
-            filterValue = Id;
-            // if(key == "catId"){
-            //     console.log(key, value)
-            //     // setAbc(true)
-            //     // setResultedKey({filterKeyValue: true})
-            //     // setResultedKey({filterKeyId: filterValue})
-            //     // resultedKey.current.filterKeyId = filterValue;
-            // }
-            // setChangedInId(filterValue);
-        }
-    }
     const [products,setProducts] = useState([]);
-    const getData = async() => {
-        // if(filterKey == "categoryId"){
-        //         console.log(filterValue)
-        //         setAbc(true)
-        //         setResultedKey({filterKeyValue: true})
-        //         setResultedKey({filterKeyId: filterValue})
-        //         // resultedKey.current.filterKeyId = filterValue;
+    useEffect(() => {
+        // for(const [key, value] of Object.entries(paramMap)){
+        // console.log(key, key)
+        // const Id = searchParams.get(key);
+        //     if(Id){
+        //         filterKey = value;
+        //         filterValue = Id;
+        //         console.log(value)
+        //         setResultedKey({keyFilter: value, filterIds: Id})
+        //         // setResultedKey({filterIds: Id})
         //     }
-        // const url = "https://example.org/products.json";
+        // }
+        searchParams.forEach((value, key) => {
+            setResultedKey({keyFilter: key, filterIds: value})
+            filterKey = true;
+            console.log(value, key);
+        });
+    } , [])
+    let filterKey = false;
+    const getData = async() => {
         try {
-            const response = await getProduct(`${[filterKey]}=${filterValue}`);
+            const response = await getProduct(resultedKey.keyFilter,resultedKey.filterIds);
             if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
             }
 
             const json = await response.json();
-            setProducts(json.passedData)
+            setProducts(json.data)
         } catch (error) {
             console.error(error.message);
         }
     }
     useEffect(()=>{
         getData();
-    },[filterValue])
-    useEffect(()=>{
-        console.log(resultedKey);
-    },[resultedKey])
+    },[filterKey])
+    // useEffect(()=>{
+    //     console.log(resultedKey);
+    // },[resultedKey])
     // useEffect(() => {
     //     // if(filterKey == "categoryId"){
     //     //     console.log("typeof",typeof resultedKey)
@@ -148,10 +147,10 @@ const ProductsList = () => {
             console.log(error);
         }
     }
-    const handleCheckboxChecked = (checkedId) => {
-        setResultedKey((prevSelected) => prevSelected.includes(checkedId) ? prevSelected.filter((id) => id !== checkedId) : [...prevSelected, checkedId]
-        );
-    }
+    // const handleCheckboxChecked = (checkedId) => {
+    //     setResultedKey((prevSelected) => prevSelected.includes(checkedId) ? prevSelected.filter((id) => id !== checkedId) : [...prevSelected, checkedId]
+    //     );
+    // }
     // onclick event that change the product grid layout
     const changeProductgridLayout = (keyID) => {
         // console.log(layoutProduct.current.setActiveLayout)
@@ -171,7 +170,7 @@ const ProductsList = () => {
                             category_data && category_data?.data?.passedData.length > 0 && category_data?.data?.passedData.map(({id,categoryName}) => (
                                 // console.log(navbarDetails),
                                 <div key={id} className='flex items-center p-[5px_10px]'>
-                                    <input type="checkbox" name={id} id={id} className='mr-2 w-[20px] h-[20px] border-gray-300 rounded focus:ring-indigo-500 hover:cursor-pointer' onChange={() => handleCheckboxChecked(id)} checked={resultedKey.includes(id)} />
+                                    {/* <input type="checkbox" name={id} id={id} className='mr-2 w-[20px] h-[20px] border-gray-300 rounded focus:ring-indigo-500 hover:cursor-pointer' onChange={() => handleCheckboxChecked(id)} checked={resultedKey.includes(id)} /> */}
                                     <label htmlFor={id} className='text-sm text-gray-700 hover:cursor-pointer w-full dark:text-text-color text-[13px]'>
                                         {categoryName}
                                     </label>
@@ -186,7 +185,7 @@ const ProductsList = () => {
                         {/* listing bar start */}
                         <div className='bg-[#f1f1f1] p-[5px_30px] w-full mb-4 rounded-md flex items-center justify-between'>
                             {/* product count */}
-                            <div className='text-black'>{products.length} products</div>
+                            <div className='text-black'>{products?.length} products</div>
                             {/* if user want to change product view */}
                             <div className='flex gap-[15px]'>
                                 {
