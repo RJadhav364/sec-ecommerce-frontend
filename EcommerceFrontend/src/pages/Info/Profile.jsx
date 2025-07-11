@@ -158,7 +158,7 @@ const Profile = () => {
                 <ul className="list-none pb-5 dark:bg-darkbg-default bg-[#f1f1f1] myAccountTabs">
                     {
                         tabs && tabs.map(({id,label,svg}) => (
-                        <li className="w-full" key={id} onClick={() => {setActiveTab(id)}}>
+                        <li className="w-full cursor-pointer" key={id} onClick={() => {setActiveTab(id)}}>
                             <a activeclassname="isActive" className="" data-discover="true">
                                 <button className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full !text-left !py-2 !px-5 !justify-start !capitalize dark:text-white text-[rgba(0,0,0,0.8)] !rounded-none flex items-center gap-2 css-iyey26" tabIndex="0" type="button">
                                     {svg} {label}<span className="MuiTouchRipple-root css-4mb1j7"></span>
