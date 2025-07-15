@@ -6,12 +6,13 @@ import toys from "../../assets/toys.png"
 import brand from "../../assets/brand.png"
 import blanket from "../../assets/blanket.png"
 import Abc from '../../components/Abc'
-import HomeSlider from '../../components/HomeSlider.jsx'
+import HomeSlider from '../../views/home/HomeSlider.jsx'
+import CategoryViews from '../../views/home/CategoryViews.jsx'
 import { homeSliderImages, popularProducts } from './services/apiCalls.jsx'
 import useCategorysStore from '../../store/categoryStore.jsx'
 
 const Home = () => {
-  const [result,setResult] = useState({sliderData: [], popularProductsData: ""});
+  const [result,setResult] = useState({sliderData: [], isSliderLoading: true, popularProductsData: ""});
   const {data} = useCategorysStore();
   useEffect(() => {
     callSlider();
@@ -46,7 +47,11 @@ const Home = () => {
       // const getResponse2 = await popularProducts();
       const data = await getResponse.json();
       // const data2 = await getResponse2.json();
-      setResult({sliderData: data.allImages, popularProductsData: details});
+      switch(true){
+        case getResponse.status == 200:
+          setResult({sliderData: data.allImages, isSliderLoading: false ,popularProductsData: details});
+          break;
+      }
     } catch(err){
       console.log(err)
     }
@@ -54,75 +59,11 @@ const Home = () => {
   
   return (
     <>
-    <HomeSlider abc={result.sliderData}/>
+    <HomeSlider sliderData={result.sliderData} isSliderLoading={result.isSliderLoading} />
       <div className='py-5 bg-[#F5F0F0] dark:bg-darkbg-highlight'>
         <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px]">
-          {/* <div className="">
-            <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true" >
-              <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
-                
-                <img src="https://serviceapi.spicezgold.com/download/1741660988059_ele.png" className='w-[44%]' />
-                  <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Electronics</h3>
-              </div>
-            </a>
-          </div>
-          <div className="">
-            <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
-              <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
-                <img src={kitchen} className='w-[44%]' />
-                  <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Kitchen</h3>
-              </div>
-            </a>
-          </div>
-          <div className="">
-            <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
-              <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
-                <img src={bycycle} className='w-[44%]' />
-                  <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Bicycles</h3>
-              </div>
-            </a>
-          </div>
-          <div className="">
-            <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
-              <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
-                <img src={watter_bottle} className="w-[44%]" />
-                  <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Bottle</h3>
-              </div>
-            </a>
-          </div>
-          <div className="">
-            <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
-              <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
-                <img src={toys} className="w-[44%]" />
-                  <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Toys</h3>
-              </div>
-            </a>
-          </div>
-          <div className="">
-            <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
-              <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
-                <img src={brand} className="w-[44%]" />
-                  <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Clothes</h3>
-              </div>
-            </a>
-          </div>
-          <div className="">
-            <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
-              <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
-                <img src={blanket} className="w-[44%]" />
-                  <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Blankets</h3>
-              </div>
-            </a>
-          </div>
-          <div className="">
-            <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
-              <div className="item border border-gray-200 py-4 lg:py-7 px-3 bg-white rounbded-sm text-center flex items-center justify-center flex-col">
-                <img src="https://serviceapi.spicezgold.com/download/1741661061379_foot.png" className="w-[44%]" />
-                  <h3 className="text-[12px] lg:text-[15px] font-[500] mt-3">Footwear</h3>
-              </div>
-            </a>
-          </div> */}
-          {
+          {/* category with images block start */}
+          {/* {
             data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
               <div className="" key={id}>
                 <a href="/products?catId=67cfa3233c7fa6b8e3276e3d" data-discover="true">
@@ -133,7 +74,9 @@ const Home = () => {
                 </a>
               </div>
             ))
-          }
+          } */}
+          <CategoryViews data={data.passedData} />
+          {/* category with images block end */}
         </div>
       </div>
       {/* popular products start */}
@@ -151,14 +94,11 @@ const Home = () => {
             {/* Tabs start */}
             <div className='w-[60%]' >
               <div className='flex gap-[20px]'>
-                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Electronics</button>
-                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Kitchen</button>
-                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Bicycles</button>
-                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Bottle</button>
-                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Toys</button>
-                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Clothes</button>
-                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Blankets</button>
-                <button className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>Footwear</button>
+                {
+                  data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
+                    <button key={id} className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>{categoryName}</button>
+                  ))
+                }
               </div>
             </div>
             {/* Tabs end */}
