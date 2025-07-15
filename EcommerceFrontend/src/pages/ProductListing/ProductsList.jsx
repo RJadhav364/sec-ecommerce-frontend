@@ -32,17 +32,13 @@ const ProductsList = () => {
     const [searchParams] = useSearchParams();
     // console.log(searchParams.keys())
     
-    const [resultedKey, setResultedKey] = useState({
-        keyFilter: "",
-        filterIds: []
-    })
+    const [resultedKey, setResultedKey] = useState({keyFilter: "", filterIds: []})
     const [confirmationBoxOpen, setConfirmationBoxOpen] = useState(false);
     const category_data = useCategoryStore();
     let filterValue = null;
     const [products,setProducts] = useState([]);
     useEffect(() => {
         // for(const [key, value] of Object.entries(paramMap)){
-        // console.log(key, key)
         // const Id = searchParams.get(key);
         //     if(Id){
         //         filterKey = value;
@@ -53,15 +49,17 @@ const ProductsList = () => {
         //     }
         // }
         searchParams.forEach((value, key) => {
-            setResultedKey({keyFilter: key, filterIds: value})
-            filterKey = true;
-            console.log(value, key);
+            setResultedKey({keyFilter: key, filterIds: [value]})
+            // filterKey = true;
+            getData(key == "catId" ? "categoryId" :  key == "subCatId" ? "subCategoryId" : "thirdLevelcategoryId",value)
+            console.log([value], key);
         });
-    } , [])
-    let filterKey = false;
-    const getData = async() => {
+    } , [searchParams])
+    // let filterKey = false;
+    const getData = async(key,value) => {
+        console.log("api call start", key,value)
         try {
-            const response = await getProduct(resultedKey.keyFilter,resultedKey.filterIds);
+            const response = await getProduct(key,value);
             if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
             }
@@ -72,9 +70,9 @@ const ProductsList = () => {
             console.error(error.message);
         }
     }
-    useEffect(()=>{
-        getData();
-    },[filterKey])
+    // useEffect(()=>{
+    //     getData();
+    // },[resultedKey])
     // useEffect(()=>{
     //     console.log(resultedKey);
     // },[resultedKey])
@@ -147,10 +145,32 @@ const ProductsList = () => {
             console.log(error);
         }
     }
-    // const handleCheckboxChecked = (checkedId) => {
-    //     setResultedKey((prevSelected) => prevSelected.includes(checkedId) ? prevSelected.filter((id) => id !== checkedId) : [...prevSelected, checkedId]
-    //     );
-    // }
+    const handleCheckboxChecked = (checkedId) => {
+        // console.log(resultedKey)
+        setResultedKey((prevSelected) => {
+            const isSelected = prevSelected.filterIds.includes(checkedId);
+            
+            const updatedFilterIds = isSelected
+            ? prevSelected.filterIds.filter((id) => id !== checkedId)
+            : [...prevSelected.filterIds, checkedId];
+
+            // Optionally update keyFilter too
+            const updatedKeyFilter = "categoryId"; // or some other logic
+
+            // Call the function with updated values
+            getData(updatedKeyFilter, updatedFilterIds );
+
+            // Update the state
+            return {
+            ...prevSelected,
+            filterIds: updatedFilterIds,
+            keyFilter: updatedKeyFilter,
+            };
+        });
+        // setResultedKey((prevSelected) => console.log(prevSelected));
+        // setResultedKey({keyFilter: "categoryId", filterIds: checkedId})
+        // getData(checkedId)
+    }
     // onclick event that change the product grid layout
     const changeProductgridLayout = (keyID) => {
         // console.log(layoutProduct.current.setActiveLayout)
@@ -170,7 +190,7 @@ const ProductsList = () => {
                             category_data && category_data?.data?.passedData.length > 0 && category_data?.data?.passedData.map(({id,categoryName}) => (
                                 // console.log(navbarDetails),
                                 <div key={id} className='flex items-center p-[5px_10px]'>
-                                    {/* <input type="checkbox" name={id} id={id} className='mr-2 w-[20px] h-[20px] border-gray-300 rounded focus:ring-indigo-500 hover:cursor-pointer' onChange={() => handleCheckboxChecked(id)} checked={resultedKey.includes(id)} /> */}
+                                     <input type="checkbox" name={id} id={id} className='mr-2 w-[20px] h-[20px] border-gray-300 rounded focus:ring-indigo-500 hover:cursor-pointer' onChange={() => handleCheckboxChecked(id)} checked={resultedKey?.filterIds?.includes(id)} /> 
                                     <label htmlFor={id} className='text-sm text-gray-700 hover:cursor-pointer w-full dark:text-text-color text-[13px]'>
                                         {categoryName}
                                     </label>
