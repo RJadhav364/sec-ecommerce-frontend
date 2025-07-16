@@ -16,10 +16,12 @@ export default function Relogin({isReloginModelOpen, onReloginModelClosed}) {
         navigate("/login");
     }
   return (
-    <div className={`${isReloginModelOpen ? "relative z-10" : "" }`}>
+    <>
+    
       <div
-        className={`${isReloginModelOpen ? "fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in" : ""} `}
+        className={`${isReloginModelOpen ? "fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in top-0 left-0 right-0 bottom-0 z-[101]" : ""} `}
       ></div>
+    <div className={`${isReloginModelOpen ? "relative z-[102]" : "" }`}>
 
       <div className={`${isReloginModelOpen ? "fixed inset-0 z-10 w-screen overflow-y-auto" : "hidden" }`}>
         <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -59,5 +61,6 @@ export default function Relogin({isReloginModelOpen, onReloginModelClosed}) {
         </div>
       </div>
     </div>
+    </>
   )
 }

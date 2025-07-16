@@ -70,6 +70,7 @@ const Header = ({handleChild1Data}) => {
     }
   ]
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchCartDetails = async() => {
     try {
       const getResponse = await getWishListDetails(token, id);
@@ -92,8 +93,11 @@ const Header = ({handleChild1Data}) => {
       console.log(error);
     }
   }
-  useEffect(()=> {
-    fetchCartDetails();
+  console.log(isCustomerLogin , id)
+  useEffect(() => {
+    if(isCustomerLogin == true){
+      fetchCartDetails();
+    }
   },[isCustomerLogin])
 
   return (

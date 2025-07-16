@@ -17,7 +17,7 @@ import productGridArray from '../../utils/ProductGridArray';
 import Button from '../../components/Button';
 
 const ProductsList = () => {
-    const {token, id: userId} = useCustomerStore();
+    const {token, id: userId, isCustomerLogin} = useCustomerStore();
     const {cartData , setAuth} = useCartStore();
     const [isReloginModelOpen, setIsReloginModelOpen] = useState(false);
     const [layoutProduct, setLayoutProduct] = useState({
@@ -84,38 +84,54 @@ const ProductsList = () => {
     //     // }
     // },[layoutProduct])
     const addProductInFavourite = async(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId) => {
-        const response = await productInWishList(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId,token);
         switch(true){
-            case response.status == 200:
-                toast.success(`Product Added in Cart \u{1F600}`, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: true,
-                    closeOnClick: false,
-                    pauseOnHover: false,
-                    draggable: false,
-                    progress: undefined,
-                    theme: "colored",
-                });
-                const getResponse = await getWishListDetails(token ,userId);
-                const updatedCart = await getResponse.json();
-                setAuth({cartData: updatedCart.data})
-                break;
-            case response.status == 409:
-                toast.error(`Product already in Cart`, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: false,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                });
-                break;
-            case response.status == 403:
-                setIsReloginModelOpen(true);
-                break;
+            case isCustomerLogin == true: 
+            const response = await productInWishList(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId,token);
+            switch(true){
+                case response.status == 200:
+                    toast.success(`Product Added in Cart \u{1F600}`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        draggable: false,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                    const getResponse = await getWishListDetails(token ,userId);
+                    const updatedCart = await getResponse.json();
+                    setAuth({cartData: updatedCart.data})
+                    break;
+                case response.status == 409:
+                    toast.error(`Product already in Cart`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: false,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                    break;
+                case response.status == 403:
+                    setIsReloginModelOpen(true);
+                    break;
+            }
+            break;
+        default:
+            toast.error(`You are not login, please login first`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            break;
         }
     }
     const removeFromWishLIst = async(productId, userId) => {

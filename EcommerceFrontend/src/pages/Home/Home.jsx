@@ -75,7 +75,7 @@ const Home = () => {
               </div>
             ))
           } */}
-          <CategoryViews data={data.passedData} />
+          <CategoryViews data={data?.passedData} />
           {/* category with images block end */}
         </div>
       </div>

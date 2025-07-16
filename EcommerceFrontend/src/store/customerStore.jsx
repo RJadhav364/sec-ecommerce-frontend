@@ -1,18 +1,14 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const useCustomerStore = create(
-  persist(
-    (set) => ({
+const useCustomerStore = create(persist((set) => ({
       isCustomerLogin: false,
       token: null,
       email: null,
       id: null,
       username: null,
       customeProfilePic: null,
-      setAuth: (newState) => {
-        set((state) => newState)
-    },
+      setAuth: (newState) => set((state) => newState),
     }),
     {
       name: "Authentication-state",
