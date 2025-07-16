@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { getWishListProduct, handleRemoveFromFavourite } from '../pages/Info/services/profileApis';
 import { toast } from 'react-toastify';
 import useCustomerStore from '../store/customerStore';
+import { useNavigate } from 'react-router-dom';
 
 const WishList = () => {
     const [myList , setMyList] = useState([]);
-    const {username , email , token , id} = useCustomerStore();
+    const navigate = useNavigate();
+    const {username , email , token , id, isCustomerLogin} = useCustomerStore();
     useEffect(() => {
-        getAllWishProducts();
-    },[])
+        switch(true){
+            case isCustomerLogin == true:
+                getAllWishProducts();
+                break;
+            default:
+                navigate("/login")
+                break;
+        }
+    },[isCustomerLogin])
     const getAllWishProducts = async() => {
         const data = await getWishListProduct(token , id);
         const result = await data.json();

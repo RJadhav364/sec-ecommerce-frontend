@@ -9,13 +9,13 @@ import Address from '../../components/Address';
 import { useParams } from 'react-router-dom';
 
 const Profile = () => {
-    const {username , email , token , id, setAuth, customeProfilePic} = useCustomerStore();
+    const {username , email , token , id, setAuth, customeProfilePic,isCustomerLogin} = useCustomerStore();
     const [myList , setMyList] = useState([]);
     const {slug} = useParams();
     // console.log("params",slug)
     const [activeTab , setActiveTab] = useState(slug);
     useEffect(() => {
-        getAllWishProducts();
+        // getAllWishProducts();
     },[])
     useEffect(() => {
         setActiveTab(slug);
