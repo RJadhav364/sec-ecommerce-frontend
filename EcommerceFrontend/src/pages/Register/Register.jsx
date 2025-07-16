@@ -110,8 +110,8 @@ const Register = () => {
     <section className='dark:bg-darkbg-highlight dark:text-white font-display-Montserrat'>
         <div className='mx-auto w-[1400px] py-[50px] flex items-center flex-col'>
             <div className='dark:bg-[#181818] bg-[#ebebeb] p-[20px] w-[600px] rounded-[10px] shadow-[0px_0px_7px_0px_#ebebeb]'>
-                <h3 className="text-center text-[20px] font-[600]">Login to your account</h3>
-                <h5 className='text-center text-[18px] text-[#bdbdbd] mt-[5px]'>Don't have an account yet? <Link className='hover:underline hover:underline-offset-1 hover:decoration-[#bdbdbd] font-bold'>Sign up</Link></h5>
+                <h3 className="text-center text-[20px] font-[600]">Welcome to EcommerceHUb! 👋</h3>
+                <h5 className='text-center text-[18px] text-[#bdbdbd] mt-[5px]'>Already have an account? <Link to={"/login"} className='hover:underline hover:underline-offset-1 hover:decoration-[#bdbdbd] font-bold'>Sign In</Link></h5>
                 <div>
                     <div className="form-group w-full mt-5 mb-5 grid grid-cols-2 gap-[20px]">
                         <div className="flex flex-col gap-1.5">

@@ -169,7 +169,8 @@ const Header = ({handleChild1Data}) => {
                 </div>
               ) : (
                 <div className='flex gap-[8px] items-center'>
-                  <Link to={'/login'} className='dark:text-white'>Login</Link><span className='border-[1px] border-[#968287] h-[60%] inline-block'></span><a href="" className='dark:text-white'>Register</a>
+                  <Link to={'/login'} className='dark:text-white'>Login</Link><span className='border-[1px] border-[#968287] h-[60%] inline-block'></span>
+                  <Link to={'/register'} className='dark:text-white'>Register</Link>
                 </div>
               )
             }
