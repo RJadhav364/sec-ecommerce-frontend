@@ -93,7 +93,7 @@ const Header = ({handleChild1Data}) => {
       console.log(error);
     }
   }
-  console.log(isCustomerLogin , id)
+  // console.log(isCustomerLogin , id)
   useEffect(() => {
     if(isCustomerLogin == true){
       fetchCartDetails();
