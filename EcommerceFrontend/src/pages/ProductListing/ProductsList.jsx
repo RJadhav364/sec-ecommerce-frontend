@@ -52,7 +52,6 @@ const ProductsList = () => {
             setResultedKey({keyFilter: key, filterIds: [value]})
             // filterKey = true;
             getData(key == "catId" ? "categoryId" :  key == "subCatId" ? "subCategoryId" : "thirdLevelcategoryId",value)
-            console.log([value], key);
         });
     } , [searchParams])
     // let filterKey = false;

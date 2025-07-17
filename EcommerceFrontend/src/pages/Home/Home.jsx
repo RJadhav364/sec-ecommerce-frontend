@@ -1,19 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
-import kitchen from "../../assets/kitchen.png"
-import bycycle from "../../assets/bycycle.png"
-import watter_bottle from "../../assets/water-bottle.png"
-import toys from "../../assets/toys.png"
-import brand from "../../assets/brand.png"
-import blanket from "../../assets/blanket.png"
 import Abc from '../../components/Abc'
 import HomeSlider from '../../views/home/HomeSlider.jsx'
 import CategoryViews from '../../views/home/CategoryViews.jsx'
-import { homeSliderImages, popularProducts } from './services/apiCalls.jsx'
+import { getPopularProduct, homeSliderImages } from './services/apiCalls.jsx'
 import useCategorysStore from '../../store/categoryStore.jsx'
+import Button from '../../components/Button.jsx'
 
 const Home = () => {
-  const [result,setResult] = useState({sliderData: [], isSliderLoading: true, popularProductsData: ""});
   const {data} = useCategorysStore();
+  const [result,setResult] = useState({sliderData: [], isSliderLoading: true, popularProductsData: "" , popularProductId: data?.passedData?.[0].id});
+  const homePopularSection = useRef({
+    isPopular : true,
+    categoryId: data?.passedData?.[0].id,
+  })
   useEffect(() => {
     callSlider();
     // getOptions()
@@ -44,16 +43,29 @@ const Home = () => {
   const callSlider = async() => {
     try{
       const getResponse = await homeSliderImages();
-      // const getResponse2 = await popularProducts();
+      const getResponse2 = await getPopularProduct(homePopularSection.current);
       const data = await getResponse.json();
-      // const data2 = await getResponse2.json();
+      const data2 = await getResponse2.json();
       switch(true){
         case getResponse.status == 200:
-          setResult({sliderData: data.allImages, isSliderLoading: false ,popularProductsData: details});
+          setResult({sliderData: data.allImages, isSliderLoading: false ,popularProductsData: data2.data, popularProductId: result.popularProductId});
           break;
       }
     } catch(err){
       console.log(err)
+    }
+  }
+
+  const handleShowPopularSection = async(id) => {
+    homePopularSection.current.categoryId = id;
+    // console.log(homePopularSection);
+    const getResponse2 = await getPopularProduct(homePopularSection.current);
+    switch(true){
+      case getResponse2.status == 200:
+        let newProducts = await getResponse2.json();
+        setResult({sliderData: result.sliderData,popularProductsData: newProducts.data, popularProductId: id});
+        break;
+      default:
     }
   }
   
@@ -96,7 +108,8 @@ const Home = () => {
               <div className='flex gap-[20px]'>
                 {
                   data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
-                    <button key={id} className='text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color'>{categoryName}</button>
+                    // <button key={id} className={`relative text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color after:content-[""] after:w-full after:bg-white after:absolute after:h-[3px] after:bottom-0 after:left-0 after:right-0`}>{categoryName}</button>
+                    <Button key={id} onClick={() => handleShowPopularSection(id)} classes={`relative text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color ${result.popularProductId == id && "after:content-[''] after:w-full after:bg-white after:absolute after:h-[3px] after:bottom-0 after:left-0 after:right-0"}`} btnLabel={categoryName} />
                   ))
                 }
               </div>

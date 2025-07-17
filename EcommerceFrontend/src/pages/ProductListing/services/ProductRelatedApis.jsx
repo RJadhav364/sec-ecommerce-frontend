@@ -3,15 +3,15 @@ import { Service_url } from "../../../../config/app.config";
 // get all products list by category id
 const getProduct = async(filterkey, filtervalue) => {
     try{
-        let sendObj = {
-            [filterkey] : filtervalue
-        }
+        // let sendObj = {
+        //     [filterkey] : filtervalue
+        // }
         const response = await fetch(`${Service_url}/product/get-all-products`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json' // Indicates the body content type
             },
-            body: JSON.stringify(sendObj)
+            body: JSON.stringify({[filterkey] : filtervalue})
         });
         return response
         // return data;

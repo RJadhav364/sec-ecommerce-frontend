@@ -1,7 +1,9 @@
+import { Service_url } from "../../../../config/app.config"
+
 const homeSliderImages = async() => {
     // eslint-disable-next-line no-useless-catch
     try{
-        const response = await fetch(`http://localhost:9000/slider/get-slider-image`);
+        const response = await fetch(`${Service_url}/slider/get-slider-image`);
         return response
         // return data;
         } catch(error){
@@ -10,16 +12,22 @@ const homeSliderImages = async() => {
         }
 }
 
-const popularProducts = async() => {
-    // eslint-disable-next-line no-useless-catch
+const getPopularProduct = async(homePopularSection) => {
+       // eslint-disable-next-line no-useless-catch
     try{
-        const response = await fetch(`http://localhost:9000/product/get-all-products`);
+        const response = await fetch(`${Service_url}/product/get-all-products`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Indicates the body content type
+            },
+            body: JSON.stringify(homePopularSection)
+        });
         return response
         // return data;
-        } catch(error){
+    } catch(error){
             // console.log(error);
             throw error;
-        }
+    }
 }
 
-export {homeSliderImages,popularProducts}
+export {homeSliderImages,getPopularProduct}

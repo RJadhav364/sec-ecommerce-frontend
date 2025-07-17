@@ -65,3 +65,16 @@
 .no-spinner {
   -moz-appearance: textfield; /* Firefox */
 }
+
+/* isFeatured product slider button css */
+.homeSlider .swiper-button-next, .homeSlider .swiper-button-prev{
+  background: white;
+  border-radius: 100%;
+  padding: 10px;
+  min-width: 40px;
+}
+.homeSlider .swiper-button-next::after , .homeSlider .swiper-button-prev::after{
+  font-size: 23px;
+  font-weight: 700;
+}
+
