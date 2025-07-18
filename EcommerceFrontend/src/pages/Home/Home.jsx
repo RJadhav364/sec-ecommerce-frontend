@@ -8,7 +8,7 @@ import Button from '../../components/Button.jsx'
 
 const Home = () => {
   const {data} = useCategorysStore();
-  const [result,setResult] = useState({sliderData: [], isSliderLoading: true, popularProductsData: "" , popularProductId: data?.passedData?.[0].id});
+  const [result,setResult] = useState({sliderData: [], isSliderLoading: true, isProductLoading: true, popularProductsData: "" , popularProductId: data?.passedData?.[0].id});
   const homePopularSection = useRef({
     isPopular : true,
     categoryId: data?.passedData?.[0].id,
@@ -48,7 +48,7 @@ const Home = () => {
       const data2 = await getResponse2.json();
       switch(true){
         case getResponse.status == 200:
-          setResult({sliderData: data.allImages, isSliderLoading: false ,popularProductsData: data2.data, popularProductId: result.popularProductId});
+          setResult({sliderData: data.allImages, isSliderLoading: false, isProductLoading: false ,popularProductsData: data2.data, popularProductId: result.popularProductId});
           break;
       }
     } catch(err){
@@ -59,13 +59,18 @@ const Home = () => {
   const handleShowPopularSection = async(id) => {
     homePopularSection.current.categoryId = id;
     // console.log(homePopularSection);
-    const getResponse2 = await getPopularProduct(homePopularSection.current);
+    try {
+      setResult({sliderData: result.sliderData,popularProductsData: "", popularProductId: id, isProductLoading: true});
+      const getResponse2 = await getPopularProduct(homePopularSection.current);
     switch(true){
       case getResponse2.status == 200:
         let newProducts = await getResponse2.json();
-        setResult({sliderData: result.sliderData,popularProductsData: newProducts.data, popularProductId: id});
+        setResult({sliderData: result.sliderData,popularProductsData: newProducts.data, popularProductId: id, isProductLoading: false});
         break;
       default:
+    }
+    } catch (error) {
+      console.log(error)
     }
   }
   
@@ -116,7 +121,7 @@ const Home = () => {
             </div>
             {/* Tabs end */}
           </div>
-          <Abc popularProductsData={result.popularProductsData} />
+          <Abc popularProductsData={result.popularProductsData} isPopularProductLoading={result.isProductLoading} />
         </div>
       </div>
       {/* according to tab products start */}
