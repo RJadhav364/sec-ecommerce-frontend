@@ -29,7 +29,7 @@ const HomeSlider = ({sliderData, isSliderLoading}) => {
   return (
       <div className='bg-[#F5F0F0] pt-[30px] dark:bg-darkbg-highlight'>
         {/* slider code start */}
-        <div className="mx-auto w-[70%]">
+        <div className="mx-auto w-[70%] max-[1858px]:w-[80%] max-[1605px]:w-[90%]">
           <div
             className={``}
             // className={`flex transition ease-out duration-[.5s]`}

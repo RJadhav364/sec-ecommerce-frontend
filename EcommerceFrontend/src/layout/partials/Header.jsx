@@ -103,7 +103,7 @@ const Header = ({handleChild1Data}) => {
   return (
     <>
       <header className='border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c] font-display-Montserrat fixed w-full top-0 z-[101]'>
-        <div className='mx-auto w-[1400px] py-[20px] grid grid-cols-3 items-center'>
+        <div className='mx-auto w-[1400px] max-[1534px]:w-full max-[1534px]:px-[20px] py-[20px] grid grid-cols-3 items-center'>
           <div>
             {/* <img src="	https://serviceapi.spicezgold.com/download/1744255975457_logo.jpg" alt="" /> */}
             <WebsiteLogo />

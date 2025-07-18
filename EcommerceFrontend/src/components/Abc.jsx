@@ -48,32 +48,44 @@ const Abc = ({popularProductsData , isPopularProductLoading}) => {
         // pagination={{
         //   clickable: true,
         // }}
-        breakpoints={{
-          640: {
-            slidesPerView: 2.5,
-            spaceBetween: 10,
-          },
-          768: {
-            slidesPerView: 3.5,
-            spaceBetween: 10,
-          },
-          1024: {
-            slidesPerView: 3.5,
-            spaceBetween: 20,
-          },
-          1658: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-          1785: {
-            slidesPerView: 4.3,
-            spaceBetween: 20,
-          },
-          1880: {
-            slidesPerView: 4.5,
-            spaceBetween: 20,
-          },
-        }}
+        // breakpoints={{
+        //   640: {
+        //     slidesPerView: 2.5,
+        //     spaceBetween: 10,
+        //   },
+        //   768: {
+        //     slidesPerView: 2.1,
+        //     spaceBetween: 10,
+        //   },
+        //   1024: {
+        //     slidesPerView: 3,
+        //     spaceBetween: 20,
+        //   },
+        //   1291: {
+        //     slidesPerView: 3.1,
+        //     spaceBetween: 20,
+        //   },
+        //   1376: {
+        //     slidesPerView: 3.3,
+        //     spaceBetween: 20,
+        //   },
+        //   1469: {
+        //     slidesPerView: 3.5,
+        //     spaceBetween: 20,
+        //   },
+        //   1658: {
+        //     slidesPerView: 4,
+        //     spaceBetween: 20,
+        //   },
+        //   1785: {
+        //     slidesPerView: 4.3,
+        //     spaceBetween: 20,
+        //   },
+        //   1880: {
+        //     slidesPerView: 4.5,
+        //     spaceBetween: 20,
+        //   },
+        // }}
         navigation={true}
         modules={[Pagination, Navigation]}
         className="mySwiper"

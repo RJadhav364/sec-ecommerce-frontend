@@ -78,7 +78,7 @@ const Home = () => {
     <>
     <HomeSlider sliderData={result.sliderData} isSliderLoading={result.isSliderLoading} />
       <div className='py-5 bg-[#F5F0F0] dark:bg-darkbg-highlight'>
-        <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px]">
+        <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px] max-[1858px]:w-[80%] max-[1605px]:w-[90%]">
           {/* category with images block start */}
           {/* {
             data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
@@ -98,9 +98,9 @@ const Home = () => {
       </div>
       {/* popular products start */}
       <div className='dark:bg-darkbg-highlight'>
-        <div className='mx-auto w-[70%] pt-[10px]'>
-          <div className="flex pb-[30px]">
-            <div className='w-[40%]'>
+        <div className='mx-auto w-[70%] pt-[10px] max-[1858px]:w-[80%] max-[1605px]:w-[90%]'>
+          <div className="flex pb-[30px] max-[1415px]:flex-col">
+            <div className='w-[40%] max-[1415px]:w-full max-[1415px]:text-center'>
               <p className='text-[20px] font-[600] dark:text-text-color'>
                 Popular Products
               </p>
@@ -109,8 +109,8 @@ const Home = () => {
               </p>
             </div>
             {/* Tabs start */}
-            <div className='w-[60%]' >
-              <div className='flex gap-[20px]'>
+            <div className='w-[60%] max-[1415px]:w-full' >
+              <div className='flex gap-[20px] max-[1415px]:justify-center'>
                 {
                   data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
                     // <button key={id} className={`relative text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color after:content-[""] after:w-full after:bg-white after:absolute after:h-[3px] after:bottom-0 after:left-0 after:right-0`}>{categoryName}</button>

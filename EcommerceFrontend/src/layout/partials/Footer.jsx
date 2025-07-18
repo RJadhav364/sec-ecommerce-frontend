@@ -41,7 +41,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#f7f7f7] dark:bg-darkbg-default pt-[30px]">
         <div className="mx-auto w-[70%]">
-        <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 py-[40px_58px] border-b border-b-[#e3e2e2] border-b-[2px]">
+        <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 xl:grid-cols-4  lg:gap-x-8 py-[40px_58px] border-b border-b-[#e3e2e2] border-b-[2px]">
             {
                 companyServices && companyServices.length > 0 && companyServices.map(({icon_light,icon_dark,box_title,box_content},index) => (
                     <div key={index} className="flex items-center justify-center text-center sm:text-left">
@@ -49,7 +49,7 @@ const Footer = () => {
                 <img src={icon_light} alt="" className="w-[70px] hidden dark:inline-block" />
                 <div className="ml-4">
                 <p className="text-base font-medium text-gray-900 dark:text-white">{box_title}</p>
-                <p className="mt-1 text-sm text-gray-500 dark:text-[#cdcdcd]">{box_content}</p>
+                <p className="mt-1 text-sm text-gray-500 dark:text-[#cdcdcd] text-nowrap">{box_content}</p>
                 </div>
             </div>
                 ))

@@ -23,7 +23,7 @@ const Navbar = ({blockBg}) => {
   return (
     <>
       <div className={`border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c] font-display-Montserrat fixed w-full ${isCustomerLogin ? "top-[93px]" : "top-[91px]" } ${blockBg ? "z-[-1]" : "z-[101]" }`}>
-          <div className='mx-auto w-[1400px] py-[20px]'>
+          <div className='mx-auto w-[1400px] py-[20px] max-[1480]:w-full'>
               {/* <div></div> */}
               <ul className='flex gap-3 items-center justify-center'>
               <li className='group text-[16px] font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'><Link to={"/"}>Home
