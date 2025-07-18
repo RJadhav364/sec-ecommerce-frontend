@@ -166,7 +166,7 @@ const ProductsList = () => {
         }
     }
     const handleCheckboxChecked = (checkedId) => {
-        // console.log(resultedKey)
+        // console.log(checkedId)
         setResultedKey((prevSelected) => {
             const isSelected = prevSelected.filterIds.includes(checkedId);
             

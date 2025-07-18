@@ -38,14 +38,48 @@ const Abc = ({popularProductsData , isPopularProductLoading}) => {
                 <ProductLoader skeltonNo={ProductSkeltonLoader} classes="grid grid-cols-5 gap-[20px]" />
             ) : (
             <Swiper
-                slidesPerView="auto"
-                spaceBetween={30}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="!overflow-visible"
+                // slidesPerView="auto"
+                // spaceBetween={30}
+                // navigation={true}
+                // modules={[Pagination, Navigation]}
+                // className="!overflow-visible"
+                slidesPerView={1}
+        spaceBetween={0}
+        // pagination={{
+        //   clickable: true,
+        // }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2.5,
+            spaceBetween: 10,
+          },
+          768: {
+            slidesPerView: 3.5,
+            spaceBetween: 10,
+          },
+          1024: {
+            slidesPerView: 3.5,
+            spaceBetween: 20,
+          },
+          1658: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+          1785: {
+            slidesPerView: 4.3,
+            spaceBetween: 20,
+          },
+          1880: {
+            slidesPerView: 4.5,
+            spaceBetween: 20,
+          },
+        }}
+        navigation={true}
+        modules={[Pagination, Navigation]}
+        className="mySwiper"
             >
             {popularProductsData && popularProductsData.map(({ productName, productBrand,id,productOldPrice,productCurrentPrice,productRating,productInStock }) => (
-                <SwiperSlide className="w-full" style={{width: "268.667px"}} key={id}>
+                <SwiperSlide className="w-full" key={id}>
                     <div
                     className="shadow-lg rounded-md border border-[#efe1e1] dark:border-[#959090] w-[290px] flex-shrink-0"
                     >
