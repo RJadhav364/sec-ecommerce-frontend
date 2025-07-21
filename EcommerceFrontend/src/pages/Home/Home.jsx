@@ -5,6 +5,8 @@ import CategoryViews from '../../views/home/CategoryViews.jsx'
 import { getPopularProduct, homeSliderImages } from './services/apiCalls.jsx'
 import useCategorysStore from '../../store/categoryStore.jsx'
 import Button from '../../components/Button.jsx'
+import { Navigation, Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 const Home = () => {
   const {data} = useCategorysStore();
@@ -78,7 +80,7 @@ const Home = () => {
     <>
     <HomeSlider sliderData={result.sliderData} isSliderLoading={result.isSliderLoading} />
       <div className='py-5 bg-[#F5F0F0] dark:bg-darkbg-highlight'>
-        <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px] max-[1858px]:w-[80%] max-[1605px]:w-[90%]">
+        {/* <div className="mx-auto w-[70%] grid grid-cols-8 gap-[5px] max-[1858px]:w-[80%] max-[1605px]:w-[90%]"> */}
           {/* category with images block start */}
           {/* {
             data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
@@ -94,11 +96,11 @@ const Home = () => {
           } */}
           <CategoryViews data={data?.passedData} />
           {/* category with images block end */}
-        </div>
+        {/* </div> */}
       </div>
       {/* popular products start */}
       <div className='dark:bg-darkbg-highlight'>
-        <div className='mx-auto w-[70%] pt-[10px] max-[1858px]:w-[80%] max-[1605px]:w-[90%]'>
+        <div className='mx-auto w-[1400px] pt-[10px] max-[1858px]:w-[80%] max-[1605px]:w-[90%]'>
           <div className="flex pb-[30px] max-[1415px]:flex-col">
             <div className='w-[40%] max-[1415px]:w-full max-[1415px]:text-center'>
               <p className='text-[20px] font-[600] dark:text-text-color'>
@@ -111,12 +113,34 @@ const Home = () => {
             {/* Tabs start */}
             <div className='w-[60%] max-[1415px]:w-full' >
               <div className='flex gap-[20px] max-[1415px]:justify-center'>
-                {
-                  data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
-                    // <button key={id} className={`relative text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color after:content-[""] after:w-full after:bg-white after:absolute after:h-[3px] after:bottom-0 after:left-0 after:right-0`}>{categoryName}</button>
-                    <Button key={id} onClick={() => handleShowPopularSection(id)} classes={`relative text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color ${result.popularProductId == id && "after:content-[''] after:w-full after:bg-white after:absolute after:h-[3px] after:bottom-0 after:left-0 after:right-0"}`} btnLabel={categoryName} />
-                  ))
-                }
+                <Swiper
+                  slidesPerView={1}
+                  spaceBetween={0}
+                  // navigation={true}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Navigation, Pagination]}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 'auto',
+                      spaceBetween: 5,
+                    },
+                    1880: {
+                      slidesPerView: 8,
+                      spaceBetween: 5,
+                    }
+                  }}
+                  className="mySwiper popularSwiper"
+                >
+                  {
+                    data && data.passedData && data.passedData.length > 0 && data.passedData.map(({id,categoryName,subNavbar,children}) => (
+                      <SwiperSlide className='w-102-2' style={{width: "102.2px !important" , height: "45px"}}>
+                        <Button key={id} onClick={() => handleShowPopularSection(id)} classes={`relative text-[0.875rem] tracking-[0.02857em] p-[12px_16px] cursor-pointer dark:text-text-color cursor-pointer ${result.popularProductId == id && "after:content-[''] after:w-full after:bg-white after:absolute after:h-[3px] after:bottom-0 after:left-0 after:right-0"}`} btnLabel={categoryName} />
+                       </SwiperSlide>
+                    ))
+                  }
+                </Swiper>
               </div>
             </div>
             {/* Tabs end */}

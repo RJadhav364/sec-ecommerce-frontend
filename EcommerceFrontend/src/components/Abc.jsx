@@ -10,7 +10,7 @@ import ProductLoader from "./ProductLoader";
 const Abc = ({popularProductsData , isPopularProductLoading}) => {
     let ProductSkeltonLoader = 5;
   return (
-    <div className="pb-[30px] w-full dark:bg-darkbg-highlight homeSlider">
+    <div className="pb-[30px] dark:bg-darkbg-highlight homeSlider">
         {/* <div className="grid grid-cols-5">
         <div className="flex-1 space-y-4 py-1">
             <div className=" bg-gray-200 rounded animate-pulse w-full h-[200px]"></div>
@@ -31,67 +31,39 @@ const Abc = ({popularProductsData , isPopularProductLoading}) => {
             </div>
         </div>
         </div> */}
-        <div
-          className={`flex-1 overflow-visible`}
-        >
+        {/* <div
+          className={``}
+        > */}
             { isPopularProductLoading ? (
                 <ProductLoader skeltonNo={ProductSkeltonLoader} classes="grid grid-cols-5 gap-[20px]" />
             ) : (
             <Swiper
-                // slidesPerView="auto"
-                // spaceBetween={30}
-                // navigation={true}
-                // modules={[Pagination, Navigation]}
-                // className="!overflow-visible"
                 slidesPerView={1}
-        spaceBetween={0}
-        // pagination={{
-        //   clickable: true,
-        // }}
-        // breakpoints={{
-        //   640: {
-        //     slidesPerView: 2.5,
-        //     spaceBetween: 10,
-        //   },
-        //   768: {
-        //     slidesPerView: 2.1,
-        //     spaceBetween: 10,
-        //   },
-        //   1024: {
-        //     slidesPerView: 3,
-        //     spaceBetween: 20,
-        //   },
-        //   1291: {
-        //     slidesPerView: 3.1,
-        //     spaceBetween: 20,
-        //   },
-        //   1376: {
-        //     slidesPerView: 3.3,
-        //     spaceBetween: 20,
-        //   },
-        //   1469: {
-        //     slidesPerView: 3.5,
-        //     spaceBetween: 20,
-        //   },
-        //   1658: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 20,
-        //   },
-        //   1785: {
-        //     slidesPerView: 4.3,
-        //     spaceBetween: 20,
-        //   },
-        //   1880: {
-        //     slidesPerView: 4.5,
-        //     spaceBetween: 20,
-        //   },
-        // }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
+                centeredSlides={false}
+                spaceBetween={30}
+                grabCursor={true}
+                pagination={{
+                clickable: true,
+                }}
+                modules={[Pagination]}
+                breakpoints={{
+                640: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 20,
+                },
+                1857: {
+                    slidesPerView: 'auto',
+                    spaceBetween: 15,
+                },
+                1880: {
+                    slidesPerView: 6.5,
+                    spaceBetween: 15,
+                }
+        }}
+                className="mySwiper"
             >
             {popularProductsData && popularProductsData.map(({ productName, productBrand,id,productOldPrice,productCurrentPrice,productRating,productInStock }) => (
-                <SwiperSlide className="w-full" key={id}>
+                <SwiperSlide className="w-[290px]" style={{width: '290px'}} key={id}>
                     <div
                     className="shadow-lg rounded-md border border-[#efe1e1] dark:border-[#959090] w-[290px] flex-shrink-0"
                     >
@@ -245,7 +217,7 @@ const Abc = ({popularProductsData , isPopularProductLoading}) => {
 
             )
             }
-        </div>
+        {/* </div> */}
     </div>
   );
 };

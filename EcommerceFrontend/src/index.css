@@ -78,3 +78,18 @@
   font-weight: 700;
 }
 
+
+.w-162-31{
+  width: 162.31px !important;
+}
+.w-102-2{
+  width: 102.2px !important;
+}
+.popularSwiper .swiper-pagination{
+  bottom: -5px !important;
+}
+
+/* .categoryViewsSlider .swiper-wrapper{
+  display: flex;
+  justify-content: center;
+} */
