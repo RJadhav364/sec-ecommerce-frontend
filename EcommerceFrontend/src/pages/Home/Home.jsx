@@ -117,12 +117,13 @@ const Home = () => {
                   slidesPerView={1}
                   spaceBetween={0}
                   // navigation={true}
-                  pagination={{
-                    clickable: true,
-                  }}
+                  // pagination={{
+                  //   clickable: true,
+                  // }}
+                  grabCursor={true}
                   modules={[Navigation, Pagination]}
                   breakpoints={{
-                    640: {
+                    200: {
                       slidesPerView: 'auto',
                       spaceBetween: 5,
                     },

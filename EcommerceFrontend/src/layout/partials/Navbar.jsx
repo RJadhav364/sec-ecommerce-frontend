@@ -27,30 +27,36 @@ const Navbar = ({blockBg}) => {
       <div className={`border-b-[1px] border-[#c1c1c1] bg-white dark:bg-darkbg-default dark:border-[#423c3c] font-display-Montserrat fixed w-full ${isCustomerLogin ? "top-[93px]" : "top-[91px]" } ${blockBg ? "z-[-1]" : "z-[101]" }`}>
           <div className='mx-auto w-[1400px] py-[20px] max-[1480px]:w-full'>
               {/* <div></div> */}
-              <ul className='flex gap-3 items-center justify-center'>
-                {/* <Swiper
+              <ul className='flex gap-3 items-center justify-center max-[891px]:px-[20px]'>
+                <Swiper
                   // slidesPerView={5}
-                  slidesPerView= {9}
-                  breakpoints={{
-                    // 1024: {
-                    //   slidesPerView: 'auto',
-                    // },
-                  }}
-                  spaceBetween={5}
+                  // slidesPerView={1}
+                  spaceBetween={0}
+                  // navigation={true}
                   pagination={{
                     clickable: true,
                   }}
-                  modules={[Pagination]}
-                  className="mySwiper"
-                > */}
-                  {/* <SwiperSlide> */}
+                  modules={[Navigation, Pagination]}
+                  breakpoints={{
+                    200: {
+                      slidesPerView: 'auto',
+                      spaceBetween: 3,
+                    },
+                    1880: {
+                      slidesPerView: 'auto',
+                      spaceBetween: 5,
+                    }
+                  }}
+                  className="mySwiper navaigationSwiper"
+                >
+                  <SwiperSlide className='w-[70.11px] h-[40px]'>
                     <li className='group text-[16px] font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'><Link to={"/"}>Home
                     </Link></li>
-                  {/* </SwiperSlide> */}
+                  </SwiperSlide>
                   {
                     options && options.passedData && options.passedData.length > 0 && options.passedData.map(({id,categoryName,subNavbar,children}) => (
                       // <React.Fragment key={id}>
-                      // <SwiperSlide>
+                      <SwiperSlide key={id}>
                       <li key={id} className='group text-[16px] font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px] cursor-pointer'>
                         <Link to={`products?catId=${id}`}>{categoryName}
                         </Link>
@@ -120,11 +126,11 @@ const Navbar = ({blockBg}) => {
                         )
                         }
                       </li>
-                      // </SwiperSlide>
+                      </SwiperSlide>
                         // </React.Fragment>
                     ))
                   }
-                {/* </Swiper> */}
+                </Swiper>
               </ul>
               {/* <div></div> */}
           </div>

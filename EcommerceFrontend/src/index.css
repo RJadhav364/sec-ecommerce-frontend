@@ -86,8 +86,20 @@
   width: 102.2px !important;
 }
 .popularSwiper .swiper-pagination{
-  bottom: -5px !important;
+  bottom: -10px !important;
 }
+
+.navaigationSwiper .swiper-pagination{
+  bottom: -10px !important;
+}
+.navaigationSwiper .swiper-slide{
+  width: auto !important;
+  /* height: 40px !important; */
+}
+
+/* .popularSwiperProduct{
+  overflow: visible !important;
+} */
 
 /* .categoryViewsSlider .swiper-wrapper{
   display: flex;

@@ -14,7 +14,7 @@ const CategoryViews = ({data}) => {
         }}
         modules={[Navigation, Pagination]}
         breakpoints={{
-          640: {
+          200: {
             slidesPerView: 'auto',
             spaceBetween: 20,
           },

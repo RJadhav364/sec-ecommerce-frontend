@@ -38,7 +38,7 @@ const Abc = ({popularProductsData , isPopularProductLoading}) => {
                 <ProductLoader skeltonNo={ProductSkeltonLoader} classes="grid grid-cols-5 gap-[20px]" />
             ) : (
             <Swiper
-                slidesPerView={1}
+                slidesPerView={'auto'}
                 centeredSlides={false}
                 spaceBetween={30}
                 grabCursor={true}
@@ -46,21 +46,21 @@ const Abc = ({popularProductsData , isPopularProductLoading}) => {
                 clickable: true,
                 }}
                 modules={[Pagination]}
-                breakpoints={{
-                640: {
-                    slidesPerView: 'auto',
-                    spaceBetween: 20,
-                },
-                1857: {
-                    slidesPerView: 'auto',
-                    spaceBetween: 15,
-                },
-                1880: {
-                    slidesPerView: 6.5,
-                    spaceBetween: 15,
-                }
-        }}
-                className="mySwiper"
+                // breakpoints={{
+                // 640: {
+                //     slidesPerView: 'auto',
+                //     spaceBetween: 20,
+                // },
+                // 1857: {
+                //     slidesPerView: 'auto',
+                //     spaceBetween: 15,
+                // },
+                // 1880: {
+                //     slidesPerView: 6.5,
+                //     spaceBetween: 15,
+                // }
+                // }}
+                className="mySwiper popularSwiperProduct"
             >
             {popularProductsData && popularProductsData.map(({ productName, productBrand,id,productOldPrice,productCurrentPrice,productRating,productInStock }) => (
                 <SwiperSlide className="w-[290px]" style={{width: '290px'}} key={id}>
