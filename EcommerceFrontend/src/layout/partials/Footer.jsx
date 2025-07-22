@@ -130,14 +130,14 @@ const Footer = () => {
             </div> */}
             </div>
             <div className="py-8">
-                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-8 2xl:grid-cols-3">
                 <div className="before:contents-[''] before:inline-block before:w-[2px] before:h-full before:bg-[#e3e2e2] before:absolute relative before:right-0 before:rounded-[10px]">
                     <div className="text-teal-600 2xl:block xl:block lg:block md:block sm:flex flex justify-center">
                     {/* <img src="https://serviceapi.spicezgold.com/download/1744255975457_logo.jpg" /> */}
                     <WebsiteLogo />
                     </div>
 
-                    <p className="mt-4 max-w-xs text-gray-500 mb-5 dark:text-text-color">
+                    <p className="mt-4 max-w-xs text-gray-500 mb-5 dark:text-text-color max-[1536px]:max-w-full">
                     Stay up to date with our latest features and releases by joining
                     our newsletter.
                     </p>
@@ -153,7 +153,7 @@ const Footer = () => {
                         Subscribe
                     </button>
                     </div>
-                    <p className="mt-4 max-w-xs text-gray-500 text-xs dark:text-text-color">
+                    <p className="mt-4 max-w-xs max-[1536px]:max-w-full text-gray-500 text-xs dark:text-text-color">
                     By subscribe, you agree to our Privacy Policy and consent to
                     receive updates from our company.
                     </p>
