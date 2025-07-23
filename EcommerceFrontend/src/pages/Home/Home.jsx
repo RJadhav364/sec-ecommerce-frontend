@@ -19,29 +19,6 @@ const Home = () => {
     callSlider();
     // getOptions()
   },[])
-  const details = [
-    {
-        img: "https://serviceapi.spicezgold.com/download/1742463096955_hbhb1.jpg",
-        percent: 10},
-        {img: "https://serviceapi.spicezgold.com/download/1742462909156_gdgd1.jpg",
-        percent: 20},
-        {img: "https://serviceapi.spicezgold.com/download/1742462729828_zoom_0-1673275594.webp",
-        percent: 30},
-        {img: "https://serviceapi.spicezgold.com/download/1742462552739_siril-georgette-pink-color-saree-with-blouse-piece-product-images-rvrk9p11sk-0-202308161432.webp",
-        percent: 40},
-        {img: "https://serviceapi.spicezgold.com/download/1742462485033_siril-poly-silk-grey-off-white-color-saree-with-blouse-piece-product-images-rvcpwdyagl-0-202304220521.webp",
-        percent: 50},
-        {img: "https://serviceapi.spicezgold.com/download/1742462383488_siril-georgette-brown-color-saree-with-blouse-piece-product-images-rvegeptjtj-3-202308161432.webp",
-        percent: 60},
-        {img: "https://serviceapi.spicezgold.com/download/1742462287664_siril-poly-silk-white-beige-color-saree-with-blouse-piece-product-images-rv2vcdkuly-0-202304220523.webp",
-        percent: 70},
-        {img: "https://serviceapi.spicezgold.com/download/1742462212409_ascscscscccswefsdvdd1.jpg",
-        percent: 80},
-        {img: "https://serviceapi.spicezgold.com/download/1742453374891_1000014029787-Green-GREEN-1000014029787_01-2100.jpg",
-        percent: 90},
-        {img: "https://serviceapi.spicezgold.com/download/1742453278959_fgfg1.jpg",
-        percent: 100},
-]
   const callSlider = async() => {
     try{
       const getResponse = await homeSliderImages();

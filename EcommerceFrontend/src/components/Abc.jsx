@@ -1,10 +1,3 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import {Link} from "react-router-dom"
-// import './styles.css';
-
-// import required modules
-import { Pagination,Navigation, EffectCoverflow } from 'swiper/modules';
 import ProductLoader from "./ProductLoader";
 import PopularProductSlider from "../views/home/PopularProductSlider";
 
