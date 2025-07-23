@@ -39,7 +39,7 @@ const companyServices = [
 ]
 const Footer = () => {
   return (
-    <footer className="bg-[#f7f7f7] dark:bg-darkbg-default pt-[30px]">
+    <footer className="bg-[#f7f7f7] dark:bg-darkbg-default pt-[30px] max-[769px]:pb-[50px]">
         <div className="mx-auto w-[70%]">
         <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 xl:grid-cols-4  lg:gap-x-8 py-[40px_58px] border-b border-b-[#e3e2e2] border-b-[2px]">
             {

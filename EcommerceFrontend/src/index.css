@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import "tailwindcss";
+@import "tailwindcss" important;
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
     --font-display: "Satoshi", "sans-serif";
@@ -17,6 +17,7 @@
     --color-darkbg-highlight: #121212;
     --color-text-color: white;
     --color-text-ff5252: #ff5252;
+    --breakpoint-tablet: "769px"
     /* ... */
   }
 
