@@ -9,6 +9,7 @@ import Profile from '../pages/Info/Profile'
 import NotFound from '../pages/Not-Found/NotFound'
 import Admin_Panel from '../layout/AdminPanel'
 import Dashboard from '../pages/Admin/Dashboard'
+import Admin_Login from '../pages/Admin/admin-login/Admin-Login'
 
 const Approutes = () => {
   return (
@@ -24,6 +25,7 @@ const Approutes = () => {
       </Route>
       <Route path="/" element={<Admin_Panel />} >
         <Route path="admin-panel/*" element={<NotFound />} />
+        <Route path="/admin-panel" element={<Admin_Login />} />
         <Route path="admin-panel/dashboard" element={<Dashboard />} />
       </Route>
     </Routes>

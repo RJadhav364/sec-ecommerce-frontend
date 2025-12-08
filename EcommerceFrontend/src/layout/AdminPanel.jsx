@@ -13,13 +13,13 @@ const Admin_Panel = () => {
   };
   return (
     <>
-        <Header handleChild1Data={handleChild1Data} />
+        {/* <Header handleChild1Data={handleChild1Data} />
         <Navbar blockBg={blockBg} />
-        <div className={`${isCustomerLogin ? "mt-[178px]" : "mt-[176px]" }`}>
+        <div className={`${isCustomerLogin ? "mt-[178px]" : "mt-[176px]" }`}> */}
           <Outlet />
-        </div>
+        {/* </div>
         <FooterNavigation />
-        <Footer />
+        <Footer /> */}
     </>  
   )
 }
