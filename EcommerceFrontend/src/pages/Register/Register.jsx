@@ -4,6 +4,7 @@ import { Bounce, Slide, toast } from 'react-toastify';
 import { emailregx } from '../../Validation/inputValidation';
 import { createNewCustomer } from './services/registerRelatedApi';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -109,29 +110,29 @@ const Register = () => {
   return (
     <section className='dark:bg-darkbg-highlight dark:text-white font-display-Montserrat'>
         <div className='mx-auto w-[1400px] py-[50px] flex items-center flex-col'>
-            <div className='dark:bg-[#181818] bg-[#ebebeb] p-[20px] w-[600px] rounded-[10px] shadow-[0px_0px_7px_0px_#ebebeb]'>
+            <div className='dark:bg-[#181818] bg-[#ffffff] p-[20px] w-[600px] rounded-[10px] dark:shadow-[0px_0px_12px_0px_#000] shadow-[0px_0px_12px_0px_#ebebeb]'>
                 <h3 className="text-center text-[20px] font-[600]">Welcome to EcommerceHUb! 👋</h3>
-                <h5 className='text-center text-[18px] text-[#bdbdbd] mt-[5px]'>Already have an account? <Link to={"/login"} className='hover:underline hover:underline-offset-1 hover:decoration-[#bdbdbd] font-bold'>Sign In</Link></h5>
+                <h5 className='text-center text-[18px] dark:text-[#bdbdbd] mt-[5px]'>Already have an account? <Link to={"/login"} className='hover:underline hover:underline-offset-1 hover:decoration-[#bdbdbd] font-bold'>Sign In</Link></h5>
                 <div>
                     <div className="form-group w-full mt-5 mb-5 grid grid-cols-2 gap-[20px]">
                         <div className="flex flex-col gap-1.5">
                             <label htmlFor="username">Username</label>
-                            <input type="text" name='username' className='dark:bg-[#111111] bg-[#cccccc] outline-none p-[10px] dark:shadow-[0px_0px_6px_2px_#000] shadow-[0px_0px_6px_2px_#ccc] w-full rounded-md' ref={(e)=>{createdCustomerData.current.username = e}} />
+                            <input type="text" name='username' className='dark:bg-[#111111] bg-[#fff] outline-none p-[10px] dark:shadow-[0px_0px_6px_2px_#000] shadow-[0px_0px_6px_2px_#ccc] w-full rounded-md' ref={(e)=>{createdCustomerData.current.username = e}} />
                         </div>
                         <div className="flex flex-col gap-1.5">
                             <label htmlFor="email">Email</label>
-                            <input type="text" name='email' className='dark:bg-[#111111] bg-[#cccccc] outline-none p-[10px] dark:shadow-[0px_0px_6px_2px_#000] shadow-[0px_0px_6px_2px_#ccc] w-full rounded-md' ref={(e)=>{createdCustomerData.current.email = e}} />
+                            <input type="text" name='email' className='dark:bg-[#111111] bg-[#fff] outline-none p-[10px] dark:shadow-[0px_0px_6px_2px_#000] shadow-[0px_0px_6px_2px_#ccc] w-full rounded-md' ref={(e)=>{createdCustomerData.current.email = e}} />
                         </div>
                         <div className="flex flex-col gap-1.5">
                             <label htmlFor="password">Password</label>
-                            <input type="password" name='password' className='dark:bg-[#111111] bg-[#cccccc] outline-none p-[10px] dark:shadow-[0px_0px_6px_2px_#000] shadow-[0px_0px_6px_2px_#ccc] w-full rounded-md' ref={(e)=>{createdCustomerData.current.password = e}} />
+                            <input type="password" name='password' className='dark:bg-[#111111] bg-[#fff] outline-none p-[10px] dark:shadow-[0px_0px_6px_2px_#000] shadow-[0px_0px_6px_2px_#ccc] w-full rounded-md' ref={(e)=>{createdCustomerData.current.password = e}} />
                         </div>
                         <div className="flex flex-col gap-1.5">
                             <label htmlFor="confirm_password">Confirm Password</label>
-                            <input type="password" name='confirm_password' className='dark:bg-[#111111] bg-[#cccccc] outline-none p-[10px] dark:shadow-[0px_0px_6px_2px_#000] shadow-[0px_0px_6px_2px_#ccc] w-full rounded-md' ref={(e)=>{createdCustomerData.current.confirm_password = e}} />
+                            <input type="password" name='confirm_password' className='dark:bg-[#111111] bg-[#fff] outline-none p-[10px] dark:shadow-[0px_0px_6px_2px_#000] shadow-[0px_0px_6px_2px_#ccc] w-full rounded-md' ref={(e)=>{createdCustomerData.current.confirm_password = e}} />
                         </div>
                     </div>
-                    <button className='w-full p-2.5 bg-[#ff5252] rounded-md inline-block mt-[10px]' onClick={registerCustomer}>Login</button>
+                    <Button classes="w-full p-2.5 dark:bg-[#ff5252] bg-[#f76d6d] text-white rounded-md inline-block mt-[10px] font-semibold cursor-pointer" btnLabel="Register" onClick={registerCustomer} />
                 </div>
             </div>
         </div>
