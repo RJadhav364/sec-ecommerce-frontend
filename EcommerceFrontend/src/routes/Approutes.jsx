@@ -7,6 +7,8 @@ import Login from '../pages/Login/Login'
 import Register from '../pages/Register/Register'
 import Profile from '../pages/Info/Profile'
 import NotFound from '../pages/Not-Found/NotFound'
+import Admin_Panel from '../layout/AdminPanel'
+import Dashboard from '../pages/Admin/Dashboard'
 
 const Approutes = () => {
   return (
@@ -19,6 +21,10 @@ const Approutes = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/*" element={<Navigate to="/" />} />
         <Route path="/customer/:slug" element={<Profile />} />
+      </Route>
+      <Route path="/" element={<Admin_Panel />} >
+        <Route path="admin-panel/*" element={<NotFound />} />
+        <Route path="admin-panel/dashboard" element={<Dashboard />} />
       </Route>
     </Routes>
   )

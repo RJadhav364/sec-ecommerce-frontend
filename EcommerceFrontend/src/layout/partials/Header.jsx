@@ -15,7 +15,7 @@ import useCartStore from '../../store/cartStore';
 
 const Header = ({handleChild1Data}) => {
   const [theme, setTheme] = useState(null);
-  const {username , email , isCustomerLogin, wishList, token , id} = useCustomerStore();
+  const {username , email , isCustomerLogin, wishList, token , id , customerLogout} = useCustomerStore();
   const storeCartData = useCartStore();
   const [isOpen, setIsOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
@@ -154,7 +154,7 @@ const Header = ({handleChild1Data}) => {
                         <div className="py-1">
                           <div>
                             <a
-                              href="#"
+                              onClick={() => customerLogout()}
                               className="flex items-center gap-[10px] px-4 py-2 text-sm text-gray-700 dark:text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden pl-[25px]"
                             >
                               <img src={log_out_dark} className={`dark:hidden inline-block w-[25px] h-[25px]`} alt="" />
