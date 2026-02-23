@@ -82,7 +82,7 @@ const ProductSlider = ({data, renderSlide, swiperProps, classes}) => {
     // ))}
     // </>
     <Swiper {...swiperProps} className={classes}>
-         {data.map((item, index) => renderSlide(item, index))}
+         {data?.map((item, index) => renderSlide(item, index))}
     </Swiper>
   )
 }

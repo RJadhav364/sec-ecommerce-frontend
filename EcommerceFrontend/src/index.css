@@ -91,7 +91,15 @@
 }
 
 .navaigationSwiper .swiper-pagination{
-  bottom: -10px !important;
+  bottom: -6px !important;
+}
+.dark .swiper-pagination-bullet {
+  background: #888;
+  opacity: 1;
+}
+
+.dark .swiper-pagination-bullet-active {
+  background: #ffffff;
 }
 .navaigationSwiper .swiper-slide{
   width: auto !important;

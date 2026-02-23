@@ -15,7 +15,7 @@ const Admin = () => {
     <>
         <Header handleChild1Data={handleChild1Data} />
         <Navbar blockBg={blockBg} />
-        <div className={`${isCustomerLogin ? "mt-[178px]" : "mt-[176px]" }`}>
+        <div className={`${isCustomerLogin ? "" : "" } -mt-[1px]`}>
           <Outlet />
         </div>
         <FooterNavigation />
