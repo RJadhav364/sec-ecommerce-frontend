@@ -58,19 +58,6 @@ const Navbar = ({ blockBg }) => {
                 <li className='group text-[16px] font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'><Link to={"/"}>Home
                 </Link></li>
               </SwiperSlide>
-              <SwiperSlide className='w-[70.11px] h-[40px]'>
-                <li className='group text-[16px] font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'><Link to={"/"}>Home
-                </Link></li>
-              </SwiperSlide>
-              <SwiperSlide className='w-[70.11px] h-[40px]'>
-                <li className='group text-[16px] font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'><Link to={"/"}>Home
-                </Link></li>
-              </SwiperSlide>
-              <SwiperSlide className='w-[70.11px] h-[40px]'>
-                <li className='group text-[16px] font-semibold relative transition duration-[.4s] ease-in-out shadow-[inset_0_0_0_0_#ff5252] text-[#ff5252] hover:text-white hover:shadow-[inset_200px_0_0_0_#ff5252] p-[10px] rounded-[8px]'><Link to={"/"}>Home
-                </Link></li>
-              </SwiperSlide>
-
               {
                 options && options.passedData && options.passedData.length > 0 && options.passedData.map(({ id, categoryName, subNavbar, children }) => (
                   // <React.Fragment key={id}>
@@ -150,7 +137,7 @@ const Navbar = ({ blockBg }) => {
               }
             </Swiper>
           </ul>
-          <div className='dark:text-[rgba(255,255,255,0.6)] text-black flex items-center justify-center'><span>Free Delivery</span></div>
+          <div className='dark:text-[rgba(255,255,255,0.6)] text-black flex items-center justify-center'><span>Free International Delivery</span></div>
         </div>
         {/* Navbar */}
       </div>
