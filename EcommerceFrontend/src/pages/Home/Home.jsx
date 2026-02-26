@@ -10,10 +10,10 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 const Home = () => {
   const {data} = useCategorysStore();
-  const [result,setResult] = useState({sliderData: [], isSliderLoading: true, isProductLoading: true, popularProductsData: "" , popularProductId: data?.passedData?.[0].id});
+  const [result,setResult] = useState({sliderData: [], isSliderLoading: true, isProductLoading: true, popularProductsData: "" , popularProductId: data?.passedData?.[0]?.id});
   const homePopularSection = useRef({
     isPopular : true,
-    categoryId: data?.passedData?.[0].id,
+    categoryId: data?.passedData?.[0]?.id,
   })
   useEffect(() => {
     callSlider();
