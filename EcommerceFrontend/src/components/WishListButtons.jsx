@@ -3,13 +3,10 @@ import useCartStore from "../store/cartStore";
 import wishListFunctions from "../utils/wishListFunctions";
 import Relogin from "./Relogin";
 
-const WishListButtons = ({ productIdCom, userToWishList, removeFromWishLIst, addProductInFavourite, isReloginModelOpen }) => {
+const WishListButtons = ({ productIdCom, userToWishList, removeFromWishLIst, addProductInFavourite, isReloginModelOpen,passedToken }) => {
   const { cartData, setAuth } = useCartStore();
 //   const { addProductInFavourite, removeFromWishLIst, isReloginModelOpen } = wishListFunctions();
   const [isFavourite, setIsFavourite] = useState(false);
-  useEffect(() => {
-    console.log(isReloginModelOpen);
-  }, [isReloginModelOpen]);
   useEffect(() => {
     setIsFavourite(
       cartData && cartData?.some(({ productId }) => productId == productIdCom),
@@ -43,7 +40,7 @@ const WishListButtons = ({ productIdCom, userToWishList, removeFromWishLIst, add
       tabIndex="0"
       type="button"
       onClick={() => {
-        addProductInFavourite(userToWishList, productIdCom);
+        addProductInFavourite(userToWishList, productIdCom, passedToken);
       }}
     >
       <svg
