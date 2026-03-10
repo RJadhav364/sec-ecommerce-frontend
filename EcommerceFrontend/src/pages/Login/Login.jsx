@@ -47,7 +47,6 @@ const Login = () => {
                     formValues[key] = customerLoginDetails.current[key].value;
                 }
                 const result = await loginCustomerDetail(formValues);
-                console.log(result);
                 const finalResult = await result.json();
                 switch(true){
                     case result.status == 200:
