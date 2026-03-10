@@ -9,6 +9,7 @@ import Button from '../../components/Button';
 import CategoryDrawer from '../../views/home/CategoryDrawer';
 
 const Navbar = ({ blockBg }) => {
+  console.log("navbar rendered", blockBg)
   const [options, setOptions] = useState();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   // console.log(options)
