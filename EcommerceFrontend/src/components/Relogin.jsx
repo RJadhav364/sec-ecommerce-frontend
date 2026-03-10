@@ -51,7 +51,7 @@ export default function Relogin({ isReloginModelOpen, onReloginModelClosed }) {
                       as="h3"
                       className="text-[20px] font-semibold text-gray-900 dark:text-white"
                     >
-                      Something went wrong
+                      Token Expired
                     </h3>
                     <div className="mt-2">
                       <p className="text-[16px] text-gray-500 dark:text-[#dee5f2]">
