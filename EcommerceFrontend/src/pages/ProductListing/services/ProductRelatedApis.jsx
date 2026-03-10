@@ -21,7 +21,7 @@ const getProduct = async(filterkey, filtervalue) => {
     }
 }
 
-const productInWishList = async(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId,token) => {
+const productInWishList = async(userId,id,token) => {
     try {
         const response = await fetch(`${Service_url}/favourite/add-wishlist`, {
             method: 'POST',
@@ -29,7 +29,7 @@ const productInWishList = async(userId,id,productDiscount, productName, productO
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId})
+            body: JSON.stringify({userId,id,token})
         });
         return response
     } catch (error) {
