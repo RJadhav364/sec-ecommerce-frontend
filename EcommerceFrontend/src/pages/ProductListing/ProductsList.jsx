@@ -93,7 +93,7 @@ const ProductsList = () => {
             const response = await productInWishList(userId,id,productDiscount, productName, productOldPrice,productCurrentPrice, productRating,productInStock, productBrand, categoryName, categoryId,token);
             switch(true){
                 case response.status == 200:
-                    toast.success(`Product Added in Cart \u{1F600}`, {
+                    toast.success(`Product Added to Wishlist \u{1F600}`, {
                         position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: true,
@@ -144,7 +144,7 @@ const ProductsList = () => {
             const convertedResult = await result.json();
             switch(true){
                     case result.status == 200:
-                        toast.success(`Product removed from cart`, {
+                        toast.success(`Product Removed from Wishlist`, {
                         position: "top-center",
                         autoClose: 3000,
                         hideProgressBar: true,
