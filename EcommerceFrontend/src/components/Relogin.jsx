@@ -2,7 +2,7 @@ import { useState } from "react";
 import useCustomerStore from "../store/customerStore";
 import { useNavigate } from "react-router-dom";
 
-export default function Relogin({ isReloginModelOpen, onReloginModelClosed }) {
+export default function Relogin({ isReloginModelOpen, onReloginModelClosed, afterReloginModalClosed }) {
   const authStore = useCustomerStore();
   const navigate = useNavigate();
   const handleLogOut = () => {
@@ -14,6 +14,8 @@ export default function Relogin({ isReloginModelOpen, onReloginModelClosed }) {
       username: null,
     });
     navigate("/login");
+    onReloginModelClosed();
+    afterReloginModalClosed();
   };
   return (
     <>

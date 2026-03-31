@@ -31,7 +31,7 @@ const Header = ({ handleChild1Data }) => {
   const [cartCount, setCartCount] = useState(0);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
-    handleChild1Data(!isOpen);
+    handleChild1Data(true);
   };
 
   useEffect(() => {
@@ -155,7 +155,7 @@ const Header = ({ handleChild1Data }) => {
                     // transition
                     className={`absolute right-auto z-10 top-[55px] mt-2  origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-[#07070A] shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in w-56 
                         `}
-                    // ${isOpen ? "opacity-[100%] w-56 h-auto" : "opacity-0 w-0 h-0"}
+                  // ${isOpen ? "opacity-[100%] w-56 h-auto" : "opacity-0 w-0 h-0"}
                   >
                     <div className="py-1 border-[#bab2b4]">
                       {dropDown &&
@@ -188,7 +188,7 @@ const Header = ({ handleChild1Data }) => {
                     <div className="py-1">
                       <div>
                         <a
-                          onClick={() => customerLogout()}
+                          onClick={() => {setIsReloginModelOpen(true)}}
                           className="flex items-center gap-[10px] px-4 py-2 text-sm text-gray-700 dark:text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden pl-[25px]"
                         >
                           <img
@@ -269,7 +269,9 @@ const Header = ({ handleChild1Data }) => {
         onClick={toggleDropdown}
         className={`${isOpen ? "fixed top-0 left-0 right-0 bottom-0 z-[10] bg-[rgba(145,145,145,0.5)]" : "hidden"}`}
       ></div>
-      {/* <Relogin isReloginModelOpen={isReloginModelOpen} onReloginModelClosed={() => setIsReloginModelOpen(false)} /> */}
+      <Relogin isReloginModelOpen={isReloginModelOpen} onReloginModelClosed={() => setIsReloginModelOpen(false)} 
+      afterReloginModalClosed={() => handleChild1Data(false)} 
+        />
     </>
   );
 };
