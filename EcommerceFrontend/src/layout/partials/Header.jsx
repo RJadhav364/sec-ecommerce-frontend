@@ -95,6 +95,7 @@ const Header = ({ handleChild1Data }) => {
           break;
         case getResponse.status == 403:
           setIsReloginModelOpen(true);
+          handleChild1Data(true);
           break;
         default:
           storeCartData.setAuth({
