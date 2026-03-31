@@ -7,9 +7,10 @@ import WishListButtons from "../../components/WishListButtons";
 import useCustomerStore from "../../store/customerStore";
 import wishListFunctions from "../../utils/wishListFunctions";
 import Relogin from "../../components/Relogin";
+import { toast } from "react-toastify";
 
 const PopularProductSlider = ({ data }) => {
-  const { token, id: userId } = useCustomerStore();
+  const { token, id: userId, isCustomerLogin } = useCustomerStore();
   const {
     isReloginModelOpen,
     setIsReloginModelOpen,
@@ -118,6 +119,16 @@ const PopularProductSlider = ({ data }) => {
                 </div>
                 <div className="!absolute bottom-[15px] left-0 pl-3 pr-3 w-full">
                   <button
+                    onClick={isCustomerLogin == true ? () => alert("product added in cart") : () => toast.error('Please log in to add items to cart', {
+                      position: "top-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: false,
+                      pauseOnHover: false,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                    })}
                     className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex w-full btn-sm gap-2 css-uiq2rh dark:text-text-color border border-[#ff5252] hover:text-white hover:shadow-[inset_300px_0_0_0_#ff5252] justify-center items-center py-[5px] transition duration-[.4s] ease-in-out cursor-pointer rounded-[5px]"
                     tabIndex="0"
                     type="button"
