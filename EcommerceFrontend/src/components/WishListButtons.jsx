@@ -4,14 +4,14 @@ import wishListFunctions from "../utils/wishListFunctions";
 import Relogin from "./Relogin";
 
 const WishListButtons = ({ productIdCom, userToWishList, removeFromWishLIst, addProductInFavourite, isReloginModelOpen,passedToken }) => {
-  const { cartData, setAuth } = useCartStore();
+  const { wishListData, setAuth } = useCartStore();
 //   const { addProductInFavourite, removeFromWishLIst, isReloginModelOpen } = wishListFunctions();
   const [isFavourite, setIsFavourite] = useState(false);
   useEffect(() => {
     setIsFavourite(
-      cartData && cartData?.some(({ productId }) => productId == productIdCom),
+      wishListData && wishListData?.some(({ productId }) => productId == productIdCom),
     );
-  }, [cartData]);
+  }, [wishListData]);
   return isFavourite == true ? (
     <button
       className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary  group css-iyey26 cursor-pointer flex justify-center items-center"

@@ -38,7 +38,7 @@ const wishListFunctions = () => {
             });
             const getResponse = await getWishListDetails(token, userId);
             const updatedCart = await getResponse.json();
-            setAuth({ cartData: updatedCart.data });
+            setAuth({ wishListData: updatedCart.data });
             break;
           case response.status == 409:
             toast.error(`Product already in Wishlist`, {
@@ -89,7 +89,7 @@ const wishListFunctions = () => {
           });
           const getResponse = await getWishListDetails(token, productId.userId);
           const updatedCart = await getResponse.json();
-          setAuth({ cartData: updatedCart.data });
+          setAuth({ wishListData: updatedCart.data });
           break;
         default:
           alert("Something went wrong");

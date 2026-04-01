@@ -5,6 +5,7 @@ const useCartStore = create(
   persist(
     (set) => ({
       cartData: null,
+      wishListData: null,
       setAuth: (newState) => {
         set((state) => newState)
     },

@@ -10,7 +10,7 @@ import shopping_bag_light from "../../assets/shopping-bag-light.png";
 import log_out_dark from "../../assets/log-out_&.png";
 import logout123_light from "../../assets/log-out.png";
 import useCustomerStore from "../../store/customerStore";
-import { getWishListDetails } from "../../pages/ProductListing/services/ProductRelatedApis";
+import { getAllCartProducts, getWishListDetails } from "../../pages/ProductListing/services/ProductRelatedApis";
 import useCartStore from "../../store/cartStore";
 import Relogin from "../../components/Relogin";
 
@@ -84,12 +84,14 @@ const Header = ({ handleChild1Data }) => {
   const fetchCartDetails = async () => {
     try {
       const getResponse = await getWishListDetails(token, id);
+      const getCartProductsRes = await getAllCartProducts(token, id);
       const result = await getResponse.json();
-      // console.log(getResponse)
+      const result2 = await getCartProductsRes.json();
+      console.log(result2)
       switch (true) {
         case getResponse.status == 200:
           storeCartData.setAuth({
-            cartData: result.data,
+            wishListData: result.data,
           });
           setCartCount(result.data.length);
           break;
@@ -99,7 +101,7 @@ const Header = ({ handleChild1Data }) => {
           break;
         default:
           storeCartData.setAuth({
-            cartData: [],
+            wishListData: [],
           });
           break;
       }
@@ -238,7 +240,7 @@ const Header = ({ handleChild1Data }) => {
               <span
                 className={`${isCustomerLogin ? "text-[13px] bg-[#ff5252] rounded-[50%] flex justify-center items-center absolute right-[8px] top-[24px] min-w-[19px]" : "hidden"}`}
               >
-                {storeCartData?.cartData?.length}
+                {storeCartData?.wishListData?.length}
               </span>
             </Link>
             <button className="cursor-pointer hover:bg-[#e2dedf] p-[10px] rounded-full dark:text-white dark:hover:bg-[#444444] w-[50px] h-[50px] flex justify-center items-center">

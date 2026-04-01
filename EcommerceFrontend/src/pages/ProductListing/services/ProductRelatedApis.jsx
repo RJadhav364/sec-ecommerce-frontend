@@ -52,6 +52,21 @@ const getWishListDetails = async(token,userId) => {
         throw error
     }
 }
+// cart product get api
+const getAllCartProducts = async(token,userId) => {
+    try {
+        const apiResponse = await fetch(`${Service_url}/cart/get-cart-product/${userId}` , {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        return apiResponse
+    } catch (error) {
+        throw error
+    }
+}
 
 const removeProductFromFavourite = async(token, productId, userId) => {
     try {
@@ -69,4 +84,4 @@ const removeProductFromFavourite = async(token, productId, userId) => {
     }
 }
 
-export {getProduct , productInWishList , getWishListDetails, removeProductFromFavourite}
+export {getProduct , productInWishList , getWishListDetails, removeProductFromFavourite, getAllCartProducts}
