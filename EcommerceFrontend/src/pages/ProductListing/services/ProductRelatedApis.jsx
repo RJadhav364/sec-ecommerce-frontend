@@ -37,6 +37,23 @@ const productInWishList = async(userId,id,token) => {
         throw error
     }
 }
+// add product in cart
+const productAddInCart = async(productId,userId,token) => {
+    try {
+        const response = await fetch(`${Service_url}/cart/add-product-cart`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({productId,userId,token})
+        });
+        return response
+    } catch (error) {
+        // console.log(error);
+        throw error
+    }
+}
 
 const getWishListDetails = async(token,userId) => {
     try {
@@ -84,4 +101,4 @@ const removeProductFromFavourite = async(token, productId, userId) => {
     }
 }
 
-export {getProduct , productInWishList , getWishListDetails, removeProductFromFavourite, getAllCartProducts}
+export {getProduct , productInWishList , getWishListDetails, removeProductFromFavourite, getAllCartProducts,productAddInCart}

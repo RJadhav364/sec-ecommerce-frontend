@@ -8,9 +8,12 @@ import useCustomerStore from "../../store/customerStore";
 import wishListFunctions from "../../utils/wishListFunctions";
 import Relogin from "../../components/Relogin";
 import { toast } from "react-toastify";
+import useCartStore from "../../store/cartStore";
+import AddToCartButton from "../../components/AddToCartButton";
 
 const PopularProductSlider = ({ data }) => {
   const { token, id: userId, isCustomerLogin } = useCustomerStore();
+  const storeCartData = useCartStore();
   const {
     isReloginModelOpen,
     setIsReloginModelOpen,
@@ -86,11 +89,6 @@ const PopularProductSlider = ({ data }) => {
                     isReloginModelOpen={isReloginModelOpen}
                     passedToken={token}
                   />
-                  {/* <button className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary  group css-iyey26 cursor-pointer flex justify-center items-center" tabIndex="0" type="button">
-                            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" className="text-[18px] text-black" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3zm-23.6 187.5L259.4 430.5c-2.4 2.4-4.4 2.4-6.8 0L77.2 251.8c-36.5-37.2-43.9-107.6 7.3-150.7 38.9-32.7 98.9-27.8 136.5 10.5l35 35.7 35-35.7c37.8-38.5 97.8-43.2 136.5-10.6 51.1 43.1 43.5 113.9 7.3 150.8z"></path>
-                            </svg>
-                        </button> */}
                 </div>
               </div>
               <div className="info p-3 py-5 relative pb-[50px] h-[190px] w-full">
@@ -118,36 +116,7 @@ const PopularProductSlider = ({ data }) => {
                   </span>
                 </div>
                 <div className="!absolute bottom-[15px] left-0 pl-3 pr-3 w-full">
-                  <button
-                    onClick={isCustomerLogin == true ? () => alert("product added in cart") : () => toast.error('Please log in to add items to cart', {
-                      position: "top-center",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: false,
-                      pauseOnHover: false,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "dark",
-                    })}
-                    className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex w-full btn-sm gap-2 css-uiq2rh dark:text-text-color border border-[#ff5252] hover:text-white hover:shadow-[inset_300px_0_0_0_#ff5252] justify-center items-center py-[5px] transition duration-[.4s] ease-in-out cursor-pointer rounded-[5px]"
-                    tabIndex="0"
-                    type="button"
-                  >
-                    <svg
-                      stroke="currentColor"
-                      fill="currentColor"
-                      strokeWidth="0"
-                      viewBox="0 0 24 24"
-                      className="text-[18px]"
-                      height="1em"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path fill="none" d="M0 0h24v24H0V0z"></path>
-                      <path d="M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49A.996.996 0 0 0 20.01 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"></path>
-                    </svg>{" "}
-                    Add to Cart
-                  </button>
+                  <AddToCartButton id={id} userId={userId} token={token} productInStock={productInStock}  />
                 </div>
               </div>
             </div>

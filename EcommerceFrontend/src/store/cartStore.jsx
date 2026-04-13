@@ -6,6 +6,7 @@ const useCartStore = create(
     (set) => ({
       cartData: null,
       wishListData: null,
+      toalCartCountN: 0,
       setAuth: (newState) => {
         set((state) => newState)
     },

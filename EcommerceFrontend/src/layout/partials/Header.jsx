@@ -13,6 +13,7 @@ import useCustomerStore from "../../store/customerStore";
 import { getAllCartProducts, getWishListDetails } from "../../pages/ProductListing/services/ProductRelatedApis";
 import useCartStore from "../../store/cartStore";
 import Relogin from "../../components/Relogin";
+import { cartProductQuantityCount } from "../../utils/CartProductTotalCount";
 
 const Header = ({ handleChild1Data }) => {
   const [theme, setTheme] = useState(null);
@@ -28,7 +29,11 @@ const Header = ({ handleChild1Data }) => {
   } = useCustomerStore();
   const storeCartData = useCartStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartCount, setCartCount] = useState({
+    wishListProductCount: 0,
+    productInCart: 0,
+    totalProductCount: 0
+  });
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
     handleChild1Data(true);
@@ -84,16 +89,22 @@ const Header = ({ handleChild1Data }) => {
   const fetchCartDetails = async () => {
     try {
       const getResponse = await getWishListDetails(token, id);
-      const getCartProductsRes = await getAllCartProducts(token, id);
+      // const getCartProductsRes = await getAllCartProducts(token, id);
       const result = await getResponse.json();
-      const result2 = await getCartProductsRes.json();
-      console.log(result2)
+      // const result2 = await getCartProductsRes.json();
+      // const total = result2?.data?.reduce((sum, { productQuantity }) => {
+      //   return sum + productQuantity;
+      // }, 0);
       switch (true) {
         case getResponse.status == 200:
+          // const total = cartProductQuantityCount(result2?.data);
+          // console.log("total", total)
           storeCartData.setAuth({
             wishListData: result.data,
+            // cartData: result2.data,
+            // toalCartCountN: total
           });
-          setCartCount(result.data.length);
+          setCartCount({ wishListProductCount: result.data.length });
           break;
         case getResponse.status == 403:
           setIsReloginModelOpen(true);
@@ -102,6 +113,7 @@ const Header = ({ handleChild1Data }) => {
         default:
           storeCartData.setAuth({
             wishListData: [],
+            cartData: [],
           });
           break;
       }
@@ -109,10 +121,41 @@ const Header = ({ handleChild1Data }) => {
       console.log(error);
     }
   };
+  const fetchProductAddedInCart = async () => {
+    try {
+      const getCartProductsRes = await getAllCartProducts(token, id);
+      const result2 = await getCartProductsRes.json();
+      const total = cartProductQuantityCount(result2?.data);
+      console.log("total", result2)
+      console.log("total", total)
+      switch (true) {
+        case getCartProductsRes.status == 200:
+          storeCartData.setAuth({
+            cartData: result2.data,
+            toalCartCountN: total
+          });
+          setCartCount({ productInCart: result2.data.length,totalProductCount: total });
+          break;
+        case getCartProductsRes.status == 403:
+          setIsReloginModelOpen(true);
+          handleChild1Data(true);
+          break;
+        default:
+          storeCartData.setAuth({
+            wishListData: [],
+            cartData: [],
+          });
+          break;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   // console.log(isCustomerLogin , id)
   useEffect(() => {
     if (isCustomerLogin == true) {
       fetchCartDetails();
+      fetchProductAddedInCart();
     }
   }, [isCustomerLogin]);
 
@@ -191,7 +234,7 @@ const Header = ({ handleChild1Data }) => {
                     <div className="py-1">
                       <div>
                         <a
-                          onClick={() => {setIsReloginModelOpen(true)}}
+                          onClick={() => { setIsReloginModelOpen(true) }}
                           className="flex items-center gap-[10px] px-4 py-2 text-sm text-gray-700 dark:text-white data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden pl-[25px]"
                         >
                           <img
@@ -243,7 +286,7 @@ const Header = ({ handleChild1Data }) => {
                 {storeCartData?.wishListData?.length}
               </span>
             </Link>
-            <button className="cursor-pointer hover:bg-[#e2dedf] p-[10px] rounded-full dark:text-white dark:hover:bg-[#444444] w-[50px] h-[50px] flex justify-center items-center">
+            <button className="cursor-pointer hover:bg-[#e2dedf] p-[10px] rounded-full dark:text-white dark:hover:bg-[#444444] w-[50px] h-[50px] flex justify-center items-center relative">
               <svg
                 stroke="currentColor"
                 fill="currentColor"
@@ -256,6 +299,12 @@ const Header = ({ handleChild1Data }) => {
                 <path fill="none" d="M0 0h24v24H0V0z"></path>
                 <path d="M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49A.996.996 0 0 0 20.01 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"></path>
               </svg>
+              <span
+                className={`${isCustomerLogin ? "text-[13px] bg-[#ff5252] rounded-[50%] flex justify-center items-center absolute right-[8px] top-[24px] min-w-[19px]" : "hidden"}`}
+              >
+                {/* {cartCount?.totalProductCount} */}
+                {storeCartData?.toalCartCountN}
+              </span>
             </button>
             <button
               type="button"
@@ -272,9 +321,9 @@ const Header = ({ handleChild1Data }) => {
         onClick={toggleDropdown}
         className={`${isOpen ? "fixed top-0 left-0 right-0 bottom-0 z-[10] bg-[rgba(145,145,145,0.5)]" : "hidden"}`}
       ></div>
-      <Relogin isReloginModelOpen={isReloginModelOpen} onReloginModelClosed={() => setIsReloginModelOpen(false)} 
-      afterReloginModalClosed={() => handleChild1Data(false)} 
-        />
+      <Relogin isReloginModelOpen={isReloginModelOpen} onReloginModelClosed={() => setIsReloginModelOpen(false)}
+        afterReloginModalClosed={() => handleChild1Data(false)}
+      />
     </>
   );
 };
