@@ -18,6 +18,7 @@ import Button from '../../components/Button';
 import ProductLoader from '../../components/ProductLoader';
 import wishListFunctions from '../../utils/wishListFunctions';
 import WishListButtons from '../../components/WishListButtons';
+import AddToCartButton from '../../components/AddToCartButton';
 
 const ProductsList = () => {
     const {token, id: userId, isCustomerLogin} = useCustomerStore();
@@ -226,7 +227,8 @@ const ProductsList = () => {
                                                     </span>
                                                 </div>
                                                 <div className="!absolute bottom-[15px] left-0 pl-3 pr-3 w-full">
-                                                    <Button btnLabel="Add to Cart" classes={`flex ${layoutProduct.setActiveLayout == 2 ? "auto p-[7px_20px]" : "w-full"} btn-sm gap-2 css-uiq2rh dark:text-text-color border border-[#ff5252] hover:text-white hover:shadow-[inset_300px_0_0_0_#ff5252] justify-center items-center py-[5px] transition duration-[.4s] ease-in-out cursor-pointer rounded-[5px]`} insideELements={<svg
+                                                    <AddToCartButton id={id} userId={userId} token={token} productInStock={productInStock}  />
+                                                    {/* <Button btnLabel="Add to Cart" classes={`flex ${layoutProduct.setActiveLayout == 2 ? "auto p-[7px_20px]" : "w-full"} btn-sm gap-2 css-uiq2rh dark:text-text-color border border-[#ff5252] hover:text-white hover:shadow-[inset_300px_0_0_0_#ff5252] justify-center items-center py-[5px] transition duration-[.4s] ease-in-out cursor-pointer rounded-[5px]`} insideELements={<svg
                                                         stroke="currentColor"
                                                         fill="currentColor"
                                                         strokeWidth="0"
@@ -238,7 +240,7 @@ const ProductsList = () => {
                                                     >
                                                         <path fill="none" d="M0 0h24v24H0V0z"></path>
                                                         <path d="M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49A.996.996 0 0 0 20.01 4H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"></path>
-                                                    </svg>} />
+                                                    </svg>} /> */}
                                                     {/* <button
                                                     className={`flex ${layoutProduct.setActiveLayout == 2 ? "auto p-[7px_20px]" : "w-full"} btn-sm gap-2 css-uiq2rh dark:text-text-color border border-[#ff5252] hover:text-white hover:shadow-[inset_300px_0_0_0_#ff5252] justify-center items-center py-[5px] transition duration-[.4s] ease-in-out cursor-pointer rounded-[5px]`}
                                                     tabIndex="0"
