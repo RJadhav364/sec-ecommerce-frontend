@@ -125,11 +125,12 @@ const Header = ({ handleChild1Data }) => {
     try {
       const getCartProductsRes = await getAllCartProducts(token, id);
       const result2 = await getCartProductsRes.json();
-      const total = cartProductQuantityCount(result2?.data);
-      console.log("total", result2)
-      console.log("total", total)
+      // const total = await cartProductQuantityCount(result2?.data);
+      // console.log("total", result2)
+      // console.log("total", total)
       switch (true) {
         case getCartProductsRes.status == 200:
+          const total = cartProductQuantityCount(result2.data);
           storeCartData.setAuth({
             cartData: result2.data,
             toalCartCountN: total
@@ -302,7 +303,7 @@ const Header = ({ handleChild1Data }) => {
               <span
                 className={`${isCustomerLogin ? "text-[13px] bg-[#ff5252] rounded-[50%] flex justify-center items-center absolute right-[8px] top-[24px] min-w-[19px]" : "hidden"}`}
               >
-                {/* {cartCount?.totalProductCount} */}
+                 {/* {cartCount?.totalProductCount}  */}
                 {storeCartData?.toalCartCountN}
               </span>
             </button>

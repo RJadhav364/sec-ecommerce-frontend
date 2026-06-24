@@ -9,6 +9,7 @@ import {
 import { toast } from "react-toastify";
 import useCustomerStore from "../store/customerStore";
 import useCartStore from "../store/cartStore";
+import { cartProductQuantityCount } from "../utils/CartProductTotalCount.jsx";
 
 const useAddToCart = () => {
     const { token, id: userId, isCustomerLogin } = useCustomerStore();
@@ -23,8 +24,10 @@ const useAddToCart = () => {
                 case getResponse.status == 200:
                     const getCartProductsRes = await getAllCartProducts(passedToken, providedUserId);
                     const result = await getCartProductsRes.json();
+                    const total = cartProductQuantityCount(result.data);
                     setAuth({
                         cartData: result.data,
+                        toalCartCountN: total
                     });
                     // setCartCount(result.data.length);
                     break;
