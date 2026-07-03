@@ -24,9 +24,18 @@ const createProductReview = async(reviewSubmitedObject,token) => {
         return response
         // return data;
     } catch(error){
-            console.log(error);
             throw error;
     }
 }
 
-export {getParticularProduct,createProductReview}
+const getParticularProductReview = async(id) => {
+    try{
+        const response = await fetch(`${Service_url}/review/get-product-review/${id}`);
+        return response
+        // return data;
+    } catch(error){
+            throw error;
+    }
+}
+
+export {getParticularProduct,createProductReview, getParticularProductReview}

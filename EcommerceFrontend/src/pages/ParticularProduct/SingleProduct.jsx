@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import {
   createProductReview,
   getParticularProduct,
+  getParticularProductReview,
 } from "./services/SingleProductRelatedApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
@@ -27,6 +28,7 @@ const SingleProduct = () => {
   // console.log(id)
   useEffect(() => {
     getSingleProductData(id);
+    // getSingleProductReviewById(id);
   }, [id]);
   const getSingleProductData = async (id) => {
     try {
@@ -34,6 +36,19 @@ const SingleProduct = () => {
       const result = await getResponse.json();
       // console.log(result)
       setData(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getSingleProductReviewById = async (productId) => {
+    try {
+      const getResponse = await getParticularProductReview(productId);
+      const result = await getResponse.json();
+      setData((prevData => ({
+        ...prevData,
+        getProductReview: result.productData
+      })));
+      // setData(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -50,12 +65,12 @@ const SingleProduct = () => {
         reviewSubmitedObject,
         token,
       );
-      console.log("review submitted", getResponse);
       if (!getResponse.ok) {
         throw String(getResponse.status);
       }
       switch (true) {
         case getResponse.status == 200:
+          getSingleProductReviewById(reviewSubmitedObject.productId);
           toast.success(`Review Submitted Successfully`, {
             position: "top-center",
             autoClose: 5000,
