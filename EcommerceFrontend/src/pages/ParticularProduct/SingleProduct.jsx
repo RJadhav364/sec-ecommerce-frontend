@@ -22,7 +22,7 @@ const SingleProduct = () => {
   const [activestars, setActiveStars] = useState(0);
   const loggedInUserReview = useRef({
     reviewDescription: "",
-    submittedStars: 0,
+    submittedStars: 1,
   });
   // console.log(id)
   useEffect(() => {
@@ -218,9 +218,8 @@ const SingleProduct = () => {
                   rows="5"
                   className="w-full bg-white resize-none placeholder:text-black p-5 text-black rounded-md outline-none"
                   placeholder="Write a review..."
-                  ref={(e) => {
-                    ((loggedInUserReview.current.reviewDescription = e?.value),
-                      console.log(e));
+                  onChange={(e) => {
+                    loggedInUserReview.current.reviewDescription = e.target.value
                   }}
                 ></textarea>
                 <br />
