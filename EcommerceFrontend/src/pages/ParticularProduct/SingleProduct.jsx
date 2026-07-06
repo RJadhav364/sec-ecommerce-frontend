@@ -11,8 +11,9 @@ import ProductRating from "../../components/ProductRating";
 import useCustomerStore from "../../store/customerStore";
 import { Bounce, toast } from "react-toastify";
 import Button from "../../components/Button";
-import useDateFormat from "../../utils/DateFormat";
 import convertData from "../../utils/DateFormat";
+import useToast from "../../hook/useToast";
+
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -21,6 +22,7 @@ const SingleProduct = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [activeTab, setActiveTab] = useState("tab1");
   const [activestars, setActiveStars] = useState(0);
+  const {toastError} = useToast();
   const loggedInUserReview = useRef({
     reviewDescription: "",
     submittedStars: 1,
@@ -97,7 +99,13 @@ const SingleProduct = () => {
           });
       }
     } catch (error) {
-      console.log(error);
+      switch(true){
+        case error == "403":
+          toastError(error);
+          break;
+        default:
+          toastError("Something went wrong");
+      }
     }
   };
   const tabs = [
