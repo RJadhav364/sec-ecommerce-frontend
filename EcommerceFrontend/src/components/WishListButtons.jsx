@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import useCartStore from "../store/cartStore";
 import wishListFunctions from "../utils/wishListFunctions";
 import Relogin from "./Relogin";
+import useWishlist from "../hook/useWishList";
 
 const WishListButtons = ({ productIdCom, userToWishList, removeFromWishLIst, addProductInFavourite, isReloginModelOpen,passedToken }) => {
   const { wishListData, setAuth } = useCartStore();
-//   const { addProductInFavourite, removeFromWishLIst, isReloginModelOpen } = wishListFunctions();
-  const [isFavourite, setIsFavourite] = useState(false);
-  useEffect(() => {
-    setIsFavourite(
-      wishListData && wishListData?.some(({ productId }) => productId == productIdCom),
-    );
-  }, [wishListData]);
+  // const [isFavourite, setIsFavourite] = useState(false);
+  // useEffect(() => {
+  //   setIsFavourite(
+  //     wishListData && wishListData?.some(({ productId }) => productId == productIdCom),
+  //   );
+  // }, [wishListData]);
+  const isFavourite = useWishlist(
+    wishListData,
+    productIdCom
+  );
   return isFavourite == true ? (
     <button
       className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-white text-black hover:!bg-primary  group css-iyey26 cursor-pointer flex justify-center items-center"

@@ -74,7 +74,8 @@ const wishListFunctions = () => {
   const removeFromWishLIst = async (productId, userId) => {
     try {
       const result = await removeProductFromFavourite(token, productId, userId);
-      const convertedResult = await result.json();
+      console.log(result);
+      // const convertedResult = await result.json();
       switch (true) {
         case result.status == 200:
           toast.success(`Product Removed from Wishlist`, {

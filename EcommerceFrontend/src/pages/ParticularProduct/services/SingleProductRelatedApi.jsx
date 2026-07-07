@@ -26,9 +26,9 @@ const createProductReview = async (reviewSubmitedObject, token) => {
   });
   const data = await response.json();
   if (!response.ok) {
-    throw Error(data.message || data.error || "Something went wrong");
+    throw Error(data.message || "Something went wrong");
   }
-  return data;
+  return {status: response.status,data};
   // return data;
   // } catch(error){
   //         throw error;
