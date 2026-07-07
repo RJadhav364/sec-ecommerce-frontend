@@ -67,9 +67,6 @@ const SingleProduct = () => {
         reviewSubmitedObject,
         token,
       );
-      if (!getResponse.ok) {
-        throw String(getResponse.status);
-      }
       switch (true) {
         case getResponse.status == 200:
           getSingleProductReviewById(reviewSubmitedObject.productId);
@@ -99,13 +96,8 @@ const SingleProduct = () => {
           });
       }
     } catch (error) {
-      switch(true){
-        case error == "403":
-          toastError(error);
-          break;
-        default:
-          toastError("Something went wrong");
-      }
+      // console.log(error.message);
+      toastError(error.message);
     }
   };
   const tabs = [
