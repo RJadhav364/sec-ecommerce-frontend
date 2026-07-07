@@ -407,7 +407,7 @@ const SingleProduct = () => {
             </p>
           </div>
           <div className="flex items-center gap-4 py-4">
-            <div className="qtyBoxWrapper w-[90px] relative">
+            {/* <div className="qtyBoxWrapper w-[90px] relative">
               <input
                 type="number"
                 name=""
@@ -452,7 +452,7 @@ const SingleProduct = () => {
                 </svg>
                 <span className="MuiTouchRipple-root css-4mb1j7"></span>
               </button>
-            </div>
+            </div> */}
             <Button
               btnLabel="Add to Cart"
               classes="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeSmall MuiButton-textSizeSmall MuiButton-colorPrimary btn-org addToCartBtn btn-border flex btn-sm gap-2 css-uiq2rh dark:text-text-color border border-[#ff5252] hover:text-white hover:shadow-[inset_300px_0_0_0_#ff5252] justify-center items-center py-[5px] transition duration-[.4s] ease-in-out cursor-pointer rounded-[5px] w-[210px]"
